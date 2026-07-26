@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>京阪 6 天 5 夜隨身旅遊手冊</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; }
+        body { font-family: 'PingFang TC', 'Microsoft JhengHei', sans-serif; line-height: 1.5; color: #2c3e50; background-color: #f4f6f9; margin: 0; padding: 0; }
+        .header { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; padding: 25px 15px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .header h1 { margin: 0; font-size: 22px; font-weight: bold; letter-spacing: 1px; }
+        .header p { margin: 5px 0 0 0; font-size: 13px; opacity: 0.9; }
+        
+        .container { padding: 12px; max-width: 600px; margin: 0 auto; }
+        
+        .section-card { background: white; border-radius: 8px; padding: 15px; margin-bottom: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .section-title { font-size: 16px; font-weight: bold; color: #1e3c72; margin-top: 0; margin-bottom: 10px; border-left: 4px solid #1e3c72; padding-left: 8px; }
+        .sub-section-title { font-size: 14px; font-weight: bold; color: #2a5298; margin-top: 12px; margin-bottom: 6px; border-bottom: 1px dashed #b0bec5; padding-bottom: 4px; }
+        
+        .day-header { font-size: 15px; font-weight: bold; color: white; background-color: #1e3c72; padding: 8px 12px; border-radius: 6px; margin-top: 15px; display: inline-block; }
+        
+        .timeline { list-style: none; padding: 0; margin: 10px 0 0 0; position: relative; }
+        .timeline::before { content: ''; position: absolute; left: 7px; top: 5px; bottom: 5px; width: 2px; background: #e0e0e0; }
+        .timeline-item { position: relative; padding-left: 24px; margin-bottom: 15px; font-size: 13px; }
+        .timeline-marker { position: absolute; left: 2px; top: 4px; width: 12px; height: 12px; border-radius: 50%; background: #1e3c72; border: 2px solid white; box-shadow: 0 0 0 1px #1e3c72; }
+        
+        .time-badge { font-weight: bold; color: #333; background: #eaedf1; padding: 1px 5px; border-radius: 4px; font-size: 11px; margin-right: 5px; }
+        .info-box { background: #f8f9fa; border-radius: 6px; padding: 10px; margin-top: 5px; font-size: 12.5px; border-left: 3px solid #b0bec5; }
+        .info-box.traffic { border-left-color: #29b6f6; background: #f1fbfd; }
+        .info-box.food { border-left-color: #ffb74d; background: #fffbf5; }
+        .info-box.ticket { border-left-color: #66bb6a; background: #f3fbf4; }
+        .info-box.recommend { border-left-color: #7e57c2; background: #f3e5f5; }
+        
+        .spot-intro { margin-top: 8px; font-size: 12.5px; color: #555; background: #ffffff; border: 1px solid #e0e0e0; border-radius: 6px; overflow: hidden; }
+        .spot-desc { padding: 10px; }
+        
+        .spot-img-container { width: 100%; height: 250px; background: #eaeaea; position: relative; overflow: hidden; border-bottom: 1px solid #e0e0e0; }
+        .spot-img-container img { width: 100%; height: 100%; object-fit: cover; }
+        .img-hint-tag { position: absolute; bottom: 5px; right: 5px; background: rgba(0,0,0,0.6); color: #fff; padding: 2px 6px; font-size: 10px; border-radius: 4px; pointer-events: none; }
+        
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 12px; background: white; }
+        th, td { border: 1px solid #e0e0e0; padding: 6px 8px; text-align: left; }
+        th { background-color: #f1f3f5; color: #333; font-weight: bold; }
+        
+        .hotel-tag { display: inline-block; padding: 2px 6px; border-radius: 4px; font-size: 11px; font-weight: bold; margin-right: 4px; }
+        .tag-best { background-color: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-option { background-color: #e3f2fd; color: #1565c0; border: 1px solid #90caf9; }
+
+        .hotel-link { display: inline-block; margin-top: 4px; font-size: 11px; color: #0277bd; text-decoration: underline; font-weight: bold; }
+
+        .text-bold { font-weight: bold; }
+        .text-blue { color: #0277bd; }
+        .text-orange { color: #e65100; }
+        .text-green { color: #2e7d32; }
+        .text-red { color: #c62828; }
+        .text-chichi { color: #1e3c72; } 
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>✈️ 京阪 6 天 5 夜 旅遊手冊</h1>
+        <p>出遊日期：2026/12/4 - 12/9</p>
+    </div>
+
+    <div class="container">
+        
+        <!-- 航班 & 行前交通概覽 -->
+        <div class="section-card">
+            <div class="section-title">📌 航班</div>
+            <table>
+                <tr>
+                    <th>航程</th>
+                    <th>日期</th>
+                    <th>航班</th>
+                    <th>起飛時間</th>
+                    <th>抵達時間</th>
+                </tr>
+                <tr>
+                    <td class="text-green text-bold">去程</td>
+                    <td>12/4 (五)</td>
+                    <td>虎航 IT284</td>
+                    <td>高雄 06:55</td>
+                    <td>關西 10:45</td>
+                </tr>
+                <tr>
+                    <td class="text-red text-bold">回程</td>
+                    <td>12/9 (三)</td>
+                    <td>虎航 IT285</td>
+                    <td>關西 11:30</td>
+                    <td>高雄 14:15</td>
+                </tr>
+            </table>
+            <div class="info-box ticket" style="margin-bottom:0;">
+                1. <strong>去程：</strong>清晨 <span class="text-red text-bold">04:25</span> 前必須到達高雄小港機場臨櫃報到。<br>
+                2. <strong>回程：</strong>上午 <span class="text-red text-bold">08:30</span> 前須到達關西機場第一航廈。虎航會在起飛前45分鐘準時關櫃，勿遲到。<br>
+                3. <strong>自駕必備：</strong>台灣駕照正本 + 國際駕照 + 護照（取車時核對）。<br>
+                4. <strong>入境規定：</strong>Visit Japan Web申請
+            </div>
+            
+            <br>
+            <div class="section-title">📌交通概覽</div>
+            <table>
+                <tr>
+                    <th>日期</th>
+                    <th style="white-space: nowrap;">交通方式</th>
+                    <th style="text-align: center;">路程說明</th>
+                </tr>
+                <tr>
+                    <td class="text-chichi text-bold">DAY1 (12/4)</td>
+                    <td>自 駕</td>
+                    <td>臨空轉運站取車 ➔ ⛩️大鳥大社 ➔ 大阪市區飯店（開車輕鬆前往景點與飯店）</td>
+                </tr>
+                <tr>
+                    <td class="text-chichi text-bold">Day 2 (12/5)</td>
+                    <td>自 駕</td>
+                    <td>大阪 ➔ ⛩️伏見稻荷 ➔ ⛩️天滿宮 ➔ ⛩️清水寺➔ 🗼八坂塔➔ ⛩️八坂神社</td>
+                </tr>
+                <tr>
+                    <td class="text-chichi text-bold">Day 3 (12/6)</td>
+                    <td style="white-space: nowrap;">自駕 ➔ 晚上還車</td>
+                    <td>海之京都｜由良川橋梁攝影點📷➔  伊根舟屋🐟 ➔ 天橋立飛龍觀🚟 ➔ 晚上開回大阪梅田（或難波）櫃檯還車。<br>
+                    <span class="text-red"><strong>※大多租車公司在大阪市區皆支援甲租乙還，只需補少許乙還手續費，非常划算。</strong></span></td>
+                </tr>
+                <tr>
+                    <td class="text-chichi text-bold">Day 4 (12/7)</td>
+                    <td>大眾運輸</td>
+                    <td>輕鬆搭乘京阪電車與叡山電車前往貴船神社，欣賞紅葉隧道與夜間點燈，完全不用煩惱山區停車問題。</td>
+                </tr>
+                <tr>
+                    <td class="text-chichi text-bold">Day 5 (12/8)</td>
+                    <td>步行/電車</td>
+                    <td>梅田商圈爆買（LINKS UMEDA / 友都八喜 / GARIGUETTE），買完戰利品直接提回飯店。</td>
+                </tr>
+                <tr>
+                    <td class="text-chichi text-bold">Day 6 (12/9)</td>
+                    <td>JR 關空快速 / 免費接駁車</td>
+                    <td>08:30前須抵達關西機場第一航廈報到，住在臨空城或泉佐野市飯店直達機場最安心。<br>
+                    <span class="text-red"><strong>※退稅新制上路，務必要再提前抵達機場，出境才能退稅。</strong></span></td>
+                </tr>
+            </table>
+
+            <br>
+            <!-- 📌 住宿建議 (大阪 2 晚 + 京都 2 晚 + 泉佐野市 1 晚) -->
+            <div class="section-title">📌住宿建議（大阪 1 晚 + 京都 3 晚 + 泉佐野市 1 晚）</div>
+            
+            <div class="info-box recommend">
+                <strong style="color: #6b21a8;">🏆 最佳住宿組合建議：</strong><br>
+                • <strong>12/4 - 12/5 (大阪 1 晚)：</strong><span class="text-bold text-blue">BESTIE - Doyanen Hotels</span> (促銷TWD 2,973) <br>
+                • <strong>12/5 - 12/8 (京都 3 晚)：</strong><span class="text-bold text-blue">RESI STAY Tsubaki</span> (促銷TWD 19,202) — 鄰近京阪電車，直達出町柳與貴船！<br>
+                • <strong>12/8 - 12/9 (泉佐野 1 晚)：</strong><span class="text-bold text-blue">OMO5 關西機場 by 星野集團</span> (促銷TWD 5,762) — 直通臨空城站，免費機場接駁車直達 T1！<br>
+                💳 <strong>5 晚預估總費用：</strong>約 TWD 27,937<strong>（平均每人僅需約 TWD 4,656）</strong>
+            </div>
+
+            <!-- 第一階段：大阪 -->
+            <div class="sub-section-title">🏢 第一階段：大阪 1 晚 (12/4 - 12/5)</div>
+            <table>
+                <tr>
+                    <th style="width: 40%;">飯店名稱</th>
+                    <th style="width: 23%;">預估金額 (6人)</th>
+                    <th style="text-align: center;">重點分析</th>
+
+                </tr>
+                <tr>
+                    <td>
+                        <span class="hotel-tag tag-best">首選</span><strong>BESTIE - Doyanen Hotels</strong><br><small>(大阪府, 大阪, 大阪市西成区萩之茶屋1-14-17, 日本)</small><br>
+                        <a href="https://www.booking.com/hotel/jp/bestie-by-doyanen.zh-tw.html?aid=318615&label=New_Chinese_Traditional_ZH-XT_24509418865-8gHVVMcbDWDHIx95ux6v2ASM813129018449%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi%3Atikwl-64415224945%3Alp9255291%3Ali%3Adem%3Adm-sYFVD5%401784738300&sid=73a257d289bcbc087836c52eb2b1bd4b&all_sr_blocks=1107347003_405272115_2_0_0%2C1107347003_405272115_2_0_0%2C1107347003_405272115_2_0_0&checkin=2026-12-04&checkout=2026-12-05&dest_id=2883&dest_type=district&dist=0&group_adults=6&group_children=0&hapos=11&highlighted_blocks=1107347003_405272115_2_0_0%2C1107347003_405272115_2_0_0%2C1107347003_405272115_2_0_0&hpos=11&matching_block_id=1107347003_405272115_2_0_0&nflt=price%3DTWD-min-3000-1&no_rooms=3&req_adults=6&req_children=0&room1=A%2CA&room2=A%2CA&room3=A%2CA&sb_price_type=total&sr_order=popularity&sr_pri_blocks=1107347003_405272115_2_0_0__500033%2C1107347003_405272115_2_0_0__500033%2C1107347003_405272115_2_0_0__500033&srepoch=1785032662&srpvid=2e060e53bac60731&type=total&ucfs=1&
+" target="_blank" class="hotel-link">🔗 查看/預訂飯店</a>
+                    </td>
+                    <td>促銷TWD 2,973<br><small>(每人約 $493/晚)</small></td>
+                    <td><span class="text-green text-bold">【優勢】</span> 雙人房x3，價格便宜。<br><span class="text-orange">【缺點】</span> 無停車位。</td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="hotel-tag tag-option">備選</span><strong>W&J Dream Stay (一棟別墅)</strong><br><small>(大阪府, 大阪, 天下茶屋２丁目９−13, 日本)</small><br>
+                        <a href="https://www.booking.com/hotel/jp/w-amp-j-dream-stay.zh-tw.html?aid=318615&label=New_Chinese_Traditional_ZH-XT_24509418865-8gHVVMcbDWDHIx95ux6v2ASM813129018449%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi%3Atikwl-64415224945%3Alp9255291%3Ali%3Adem%3Adm-sYFVD5%401784738300&sid=73a257d289bcbc087836c52eb2b1bd4b&all_sr_blocks=1005281105_373272234_0_0_0&checkin=2026-12-04&checkout=2026-12-05&dest_id=2883&dest_type=district&dist=0&group_adults=6&group_children=0&hapos=19&highlighted_blocks=1005281105_373272234_0_0_0&hpos=19&matching_block_id=1005281105_373272234_0_0_0&nflt=price%3DTWD-min-3000-1&no_rooms=3&req_adults=6&req_children=0&room1=A%2CA&room2=A%2CA&room3=A%2CA&sb_price_type=total&sr_order=popularity&sr_pri_blocks=1005281105_373272234_0_0_0__1566000&srepoch=1785031390&srpvid=2e060e53bac60731&type=total&ucfs=1&#map_closed" target="_blank" class="hotel-link">🔗 查看/預訂飯店</a>
+                    </td>
+                    <td>促銷TWD 3,103<br><small>(每人約 $517/晚)</small></td>
+                    <td><span class="text-green text-bold">【優勢】</span> 一棟別墅，3 房間。<br><span class="text-red">【缺點】</span> 無停車位。</td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="hotel-tag tag-option">備選</span><strong>BRACKETS HOTEL Osaka Hommachi</strong><br><small>(4 Chome-5-18 Minamihonmachi, Chuo Ward, Osaka, 541-0054日本)</small><br>
+                        <a href="https://www.booking.com/hotel/jp/brackets-osaka-hommachi.zh-tw.html?aid=318615&label=New_Chinese_Traditional_ZH-XT_24509418865-8gHVVMcbDWDHIx95ux6v2ASM813129018449%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi%3Atikwl-64415224945%3Alp9255291%3Ali%3Adem%3Adm-sYFVD5%401784738300&sid=73a257d289bcbc087836c52eb2b1bd4b&all_sr_blocks=1435643801_415071019_0_0_0%2C1435643801_415071019_0_0_0&checkin=2026-12-04&checkout=2026-12-05&dest_id=-240905&dest_type=city&dist=0&group_adults=2&group_children=0&hapos=4&highlighted_blocks=1435643801_415071019_0_0_0%2C1435643801_415071019_0_0_0&hpos=4&matching_block_id=1435643801_415071019_0_0_0&nflt=price%3DTWD-min-2500-1%3Breview_score%3D80%3Bfc%3D2&no_rooms=2&req_adults=2&req_children=0&room1=A&room2=A&sb_price_type=total&sr_order=popularity&sr_pri_blocks=1435643801_415071019_0_0_0__522612%2C1435643801_415071019_0_0_0__522612&srepoch=1785030533&srpvid=3f530c7c725c01e7&type=total&ucfs=1&" target="_blank" class="hotel-link">🔗 查看/預訂飯店</a>
+                    </td>
+                    <td>促銷TWD 3,495<br><small>(每人約 $583/晚)</small></td>
+                    <td><span class="text-green text-bold">【優勢】</span> 價格便宜。<br><span class="text-red">【缺點】</span> 無停車位。</td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="hotel-tag tag-option">備選</span><strong>Shinsaibashi ARTY Inn</strong><br><small>(大阪府, 大阪, 2-17-3 Nishishinsaibashi, Chuo-ku, 日本)</small><br>
+                         <a href="https://arty-inn.com/shinsaibashi/cn/" target="_blank" class="hotel-link">🔗 官方網站 / 預訂</a><br>
+                        <a href="https://www.booking.com/hotel/jp/xin-zhai-qiao-aruteiin-da-ban-fu-da-ban-shi.zh-tw.html?aid=311984&label=xin-zhai-qiao-aruteiin-da-ban-fu-da-ban-shi-3V%2Ad5J5oqDgYY8H48lDMZgS630503105975%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi%3Atikwd-1996016989917%3Alp9252980%3Ali%3Adec%3Adm%3Appccp%3DUmFuZG9tSVYkc2RlIyh9YXORK0YJiVoOxcWODxYDaAA&sid=73a257d289bcbc087836c52eb2b1bd4b&all_sr_blocks=814453006_400146322_2_0_0%2C814453006_400146322_2_0_0%2C814453006_400146322_2_0_0&checkin=2026-12-04&checkout=2026-12-05&dest_id=-240905&dest_type=city&dist=0&group_adults=6&group_children=0&hapos=1&highlighted_blocks=814453006_400146322_2_0_0%2C814453006_400146322_2_0_0%2C814453006_400146322_2_0_0&hpos=1&matching_block_id=814453006_400146322_2_0_0&no_rooms=3&req_adults=6&req_children=0&room1=A%2CA&room2=A%2CA&room3=A%2CA&sb_price_type=total&sr_order=popularity&sr_pri_blocks=814453006_400146322_2_0_0__1346400%2C814453006_400146322_2_0_0__1346400%2C814453006_400146322_2_0_0__1346400&srepoch=1785031876&srpvid=9de20f5ec66f0136&type=total&ucfs=1& target="_blank" class="hotel-link">🔗 查看/預訂飯店</a>
+                    </td>
+                    <td>促銷TWD 8,004 <br><small>(每人約 $1,334/晚)</small></td>
+                    <td><span class="text-green text-bold">【優勢】</span> 鄰近心齋橋筋商店街。<br><span class="text-red">【缺點】</span> 無停車位。</td>
+                </tr>
+            </table>
+
+            <!-- 第二階段：京都 -->
+            <div class="sub-section-title">🏢 第二階段：京都 2 晚 (12/6 - 12/8)</div>
+            <table>
+                <tr>
+                    <th style="width: 40%;">飯店名稱</th>
+                    <th style="width: 23%;">預估金額 (6人)</th>
+                    <th style="text-align: center;">重點分析</th>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="hotel-tag tag-best">首選</span><strong>RESI STAY Tsubaki</strong><br><small>(京都府, 京都, Higashiyama-ku Miyagawasuji 5-329-2, 日本)</small><br>
+                        <a href="https://www.booking.com/hotel/jp/resi-stay-koan-bettei.html?ssne=%E4%BA%AC%E9%83%BD&ssne_untouched=%E4%BA%AC%E9%83%BD&highlighted_hotels=3501808&ss=%E4%BA%AC%E9%83%BD&dest_id=-235402&dest_type=city&hp_avform=1&origin=hp&do_availability_check=1&label=New_Chinese_Traditional_ZH-XT_24509424385-EvkpFC_vhmt42KakqAzt7QS813024753570%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi55765997455%3Atikwl-355815316927%3Alp9197606%3Ali%3Adec%3Adm&sid=73a257d289bcbc087836c52eb2b1bd4b&aid=318615&lang=zh-tw&sb=1&src_elem=sb&src=hotel&group_adults=6&no_rooms=1&group_children=0&checkin=2026-12-05&checkout=2026-12-08&req_adults=6&req_children=0" target="_blank" class="hotel-link">🔗 查看/預訂飯店</a>
+                    </td>
+                    <td>促銷TWD 19,202<br><small>(每人約 $1,067/晚)</small></td>
+                    <td><span class="text-green text-bold">【優勢】</span> 鄰近京阪電車「祇園四條/清水五條站」，Day 4 去貴船神社直達「出町柳站」轉乘極方便。<br><span class="text-green"> <strong>※清水寺、八坂神社步行約16分鐘</span></strong><br><span class="text-red">【缺點】</span> 2人房+4人房<br></td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="hotel-tag tag-option">備選</span><strong>鈴 祇園八坂前-日式連棟別墅</strong><br><small>(京都府, 京都, Higashiyama-ku Rinkacho 436-4, 日本)</small><br>
+                        <a href="https://www.booking.com/hotel/jp/ling-zhi-yuan-ba-ban-qian.html?ssne=%E4%BA%AC%E9%83%BD&ssne_untouched=%E4%BA%AC%E9%83%BD&highlighted_hotels=2410897&ss=%E4%BA%AC%E9%83%BD&dest_id=-235402&dest_type=city&hp_avform=1&origin=hp&do_availability_check=1&label=New_Chinese_Traditional_ZH-XT_24509424385-EvkpFC_vhmt42KakqAzt7QS813024753570%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi55840311228%3Atikwl-303472602395%3Alp9197606%3Ali%3Adec%3Adm&sid=73a257d289bcbc087836c52eb2b1bd4b&aid=318615&lang=zh-tw&sb=1&src_elem=sb&src=hotel&checkin=2026-12-05&checkout=2026-12-08&group_adults=6&no_rooms=1&group_children=0#group_recommendation" target="_blank" class="hotel-link">🔗 查看/預訂飯店</a>
+                    </td>
+                    <td>TWD  49,323<br><small>(每人約 $2,740/晚)</small></td>
+                    <td><span class="text-green text-bold">【優勢】</span> 經典日式町家奢華體驗，鄰近八坂神社、祇園商圈。<br><span class="text-green"> <strong>※清水寺、八坂神社步行約16分鐘</span></strong><br><span class="text-red">【缺點】</span> 2人房+4人房<br></td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="hotel-tag tag-option">備選</span><strong>三條白川浩二三谷別墅</strong><br><small>(京都府, 京都, Higashiyama-ku Awataguchi, Sanjobocho 32-2, 日本)</small><br>
+                        <a href="https://go-machiyainnsandhotels.reservation.jp/ja/hotels/machiya-villa/plans?checkin_date=20261206&checkout_date=20261208&adults=6&child1=0&child2=0&child3=0&child4=0&child5=0&children=0&rooms=1&dayuseFlg=0&sort=2
+" target="_blank" class="hotel-link">🔗 官方網站 / 預訂</a><br>
+                        <a href="https://www.booking.com/hotel/jp/machiya-villa.html?ssne=%E4%BA%AC%E9%83%BD&ssne_untouched=%E4%BA%AC%E9%83%BD&highlighted_hotels=2945677&ss=%E4%BA%AC%E9%83%BD&dest_id=-235402&dest_type=city&hp_avform=1&origin=hp&do_availability_check=1&label=New_Japanese_JA_19114765585-zQgQbE264GZ18_F5nv5AUQS217274943017%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi55795680992%3Atidsa-350979134524%3Alp9197606%3Ali%3Adec%3Adm&sid=73a257d289bcbc087836c52eb2b1bd4b&aid=318615&lang=zh-tw&sb=1&src_elem=sb&src=hotel&checkin=2026-12-05&checkout=2026-12-08&group_adults=6&no_rooms=1&group_children=0#group_recommendation
+" target="_blank" class="hotel-link">🔗 查看/預訂飯店</a>
+                    </td>
+                    <td>TWD 41,207<br><small>(每人約 $2,289/晚)</small></td>
+                    <td><span class="text-green text-bold">【優勢】</span> 經典日式包棟整棟體驗。<br><span class="text-green"> <strong>※八坂神社步行約16分鐘</span></strong><br><span class="text-red">【缺點】</span> 價格稍高，且轉乘京阪電車至出町柳需多走一段路<br></td>
+                </tr>
+            </table>
+
+            <!-- 第三階段：泉佐野市 -->
+            <div class="sub-section-title">🏢 第三階段：泉佐野市 1 晚 (12/8 - 12/9)</div>
+            <table>
+                <tr>
+                    <th style="width: 40%;">飯店名稱</th>
+                    <th style="width: 23%;">預估金額 (6人)</th>
+                    <th style="text-align: center;">重點分析</th>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="hotel-tag tag-best">首選</span><strong>OMO5 關西機場 by 星野集團</strong><br><small>(大阪府, 泉佐野, 1-833 Rinkuorai-Kita,, 日本)</small><br>
+                        <a href="https://www.booking.com/hotel/jp/omo-kansai-airport-by-hoshino-resorts.html?ssne=%E6%B3%89%E4%BD%90%E9%87%8E&ssne_untouched=%E6%B3%89%E4%BD%90%E9%87%8E&highlighted_hotels=9290352&ss=%E6%B3%89%E4%BD%90%E9%87%8E&dest_id=-231191&dest_type=city&hp_avform=1&origin=hp&do_availability_check=1&label=New_English_EN_TW_26761663105-ySXISxshohb8GDatgxAuWQS813129213341%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi%3Atikwl-64415224945%3Alp9197606%3Ali%3Adec%3Adm%3Aag26761663105%3Acmp394643185&sid=73a257d289bcbc087836c52eb2b1bd4b&aid=318615&lang=zh-tw&sb=1&src_elem=sb&src=hotel&checkin=2026-12-08&checkout=2026-12-09&group_adults=2&no_rooms=1&group_children=0#availability_target" target="_blank" class="hotel-link">🔗 查看/預訂飯店</a>
+                    </td>
+                    <td>TWD 5,762<br><small>(每人約 $960/晚)</small></td>
+                    <td><span class="text-green text-bold">【優勢】</span> 免費機場接駁車、若自行轉地鐵約8分鐘路程</td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="hotel-tag tag-option">備選</span><strong>Henn na Resort & Spa Kansai Airport</strong><br><small>(大阪府, 泉佐野, Rinkuouraikita 1-23, 日本)</small><br>
+                        <a href="https://www.booking.com/hotel/jp/bian-nahoteru-guan-xi-kong-gang.zh-tw.html?aid=318615&label=New_English_EN_TW_26761663105-ySXISxshohb8GDatgxAuWQS813129213341%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi%3Atikwl-64415224945%3Alp9197606%3Ali%3Adec%3Adm%3Aag26761663105%3Acmp394643185&sid=73a257d289bcbc087836c52eb2b1bd4b&all_sr_blocks=481723618_279741777_2_2_0_227427&checkin=2026-12-08&checkout=2026-12-09&dest_id=-231191&dest_type=city&dist=0&group_adults=2&group_children=0&hapos=2&highlighted_blocks=481723618_279741777_2_2_0_227427&hpos=2&matching_block_id=481723618_279741777_2_2_0_227427&nad_cpc=0.5&nad_id=7126b229-df94-4f1c-b761-0b4233bc3246_0&nad_placement=SR_MAIN&nad_track=eyJhdWN0aW9uRXBvY2giOjE3ODQ5NjY0OTM1NzEsInJhbmsiOjEsImtvZGRpVHJhY2tpbmdJbmZvIjoiK2lzTXNsQ2dmOUgvR2tLcW1MN2k5WVRaSVBWcGl3ZFZyMGZqem9xOXFKT1U4SWQzL1RXQjFWZStnUmhHVHNiVDZRM0VlN0ltTHUzTGNDQi9WWGlxM3pieTRqajZzbU9zTm1QSkt5aWdEZmwvamNyT2V1TElyYkRhaGRSMHpUY3NXbHFLYnViMVlIVGROdHpBaXFQRmpjbWdPMGl5WTUvbHZnZk1lakNOclFMNHpKTlRRYkQ0L1lROHZCTWhUM3hPQ3pvWFNDU0ttb1BEdWdRQS8vb3J6M251Skcxbm5pRDJ3bFBXbVZhUGRwYXZLRjBEeHpPZEhjaGwzMmxhcFl4VTltbFlFYVZTUVZ2ZU1wUUFyQXNzYmtSMW5xek9RYjYrWEhmODNpVTd6cE81R3ZLK0VPaHRVUTcwRGMvNE1Kdkp4RUM0SFJ0Si94WENFZTRCcEFpckpjQ0hmMXgvdjFHdWxkS1hHNE10Q0w2TC9oWkcxRVg1SHU2M2NWMGNlOGVVUWhnb0JNTnc4TUVtUXNndlhTWEQxYnlWVWtES0lVY1lPcmlhc0JrRlJrVzRSOGZYeTlRaTZibjFYNjNYaDg1R2ZXZU1xamxSMTNoZE9ueFN2RGo5UW5tSmFYKzYxYVA0MDhHenRwZ2JhTWJBR25OaFNoQWcyN2EwZTJLWjQ3M1FYQWZzM2wrZFMzbWU3cWJkM2crT3gwRElUbEVzRXkyZ0dMaUNHQ3JTcjJBeXVVVXp6WFlXU3JIa0VYbGRmWmFlRzNXRE9vVkUxQmxjRC9OdCtFbWxYTTZ0bHBnUVZ0S0lrWnZwK2FwVWlLNEgrNjF3aVIwVFo1YlQwaitHVnlSL2NNcjNOM0N3ZThpYXlCa3Y0RkZLbXgzM1lHL3Z6RTNQZ0dWaFF0NTVjc2h0YXRTUGo4dGhhbFkvL1B0RlFDSDFpaDZOWmFCTWxBc0d0RmpCN2ozcFZETm1WRU1MaXc2Z3VQcUdkbG9wTk8rRnpiZHF2K1NNMDB1YVM4TjFISTNjSW9WRzNNc0lHSm45WDFNSTFmZ01pNi9iUXp6dWZYU1BlSk1OeHZSOEVVbGlja0xWL1JUUTg0WXNlUzlFZUkydm9ua2VrUDB2RldraEhHVlRHTU1tYm92OUtoT0o5SkM3b09pT3RTZjMySjZRSnJNN0hTVlJUOSt2a0phSHE2NFVsZ1FQMDIya3EzM0FFeno3bFcyQ0tEaUlKZGRPRXRDS2x6Ny9EcEhabDVQclgrenVNNXJzdHd5MlpuRk53Y3JDYWNleDQ2SFFzN3ZkSFZSSnZUNVdmVDdxUUtHaWVvTmVNcG85RGNuWGhJMzlGSW02STZ0NnNmYUl2L1Qvcm9xd0Z4ZXA0NWMvZUJwVGcvSkNVQXpXSnlUYWFyc3BHRnloQXR4MlA2RjhxdzFna1JZcHRnais4bzFkRndTNTBuUGE0MFZsMFJHa2ljbW1zVFFtWUNTY2J1eFYzNmxQc0ZTTXNWMGhCZ3JkaVJLSTM2Sm42NGwwTzd2V1MrWEN1ZEptRGp3RC9ZaEtNbVpDY0MyU0JERjZMSUNMbjZzNDBTcTVsd0pmTzlvYUtIYmhDMTBZTnlMWnA3ZHhqa2VJRHdvZm4rdEhQdHpEaVBPa0xUb1RobXNYRzdSRlFKUjBVeE1DYk1HYTZSL3VRc290TDlWR2NhRkhPRzRqNW5wdis3OTNrZVNDa2RYUE0zVVNaZlhIVHRXM2Ywb2E5ZUk5WExsRWNrQjlVYkhsSWhMZWdFaktOTUFWcGdqY2t3UGNVa014MDg4Sjk1clNFQzFtRWkxWXpKNHBhYzJHM2tFa1dLdzFCTWdCMlJualpRTjFPNU5qYWlja295MU5paGNFcHdkVWdqc1hsU0d2aWR2Nk9WZ2h4RVJJS096L1NnT0IveklsMHdKMjVzTjZJcmFPU2JMa2xQelBoR3R6aklrcWQ1WmM5a2VmbXdTWHAzenpWNlNaenJMY1BWYmRiNUJtSnFkSmowYzF4a3pLUDNjN09wVml1TCttdUVlM2FjMEovZjl6NERpbmFUaWlkdUJ4MzloSTIvY2I3Y2xTK0YxNGtMMFZ4aXN2VEJYRTEyKzNJeWR0UzduSFNsVzUxUHpjelFMd0I2Y2VaQS9tZUJIYmt2TjNyUHZmTEF5TTZYREk5OXpnVXNkRyJ9&no_rooms=1&req_adults=2&req_children=0&room1=A%2CA&sb_price_type=total&sr_order=popularity&sr_pri_blocks=481723618_279741777_2_2_0_227427_794610&srepoch=1784966496&srpvid=6307386eb8e000c3&type=total&ucfs=1&
+" target="_blank" class="hotel-link">🔗 查看/預訂飯店</a>
+                    </td>
+                    <td>TWD 4,724 - 6,800<br><small>(每人約 $787/晚)</small></td>
+                    <td><span class="text-green text-bold">【優勢】</span> 有海景大浴場溫泉體驗。<br><span class="text-red">【缺點】</span> 轉地鐵約15分鐘路程。</td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="hotel-tag tag-option">備選</span><strong>R Hotel Kansai Airport</strong><br><small>(大阪府, 泉佐野, 若宮町5-3, 日本)</small><br>
+                        <a href="https://www.booking.com/hotel/jp/r-kansai-airport-quan-zuo-ye-shi.zh-tw.html?aid=318615&label=New_English_EN_TW_26761663105-ySXISxshohb8GDatgxAuWQS813129213341%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi%3Atikwl-64415224945%3Alp9197606%3Ali%3Adec%3Adm%3Aag26761663105%3Acmp394643185&sid=73a257d289bcbc087836c52eb2b1bd4b&all_sr_blocks=1132050901_385841682_2_0_0&checkin=2026-12-08&checkout=2026-12-09&dest_id=-231191&dest_type=city&dist=0&group_adults=6&group_children=0&hapos=4&highlighted_blocks=1132050901_385841682_2_0_0&hpos=4&matching_block_id=1132050901_385841682_2_0_0&no_rooms=1&req_adults=6&req_children=0&room1=A%2CA%2CA%2CA%2CA%2CA&sb_price_type=total&sr_order=popularity&sr_pri_blocks=1132050901_385841682_2_0_0__4671409&srepoch=1784947812&srpvid=4e4813e7336604a8&type=total&ucfs=1&
+" target="_blank" class="hotel-link">🔗 查看/預訂飯店</a>
+                    </td>
+                    <td>TWD 6,303<br><small>(每人約 $1,005/晚)</small></td>
+                    <td></span> 自行轉地鐵約11分鐘路程。</td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="hotel-tag tag-option">備選</span><strong>關西機場阿斯頓廣場酒店</strong><br><small>(大阪府, 泉佐野, Minami Nakayasumatsu 674-1, 日本)</small><br>
+                        <a href="https://booking.kyoto-plazahotels.com/booking/result?code=3856c659-834b-403e-b4cb-581a66d37d30&checkin=2026%2F12%2F08&checkout=2026%2F12%2F09&type=rooms&is_day_use=false&order=recommended&is_including_occupied=false&rooms=%5B%7B%22adults%22%3A2%2C%22children%22%3A0%7D%2C%7B%22adults%22%3A2%2C%22children%22%3A0%7D%2C%7B%22adults%22%3A2%2C%22children%22%3A0%7D%5D&locale=zh_Hant&mcp_currency=TWD
+" target="_blank" class="hotel-link">🔗 官方網站 / 預訂</a><br>
+                        <a href="https://www.booking.com/hotel/jp/aston-plaza-kansai-airport.zh-tw.html?aid=318615&label=New_English_EN_TW_26761663105-ySXISxshohb8GDatgxAuWQS813129213341%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi%3Atikwl-64415224945%3Alp9197606%3Ali%3Adec%3Adm%3Aag26761663105%3Acmp394643185&sid=73a257d289bcbc087836c52eb2b1bd4b&all_sr_blocks=222441402_393874168_2_2_0&checkin=2026-12-08&checkout=2026-12-09&dest_id=-231191&dest_type=city&dist=0&group_adults=2&group_children=0&hapos=12&highlighted_blocks=222441402_393874168_2_2_0&hpos=12&matching_block_id=222441402_393874168_2_2_0&no_rooms=1&req_adults=2&req_children=0&room1=A%2CA&sb_price_type=total&sr_order=popularity&sr_pri_blocks=222441402_393874168_2_2_0__792000&srepoch=1784966589&srpvid=646938348b1303cb&type=total&ucfs=1&
+" target="_blank" class="hotel-link">🔗 查看/預訂飯店</a>
+                    </td>
+                    <td>TWD 5,040 - 5,244<br><small>(每人約 $840-874/晚)</small></td>
+                    <td><span class="text-green text-bold">【優勢】</span> 價格實惠且提供免費機場接駁服務。<br><span class="text-red">【缺點】</span> </strong>若錯過專屬接駁車，交通轉換會相當繁瑣，自行轉地鐵約30分鐘路程。</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- DAY 1 -->
+        <div class="day-header">📆 Day 1&nbsp;&nbsp;12/4 (五) &nbsp;&nbsp;機場啟航&nbsp;&nbsp; ➔ &nbsp;&nbsp;⛩️大鳥大社&nbsp;&nbsp; ➔&nbsp;&nbsp; 心齋橋商店街美食&nbsp;&nbsp;</div>
+        <div class="section-card">
+            <ul class="timeline">
+                <li class="timeline-item">
+                    <span class="timeline-marker"></span>
+                    <span class="time-badge">04:25 - 06:55</span> <strong>高雄小港機場｜報到 & 通關</strong>
+                </li>
+                <li class="timeline-item">
+                    <span class="timeline-marker"></span>
+                    <span class="time-badge">10:45 - 12:15</span> <strong>抵達 大阪關西國際機場 (KIX)</strong>
+                    <div class="spot-intro">
+                        <div class="spot-img-container">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqcg_r8ol0MNdeYs7_RDIz-p54wv4HnYP4ee5HgpNDWQ&s=10" alt="關西國際機場">
+                            <span class="img-hint-tag">大圖呈現 - 可自訂圖片 src</span>
+                        </div>
+                        <div class="spot-desc">
+                            辦理入境填寫 Visit Japan Web，通關後至一樓大廳。
+                        </div>
+                    </div>
+                </li>
+                <li class="timeline-item">
+                   <span class="timeline-marker"></span>
+                   <span class="time-badge">12:15 - 13:15</span> <strong>機場｜臨櫃取車手續</strong>
+                   <div class="info-box traffic">         
+                      <strong><span class="text-blue">租車指南：</span></strong> 接駁車前往機場臨空轉運站的租車櫃檯（如Times、Toyota）。<br>
+                      ✈️機場租車資訊：<a href="https://rent.toyota.co.jp/zh-tw/reservation/airport_list.aspx?prevPage=1&shopMode=0" target="_blank">機場｜関西空港店連結</a><br>
+                      ✈️機場租車資訊：<a href="https://www.r-shinosaka.jp/shop/009/" target="_blank">機場｜臨空城站前店連結</a><br>
+                      ✈️機場租車資訊：<a href="https://www.r-shinosaka.jp/shop/kansaikukou/" target="_blank">機場｜TOYOTA租車連結</a><br>
+                      ⭐參考資訊：<a href="https://www2.tocoo.jp/cn/guide/2023/06/01/%E4%B8%8D%E6%9C%83%E5%86%8D%E5%9C%A8%E6%A9%9F%E5%A0%B4%E8%BF%B7%E8%B7%AF%E4%BA%86%EF%BC%81-%E6%82%A8%E5%8F%AF%E4%BB%A5%E5%9C%A8%E6%AD%A4%E8%99%95%E6%89%BE%E5%88%B0%E5%89%8D%E5%BE%80%E6%A9%9F-2/#m" target="_blank">ToCoo! 機場租車指南連結</a><br>
+                      ⭐參考資訊：<a href="https://spirit0926.pixnet.net/blog/posts/3050900748" target="_blank">網友租車教學連結</a><br>
+                   </div>
+
+                    <div class="info-box ticket">
+                        <strong><span class="text-green">ETC卡申辦：</span></strong> 現場取車時，務必向櫃檯加購 <span class="text-green text-bold">ETC卡</span> 借用與 <span class="text-green text-bold">KEP (Kansai Expressway Pass) 關西高速公路通行證</span>（依天數計費計價，約¥3,700-¥4,700）。這能讓您在後續行經阪神高速與跨海大橋時大幅節省過路費並直接走ETC車道，不需人工停車掏現。
+                    </div>
+                </li>
+                <li class="timeline-item">
+                    <span class="timeline-marker"></span>
+                    <span class="time-badge">13:15 - 14:00</span> <span class="text-red"><strong>【自駕🚗】</strong></span><strong>前往堺市｜大鳥大社</strong>
+                    <p style="margin:2px 0;">開車路線：走關西空港自動車道接阪神高速4號灣岸線，於「石津」出口下交流道，總車程約45分鐘。</p>
+                </li>
+                <li class="timeline-item">
+                    <span class="timeline-marker"></span>
+                    <span class="time-badge">14:00 - 15:30</span> <strong> ⛩️大鳥大社 </strong>
+                    <div class="spot-intro">
+                        <div class="spot-img-container">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpPYRree9YRR465R20u70vluhIoKf1VzfNk-cfyqoNQA&s=10" alt="大鳥大社">
+                            <span class="img-hint-tag">大圖呈現 - 可自訂圖片 src</span>
+                        </div>
+                        <div class="spot-desc">
+                            <span class="text-chichi"><strong> 【景點簡介】<br></strong></span> 和泉國一宮，名列日本古老官社。主祀日本武尊。其本殿建築樣式被稱為「大鳥造」，是與出雲大社大社造齊名的日本古老神社建築典範，境內莊嚴，非常適合做為落地日本祈求旅途平安的第一站。<br>神社內有一棵神木，隆起的樹根很有特色，說是事業和金運有幫助，可以買一堆金幣💰丟過去祈福
+                        </div>
+                    </div>
+                    <div class="info-box traffic"><span class="text-blue"><strong>停車資訊：</strong></span> 神社旁附設有參拜專用免費停車場。</div>
+                </li>
+                <li class="timeline-item">
+                    <span class="timeline-marker"></span>
+                    <span class="time-badge">15:30 - 16:30</span> <span class="text-red"><strong>【自駕🚗】</strong></span><strong>大阪市區｜飯店 Check-in</strong>
+                    <p style="margin:2px 0;">開車路線：走阪神高速15號堺線直達大阪市中心（難波/本町周邊），車程約40分鐘。建議尋找帶有配合立體停車場的飯店。</p>
+                </li>
+                <li class="timeline-item">
+                    <span class="timeline-marker"></span>
+                    <span class="time-badge">16:45 - 18:30</span> <strong>【美食/購物】 步行前往心齋橋。</strong>
+                    <div class="spot-intro">
+                        <div class="spot-img-container">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxL0lKfCGv7R1oKx6qKp8-4cPKNK9YE6ABaATZdVmLBw&s=10" alt="MooKEN 泡芙">
+                            <span class="img-hint-tag">大圖呈現 - 可自訂圖片 src</span>
+                        </div>
+                        <div class="spot-desc">
+                            <span class="text-chichi text-bold">【MooKEN 泡芙】<br></span> 大阪心齋橋的超高評價烘焙甜點。主打現點現灌餡。外皮經特殊烘烤工法呈現餅乾般的爽脆，咬下瞬間，醇厚細緻的卡士達內餡在口中爆漿，甜度拿捏極佳，是逛街的完美伴侶。
+                        </div>
+                    </div>
+                </li>
+                <li class="timeline-item">
+                    <span class="timeline-marker"></span>
+                    <span class="time-badge">18:30~</span> <strong>道頓堀（固力果跑跑人）｜晚餐</strong>
+                    <div class="info-box food"><span class="text-orange"><strong>美食推薦：</strong></span>next shikaku <br>🚩Map資訊：<a href="https://maps.app.goo.gl/ieYdBFReNEyq1Qdr8" target="_blank">https://maps.app.goo.gl/ieYdBFReNEyq1Qdr8</a><br>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- DAY 2 -->
+        <div class="day-header">📆 Day 2&nbsp;&nbsp;12/5 (六) <br>大阪出發 ➔ ⛩️伏見稻荷神社 ➔ ⛩️天滿宮 ➔ ⛩️清水寺➔ 🗼八坂塔➔ ⛩️八坂神社</div>
+        <div class="section-card">
+            <ul class="timeline">
+                <li class="timeline-item">
+                    <span class="timeline-marker"></span>
+                    <span class="time-badge">06:30 - 08:00</span> <span class="text-red"><strong>【自駕🚗】</strong></span><strong>大阪出發 ➔ 京都｜⛩️伏見稻荷神社</strong>
+                    <div>
+                        <p style="margin:2px 0;">開車路線：從大阪市區出發，上阪神高速、經第二京阪道路直達京都伏見區（車程約60-70分鐘）。由於是週末，導遊強烈建議盡早出發，能有效避開稻荷大社周邊的觀光與停車車潮。</p>
+                    </div>
+                </li>
+                <li class="timeline-item">
+                    <span class="timeline-marker"></span>
+                    <span class="time-badge">08:00 - 11:00</span> <strong> ⛩️伏見稻荷神社 </strong>
+                    <div class="spot-intro">
+                        <div class="spot-img-container">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRoFxErjZ4p4QngFmXUxcUYBlDid_9-CcMXKDbSDYcVQ&s=10" alt="伏見稻荷神社">
+                            <span class="img-hint-tag">大圖呈現 - 可自訂圖片 src</span>
+                        </div>
+                        <div class="spot-desc">
+                            <span class="text-chichi text-bold">【景點簡介】</span><br>
+                            神社參拜免費。全日本三萬多座稻荷神社的總本宮，供奉掌管生意興隆、五穀豐登的稻荷大神。神社境內最震撼、最出名的便是綿延不絕、穿過一整座山頭的「千本鳥居」，朱紅色的隧道極具視覺衝擊力。這裡也是狐狸使者的故鄉，隨處可見栩栩如生的狐狸石雕。
+                        </div>
+                    </div>
+                    <div class="info-box food"><span class="text-orange"><strong>美食推薦：</strong></span> 前往周邊的稻荷參道商店街，品嚐當地極具代表性的「稻荷壽司（豆皮壽司）」與「狐狸烏龍麵」，豆皮吸滿甘甜高湯，非常道地！</div>
+                    <div class="info-box traffic"><span class="text-blue"><strong>停車資訊：</strong></span> 設有參拜者專用的免費停車場，若客滿，周邊亦有許多計時收費的民間 Orix 或 Times 停車場。</div>
+                </li>
+                <li class="timeline-item">
+                    <span class="timeline-marker"></span>
+                    <span class="time-badge">11:00 - 11:30</span> <span class="text-red"><strong>【自駕🚗】</strong></span><strong>前往 ⛩️北野天滿宮</strong>
+                </li>   
+                </li>
+                <li class="timeline-item">
+                    <span class="timeline-marker"></span>
+                    <span class="time-badge">11:30 - 13:30</span> <strong> ⛩️北野天滿宮 </strong>
+                        <div class="spot-intro">
+                        <div class="spot-img-container">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQalmmyhh--OFlFUo61AkdszkTZgQcRLMjes_yPZAKnRw&s=10" alt="伏見稻荷神社">
+                            <span class="img-hint-tag">大圖呈現 - 可自訂圖片 src</span>
+                        </div>
+                        <div class="spot-desc">
+                            <span class="text-chichi text-bold">【景點簡介】</span><br>
+                            供奉日本學問之神菅原道真，每年有眾多的考生為祈求學業有成和考試及格而到此來參拜。
+                        </div>
+                         <div class="info-box traffic"><span class="text-blue"><strong>停車資訊：</strong></span> 設有專用免費停車場（位於神社入口（一之鳥居）的西側），但須特別注意特定的「禁停日期」與尖峰時段。</div>
+                        <div class="info-box" style="background-color: #ffebee; border-left: 4px solid #f44336; padding: 10px; margin-bottom: 10px;"><span class="text-red text-bold"> 💥 推薦：</span> 11～12月楓葉季會推出夜間點燈，境內開放到晚上8點。詳細開放時間&特別活動日程請先上官網確認最新資訊<br>
+                            🚩官網資訊：<a href="https://kitanotenmangu.or.jp/access/" target="_blank">https://kitanotenmangu.or.jp/access/</a><br></div>
+                </li>
+                <li class="timeline-item">
+                    <span class="timeline-marker"></span>
+                    <span class="time-badge">13:30 - 16:30</span></span><strong>午餐｜飯店 Check-in</strong>
+                </li>
+                <li class="timeline-item">
+                    <span class="timeline-marker"></span>
+                    <span class="time-badge">16:30 - 18:00</span><strong>⛩️清水寺｜⛩️清水坂｜⛩️產寧坂｜⛩️二寧坂</strong>
+                        <div class="spot-intro">
+                        <div class="spot-img-container">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTi9zy3iP6IoEwD4kj3IyCS2O1Otp98ke9rZmsp5CuRVA&s=10" alt="清水寺">
+                            <span class="img-hint-tag">大圖呈現 - 可自訂圖片 src</span>
+                        </div>
+                        <div class="spot-desc">
+                            <span class="text-chichi text-bold">【景點簡介】</span><br>
+                            經典京都散步路線，依序經過二年坂（二寧坂）、產寧坂（三年坂）與清水坂。沿途充滿石板坡道與傳統町家建築，是體驗古都風情與品嘗和風點心、購買伴手禮最熱鬧的精華路段。亦可拍攝法觀寺（八坂塔）古都風情，一路散步至八坂神社。
+                        </div>
+                        <div class="info-box" style="background-color: #ffebee; border-left: 4px solid #f44336; padding: 10px; margin-bottom: 10px;"><span class="text-red text-bold"> 💥 超重要：</span> 開放時間：每日上午 06:00 開門，關門時間依季節而定（一般為 18:00，夏秋季延長或舉辦夜間參拜至 21:30）。詳細開放時間&特別活動日程請先上官網確認最新資訊<br>
+                            🚩官網資訊：<a href="https://www.kiyomizudera.or.jp/" target="_blank">https://www.kiyomizudera.or.jp/</a><br></div>
+                </li>
+                <li class="timeline-item">
+                    <span class="timeline-marker"></span>
+                    <span class="time-badge">18:00 - 20:00</span><strong>⛩️法觀寺（八坂塔）｜⛩️八坂神社</strong>
+                        <div class="spot-intro">
+                        <div class="spot-img-container">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWGz_9cdKuuXz-yD3lARhgfmv7miXi8jyDBb8cUM91FA&s=10" alt="清水寺">
+                            <span class="img-hint-tag">大圖呈現 - 可自訂圖片 src</span>
+                        </div>
+                        <div class="spot-desc">
+                            <span class="text-chichi text-bold">【景點簡介】</span><br>
+                         八坂神社全年免費開放，夜間會舉行點燈，但御守、御朱印等販售時間為9點至17點。
+                        </div>                              
+                </li>
+                <li class="timeline-item">
+                    <span class="timeline-marker"></span>
+                    <span class="time-badge">20:00~</span> <strong>晚餐</strong>
+                </li>
+            </ul>
+        </div>
+
+        <!-- DAY 3 -->
+        <div class="day-header">📆 Day 3&nbsp;&nbsp;12/6 (日)<br>海之京都｜由良川橋梁攝影點📷 ➔ 伊根舟屋🐟 ➔ 天橋立飛龍觀🚟 ➔ 梅田還車</div>
+        <div class="section-card">
+            <div class="info-box" style="background-color: #ffebee; border-left: 4px solid #f44336; padding: 10px; margin-bottom: 10px;">
+                <span class="text-red text-bold"> 💥 超重要：</span> 來回拉車較長，為了幫大家圓夢拍到完美的「神隱少女海上電車」，務必精準卡位列車通過時刻！務必準時出發。<br>
+                <span class="text-red text-bold"><strong>海上列車最佳角度：靠近「丹後由良車站」的水岸邊。</strong></span>
+            </div>
+            <ul class="timeline">
+                <li class="timeline-item">
+                    <span class="timeline-marker"></span>
+                    <span class="time-badge">07:30 - 10:30</span> <span class="text-red"><strong>【自駕🚗】</strong></span><strong>大阪出發 ➔ 經京都縱貫道 ➔ 丹後神崎（由良川東側堤防）</strong>
+                    <div class="info-box traffic">                
+                        <strong><span class="text-blue">導航路線：</span></strong> 導航至LAWSON宮津由良店，超商前方有一小徑走到河邊就可看到鐵橋<br>🚩Map資訊：<a href="https://maps.app.goo.gl/a73w5V1GxdtVKWAk9" target="_blank">https://maps.app.goo.gl/a73w5V1GxdtVKWAk9</a><br>
+                    </div>
+                </li>
+                <li class="timeline-item">
+                    <span class="timeline-marker"></span>
+                    <span class="time-badge">11:00 - 11:40</span> <strong>由良川橋梁｜海上列車</strong>
+                    <div class="spot-intro">
+                        <div class="spot-img-container">
+                            <img src="https://farm66.static.flickr.com/65535/54290327217_35868e52f1_b.jpg" alt="由良川橋梁海之列車">
+                            <span class="img-hint-tag">大圖呈現 - 可自訂圖片 src</span>
+                        </div>
+                        <div class="spot-desc">
+                            <span class="text-chichi text-bold">【景點介紹】</span> 神隱少女「海之列車」<br>⭐丹後鐵道官網：<a href="https://trains.willer.co.jp/" target="_blank">https://trains.willer.co.jp/</a><br>
+                            ⭐參考資訊：<a href="https://www.threads.com/@solitary.photographer/post/DCT3EAhyliT?hl=zh-tw" target="_blank">Threads 攝影貼文</a><br>
+                            <a href="https://vocus.cc/article/6678bbcdfd89780001725d8e" target="_blank">方格子文章參考</a><br>
+                            <a href="https://ourtravel.tw/shottantetsu/" target="_blank">我們的旅遊日記攻略</a><br>
+                        </div>
+                    </div>
+                </li>
+                <li class="timeline-item">
+                    <span class="timeline-marker"></span>
+                    <span class="time-badge">11:40 - 14:00</span> <strong>伊根舟屋漁村｜海景午餐｜餵海鷗 </strong>
+                    <div class="spot-intro">
+                        <div class="spot-img-container">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAa6d6YJeTyAPWqd9gEC0WqRJ2aKTVvNar3AtcTU--Bg&s=10" alt="伊根舟屋">
+                            <span class="img-hint-tag">大圖呈現 - 可自訂圖片 src</span>
+                        </div>
+                        <div class="spot-desc">
+                            <span class="text-chichi text-bold">【景點介紹】</span> 開車約 45 分鐘抵達被譽為「日本最美漁村」的伊根舟屋。這裏有 230 多棟沿海岸建造的木造舟屋建築，可以自由散步或自費自選搭乘遊覽船，用手上的蝦味先體驗震撼的海鷗與老鷹空中爭食體驗！
+                        </div>
+                    </div>
+                    <div class="info-box food"><span class="text-orange"><strong>美食推薦：</strong></span>推薦前往觀光案內所二樓的「舟屋食堂」享用在地老舖經營的現撈海鮮與生魚片定食，從落地窗俯瞰整片灣景。</div>
+                    <div class="info-box food"><span class="text-orange"><strong>咖啡推薦：</strong></span>INE CAFE（伊根町）</div>
+                </li>
+                <li class="timeline-item">
+                    <span class="timeline-marker"></span>
+                    <span class="time-badge">14:00 - 14:30</span> <span class="text-red"><strong>【自駕🚗】</strong></span><strong>前往天橋立</strong>
+                </li>
+                <li class="timeline-item">
+                    <span class="timeline-marker"></span>
+                    <span class="time-badge">14:30 - 16:30</span> <strong>天橋立飛龍觀｜智恩寺智慧之餅</strong>
+                    <div class="spot-intro">
+                        <div class="spot-img-container">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT68PDsKgJim2vafPfZv296wIxMm1x7RG_nWIMnyJbJCw&s=10" alt="天橋立飛龍觀">
+                            <span class="img-hint-tag">大圖呈現 - 可自訂圖片 src</span>
+                        </div>
+                        <div class="spot-desc">
+                            <span class="text-chichi text-bold">【景點介紹】</span> 搭乘露天吊椅纜車登上展望台，背對沙洲從胯下倒過來觀看著名的「飛龍沙洲」絕景！可在頂端樂園挑戰刺激的高空腳踏車。<br>下山後前往上千年歷史的「智恩寺」參拜文殊菩薩，並品嚐限定特產「智慧之餅」，最後觀看特殊的「旋轉迴旋橋」。
+                        </div>
+                    </div>
+                </li>
+                <li class="timeline-item">
+                    <span class="timeline-marker"></span>
+                    <span class="time-badge">16:30 - 19:00</span> <span class="text-red"><strong>【自駕🚗】</strong></span><strong>返回大阪梅田還車</strong>
+                </li>
+                <li class="timeline-item">
+                    <span class="timeline-marker"></span>
+                    <span class="time-badge">19:30 - 20:30</span> <strong>搭乘阪急/京阪電車🚃→前往京都飯店｜晚餐</strong>
+                </li>
+            </ul>
+        </div>
+
+        <!-- DAY 4 -->
+        <div class="day-header">📆 Day 4&nbsp;&nbsp;12/7 (一) <br>🚇叡山電車紅葉隧道🍁🍁🍁 ➔ ⛩️貴船神社 ➔ ⛩️鞍馬寺 ➔ 鴨川三角洲跳烏龜🏃</div>
+        <div class="section-card">
+            <ul class="timeline">
+                <li class="timeline-item">
+                    <span class="timeline-marker"></span>
+                    <span class="time-badge">07:00 - 07:30</span> <span class="text-green text-bold">【大眾運輸🚎】</span><strong>京都市區 ➔ 出町柳站</strong>
+                    <p style="margin:2px 0;">可從「祇園四条站」乘坐「京阪本線」至「出町柳站」轉公車。</p>
+                </li>
+                <li class="timeline-item">
+                    <span class="timeline-marker"></span>
+                    <span class="time-badge">07:30 - 08:00</span> <span class="text-green text-bold">【叡山電車🚇】</span><strong>叡山電車紅葉隧道｜出町柳站 ➔ 貴船口站 </strong>
+                    <p style="margin:2px 0;">從「出町柳站」乘坐「叡山電鐵鞍馬線」至「貴船口站」車程約28分鐘。<br>早晨班次約 15–20 分鐘一班。車上多為當地居民或極少數早起遊客，搭乘體驗舒適悠閒。</p>
+                    <div class="spot-intro">
+                        <div class="spot-img-container">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuZ04zEq5jgwlJeRe6wi8w2-9DLQ1PCje_YEuc6bdngw&s=10" alt="叡山電車紅葉隧道">
+                            <span class="img-hint-tag">大圖呈現 - 可自訂圖片 src</span>
+                        </div>
+                        <div class="spot-desc">
+                            <span class="text-chichi text-bold">【景點簡介】<br></span> 叡山電車鞍馬線在「市原站」至「二之瀨站」之間，有一段長約250公尺的兩側密植楓樹路段，被譽為「紅葉隧道」。12月初初冬時分，列車駛入此區間時，車廂內會熄燈，列車會慢速緩行，讓乘客透過大片觀景窗凝視窗外如夢似幻的深秋與初冬冬景。
+                        </div>
+                    </div>
+                </li>
+                <li class="timeline-item">
+                    <div class="info-box traffic">
+                        <div>                  
+                        <strong><span class="text-blue">搭乘指南：</span></strong><br>
+                        1. 於出町柳站轉乘【叡山電車・鞍馬線】開往鞍馬方向的列車。<br>
+                        2. <strong>票價：</strong>出町柳站至貴船口站，單程 ¥430。<br>
+                        3. <strong>購票方式：</strong>不需要、也無法提前劃位！全線支援 <span class="text-blue text-bold">ICOCA / Suica 交通卡</span>，進出站直接刷卡即可。若無IC卡，請在出町柳站的售票機購買單程車票即可。建議上車時爭取靠窗的座位（特別是觀光列車「きらら (Kirara)」設有面窗座椅）。<br>
+                        4. <strong>官網資訊：</strong><a href="https://eizandensha.co.jp/tc/" target="_blank">https://eizandensha.co.jp/tc/</a><br>
+                        ⭐<strong>路線指引影片1：<strong><a href="https://www.youtube.com/watch?v=0N7rrKNzW_Y" target="_blank">https://www.youtube.com/watch?v=0N7rrKNzW_Y</a><br>
+                        ⭐<strong>路線指引影片2：<strong><a href="https://www.youtube.com/watch?v=rAJRhIrV1zw" target="_blank">https://www.youtube.com/watch?v=rAJRhIrV1zw</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="timeline-item">
+                    <span class="timeline-marker"></span>
+                    <span class="time-badge">08:00 - 08:15</span> <span class="text-green text-bold">【轉乘公車🚍】</span><strong>抵達貴船 </strong>
+                    <div class="info-box traffic">                
+                        <strong><span class="text-blue">搭乘指南：</span></strong>從「貴船口站」出站後，列車站外搭乘【京都巴士33號】前往「貴船」巴士總站下車（車程約5分鐘，可刷交通卡）。<br>
+                        ⭐<strong>京都巴士33號-時刻表：</strong><a href="https://japantravel.navitime.com/zh-tw/area/jp/depArrTimeList/00056787/00056789/00016721?direction=down" target="_blank">https://japantravel.navitime.com/zh-tw/area/jp/depArrTimeList/00056787/00056789/00016721?direction=down</a><br>
+                    </div>
+                    <div class="info-box food"><span class="text-orange"><strong>美食推薦：</strong></span> 貴船川畔的日式茶屋，享用京都冬日限定的熱山藥烏龍麵或蕎麥定食。</div>
+                </li>
+                <li class="timeline-item">
+                    <span class="timeline-marker"></span>
+                    <span class="time-badge">08:15 - 10:30</span> <strong> ⛩️貴船神社 </strong>
+                    <div class="spot-intro">
+                        <div class="spot-img-container">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIps2nzHqXDAEod-XXg-1xVuRfyqheJDePZ6fiwdHzzA&s=10" alt="貴船神社">
+                            <span class="img-hint-tag">大圖呈現 - 可自訂圖片 src</span>
+                        </div>
+                        <div class="spot-desc">
+                            <span class="text-chichi text-bold">【景點簡介】<br></span> 日本全國貴船神社的總本社，奉祀水神。這裏也是日本「繪馬」的發源地。神社最著名的是沿山路蜿蜒而上的參道階梯，兩側排列著整齊的朱紅燈籠。傍晚17:00左右，夜幕低垂，兩側燈籠火光點亮，將古老神社渲染得極其神聖與浪漫，是情侶牽手漫步的極致機位。
+                        </div>
+                    </div>
+                    <div class="info-box ticket">
+                        <span class="text-green text-bold">推薦體驗：</span> <br>神社參拜免費。<br>務必花費 ¥300 購買一張「水占卜籤詩（水占いみくじ）」。拿到時是一張空白紙，將其輕輕平鋪於境內的御神水水池中，幾秒鐘後吉凶籤文便會奇蹟般地浮現，值回票價！
+                    </div>
+                </li>
+                <li class="timeline-item">
+                    <span class="timeline-marker"></span>
+                    <span class="time-badge">10:30 - 11:00</span> <span class="text-green text-bold">【叡山電車🚇】</span><strong>⛩️鞍馬寺<strong>
+                    <div class="spot-intro">
+                        <div class="spot-img-container">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-xGm38omjIJkDZDRDWd7bV6QThADFu3577JlfgQ3ulw&s=10" alt="鞍馬寺">
+                            <span class="img-hint-tag">大圖呈現 - 可自訂圖片 src</span>
+                        </div>
+                        <div class="spot-desc">
+                            <span class="text-chichi text-bold">【景點簡介】<br></span> 以天狗傳說的發源地與源義經修行之地而聞名。<br>
+                            ◆開放時間：每日 09:00 – 16:00<br>
+                            ◆門票：¥500<br>
+                            ◆官方網站：</strong><a href="https://www.kuramadera.or.jp/" target="_blank">https://www.kuramadera.or.jp/</a><br>
+                        </div>
+                    </div>
+                    <div class="info-box traffic">                
+                        <strong><span class="text-blue">搭乘指南：<br>
+                        </span></strong>1. 搭乘【京都巴士33號🚍】前往貴船口→搭乘【叡山電車🚇】1 站抵達「鞍馬站」，車程約 3 分鐘。<br>
+                        </span></strong>2. 從「鞍馬站」旁的「山門站」乘坐纜車至「多寶塔站」，再步行即可到達「鞍馬寺」。<br>
+                        ⭐<strong>京都巴士33號-時刻表：</strong><a href="https://japantravel.navitime.com/zh-tw/area/jp/depArrTimeList/00056787/00056789/00016721?direction=down" target="_blank">https://japantravel.navitime.com/zh-tw/area/jp/depArrTimeList/00056787/00056789/00016721?direction=down</a><br>
+                        ⭐<strong>鞍馬山鋼索鐵道(纜車)：</strong>山門站&nbsp;08:40 - 16:30、多寶塔站&nbsp;08:45 - 16：35<br>
+                        <span class="text-red text-bold"><strong>※每小時 10分、25分、40分、55分（人潮多時會視情況增加班次頻繁行駛）。</strong></span>
+                    </div>
+                <li>
+                    <li class="timeline-item">
+                    <span class="timeline-marker"></span>
+
+                    
+                    <span class="time-badge">11:00 - 11:30</span> <span class="text-green text-bold">【叡山電車🚇】</span><strong> ➔ 出町柳站｜午餐<strong>
+
+                <li>
+                    <li class="timeline-item">
+                    <span class="timeline-marker"></span>
+                    <span class="time-badge">13:30 - 15:30</span> <strong> 鴨川三角洲跳烏龜 </strong>
+                    <div class="spot-intro">
+                        <div class="spot-img-container">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAazJFOek6tGBMBhKZu8IQB_AdbMsNunDaJjxqErdi1w&s alt="鴨川三角洲跳烏龜">
+                            <span class="img-hint-tag">大圖呈現 - 可自訂圖片 src</span>
+                        </div>
+                        <div class="spot-desc">
+                            <span class="text-chichi text-bold">【景點簡介】<br></span> 從出町柳站出站即達。清澈的鴨川在此匯流，踩著烏龜與石塊形狀的踏腳石跨越溪流。<br>
+                    </div>
+                <li class="timeline-item">
+                    <span class="timeline-marker"></span>
+                    <span class="time-badge">15:30 ~</span> <span class="text-green text-bold">【大眾運輸🚎】</span><strong>返回京都市區</strong>
+                </li>
+            </ul>
+        </div>
+
+        <!-- DAY 5 -->
+        <div class="day-header">📆 Day 5&nbsp;&nbsp; 12/8 (二)&nbsp;&nbsp; LINKS UMEDA / 友都八喜 ➔ 泉佐野市飯店 Check-in&nbsp;&nbsp;&nbsp;&nbsp;</div>
+        <div class="section-card">
+        <div class="info-box" style="background-color: #ffebee; border-left: 4px solid #f44336; padding: 10px; margin-bottom: 10px;">
+                <span class="text-red text-bold"> 💥 超重要：</span> 飯店拉車較長，先找梅田車站（JR/阪急）櫃置物寄放行李，採購完再Check-in<br>
+                <span class="text-red text-bold">寄放查詢：</span><a href="https://cloak.ecbo.io/zh-TW/jpn/city/osaka/860" target="_blank" class="hotel-link">🔗 店家 / 空位查詢</a>
+            </div>
+        <div class="section-card">
+            <ul class="timeline">
+                <li class="timeline-item">
+                    <span class="timeline-marker"></span>
+                    <span class="time-badge">09:00 - 10:00</span> <span class="text-green text-bold">【阪急特急🚎】</span><strong>京都 ➔ 直達大阪梅田</strong>
+                    <div class="info-box traffic">                
+                        <strong><span class="text-blue">搭乘指南：</span></strong>於京都「四条烏丸站」或「京都河原町站」搭乘 <span class="text-red text-bold">阪急電鐵・京都線特急列車</span>，終點站即為大阪梅田。
+                    </div>
+                </li>
+                <li class="timeline-item">
+                    <span class="timeline-marker"></span>
+                    <span class="time-badge">10:00 - 16:00</span> <strong> 🛒 梅田巨型商圈購物（LINKS UMEDA / Lucua 1100 / Yodobashi） </strong>
+                    <div class="spot-intro">
+                        <div class="spot-img-container">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRLD06EjntLXxKCuaz7cvkOtZ1vaKqcbW-fae0KgUnzA&s=10" alt="梅田購物">
+                            <span class="img-hint-tag">大圖呈現 - 可自訂圖片 src</span>
+                        </div>
+                        <div class="spot-desc">
+                            <span class="text-chichi text-bold">【景點簡介】<br></span> 梅田是西日本最大的購物樞紐，LINKS UMEDA與友都八喜結合了極致龐大的電器、動漫、服飾與雜貨店鋪；Lucua 與 Lucua 1100 則齊聚許多質感潮流品牌與話題甜點（如 GARIGUETTE 千層派）。
+                        </div>
+                    </div>
+                    <div class="info-box food">
+                        <span class="text-orange"><strong>甜點與美食推薦：</strong></span> GARIGUETTE 拿破崙千層派、HARBS 蛋糕、梅田地下街串炸。
+                    </div>
+                </li>
+                <li class="timeline-item">
+                    <span class="timeline-marker"></span>
+                    <span class="time-badge">16:30 - 17:30</span> <span class="text-green text-bold">【JR 關空快速🚎】</span><strong>梅田 ➔ 前往泉佐野市飯店 Check-in</strong>
+                    <p style="margin:2px 0;">從 JR 大阪站搭乘關空快速列車至「臨空城站（Rinku-Town）」，辦理入住，徹底為明日早班機做好萬全準備。</p>
+                </li>
+                <li class="timeline-item">
+                    <span class="timeline-marker"></span>
+                    <span class="time-badge">18:00~</span> <strong>臨空城 Outlet ｜晚餐 & 購物</strong>
+                        <div class="spot-intro">
+                            <div class="spot-img-container">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSq4zdujkK5uhBszzq5rH44a7eoVLNWs3uKVqucKZi0Zw&s" alt="臨空城 Outlet">
+                            <span class="img-hint-tag">大圖呈現 - 可自訂圖片 src</span>
+                        </div>
+                        <div class="spot-desc">
+                            <span class="text-chichi text-bold">【景點簡介】<br></span> 整個園區分為 Main Side（主館） 與 Sea Side（海濱區），中間有空橋連接。<br>
+◆輕奢精品（主館1F）：COACH、Michael Kors、Kate Spade 等品牌折扣力度極大，常有 5 折後再打 7-7.5 折的超級優惠。<br>
+◆運動休閒（主館2F / 海濱區2F）：Nike、Adidas、New Balance 等佔地遼闊，零碼區經常能挖到台幣千元以下的球鞋。<br>
+※Nike 、 Adidas 不參與免稅，本身折扣已非常便宜。<br>
+◆日系質感服飾（主館1F）：日本三大選品店 BEAMS、United Arrows、Urban Research 齊聚，價格比台灣專櫃便宜 2 至 3 成。<br>
+<span class="text-red text-bold">💥官網樓層介紹：</span><a href="https://www.premiumoutlets.co.jp/cht/kobesanda/brands/?tab=1" target="_blank" class="hotel-link">🔗 樓層介紹</a>
+                        <div class="info-box traffic">                
+                        <strong><span class="text-blue">路線指南：</span></strong>若住宿OMO5 關西機場，步行11分鐘。<br>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- DAY 6 -->
+        <div class="day-header">📆 Day 6&nbsp;&nbsp;12/9 (三)&nbsp;&nbsp;泉佐野飯店&nbsp;&nbsp; ➔&nbsp;&nbsp; 關西國際機場✈️&nbsp;&nbsp;  ➔&nbsp;&nbsp; 順利返台</div>
+        <div class="section-card">
+        <div class="info-box" style="background-color: #ffebee; border-left: 4px solid #f44336; padding: 10px; margin-bottom: 10px;">
+                <span class="text-red text-bold"> 💥 超重要：</span> 2026 日本免稅新制上路：先結帳→再透過出境流程把稅金退回。<br>
+            </div>
+        <div class="spot-intro">
+                            <div class="spot-img-container">
+                            <img src="https://assets.juksy.com/files/articles/143714/69d473e7a9de3.jpg" alt="臨空城 Outlet">
+                            <span class="img-hint-tag">大圖呈現 - 可自訂圖片 src</span>
+                        </div>
+                        <div class="spot-desc">
+                            <span class="text-chichi text-bold">【退稅說明】<br></span> 結帳時，旅客需先以標示的含稅價格付款，並透過商店或購買明細上提供的J-TaxRefund網站QR-Code登記護照與收款資訊（如信用卡、銀行帳戶或現金等）。<br>
+                            出境時，再前往機場的自助通關機（KIOSK）或海關櫃檯辦理查驗，確認符合免稅資格&明細無誤之後，退款才會正式撥入你指定的帳戶。             
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        <div class="section-card">
+            <ul class="timeline">
+                <li class="timeline-item">
+                    <span class="timeline-marker"></span>
+                    <span class="time-badge">08:00 - 08:30</span> <strong>飯店退房 ➔ 搭乘飯店免費接駁車前往機場 T1</strong>
+                    <div class="info-box traffic">
+                        <strong><span class="text-blue">搭乘指南：</span></strong>OMO5 關西機場與關西機場有免費機場接駁巴士（或搭乘 JR / 南海電鐵至關西機場站）。
+                    </div>
+                </li>
+                <li class="timeline-item">
+                    <span class="timeline-marker"></span>
+                    <span class="time-badge">08:30 - 11:30</span> <strong>關西國際機場 (KIX)｜櫃檯報到 ➔ 免稅店採買 ➔ 起飛</strong>
+                    <p style="margin:2px 0;">辦理虎航 IT285 託運與報到，出境後可於免稅店採買知名伴手禮（白色戀人、Royce巧克力、Tokyo Banana等）。</p>
+                </li>
+                <li class="timeline-item">
+                    <span class="timeline-marker"></span>
+                    <span class="time-badge">11:30 - 14:15</span> <strong>✈️ 虎航 IT285：關西機場 (KIX) ➔ 高雄小港機場 (KHH)</strong>
+                    <p style="margin:2px 0;">帶著滿滿的精采回憶與戰利品平安返抵高雄！</p>
+                </li>
+            </ul>
+        </div>
+
+
+</body>
+</html>
