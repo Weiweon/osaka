@@ -54,6 +54,32 @@
         .text-green { color: #2e7d32; }
         .text-red { color: #c62828; }
         .text-chichi { color: #1e3c72; } 
+
+        /* 以下僅支援本次行程新增的租車教學、訂位說明與勾選清單；不變更既有航班/交通概覽樣式 */
+        .guide-details { border: 1px solid #d8e3ed; border-radius: 7px; background: #fff; margin: 9px 0; overflow: hidden; }
+        .guide-details > summary { padding: 11px 12px; font-weight: bold; color: #1e3c72; cursor: pointer; background: #f4f8fc; font-size: 12.5px; }
+        .guide-details[open] > summary { border-bottom: 1px solid #e0e7ef; }
+        .guide-details-body { padding: 10px 11px 12px; font-size: 12.5px; color: #475569; }
+        .rental-steps { list-style: none; margin: 0; padding: 0; }
+        .rental-steps > li { padding: 9px 0; border-bottom: 1px solid #e9edf2; }
+        .rental-steps > li:last-child { border-bottom: 0; }
+        .guide-step-title { display: flex; align-items: center; gap: 8px; color: #1e3c72; }
+        .guide-step-num { width: 22px; height: 22px; flex: 0 0 22px; background: #1e3c72; color: white; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 11px; }
+        .guide-step-body { margin: 6px 0 0 30px; line-height: 1.7; }
+        .booking-steps { margin: 6px 0 6px; padding-left: 20px; }
+        .booking-steps li { margin-bottom: 5px; }
+        .rental-check-list { display: grid; gap: 6px; }
+        .rental-check { display: flex; align-items: flex-start; gap: 8px; padding: 8px; border: 1px solid #ebeff5; border-radius: 5px; background: #fafcff; line-height: 1.6; }
+        .rental-check input { accent-color: #1e3c72; margin-top: 4px; flex-shrink: 0; }
+        .rental-check:has(input:checked) { background: #f0f8ef; color: #587063; }
+        .rental-check input:checked + span { text-decoration: line-through; }
+        #rental-progress { color: #e65100; font-size: 11px; font-weight: 600; white-space: nowrap; }
+        .rental-compare { margin: 0 0 6px; font-size: 11px; }
+        .rental-compare td, .rental-compare th { vertical-align: top; padding: 7px 6px; word-break: break-word; }
+        .guide-note { font-size: 11px; color: #6b7280; margin-bottom: 0; }
+        .photo-credit { font-size: 10px; color: #64748b; margin-top: 7px; text-align: right; }
+        .spot-desc { line-height: 1.75; }
+        .spot-desc a, .guide-details-body a, .info-box a { overflow-wrap: anywhere; }
     </style>
 </head>
 <body>
@@ -210,419 +236,359 @@
             </table>
         </div>
 
-        <!-- DAY 1 -->
-        <div class="day-header">📆 Day 1&nbsp;&nbsp;12/4 (五) &nbsp;&nbsp;機場啟航&nbsp;&nbsp; ➔ &nbsp;&nbsp;⛩️大鳥大社&nbsp;&nbsp; ➔&nbsp;&nbsp; 心齋橋商店街美食&nbsp;&nbsp;</div>
+    <!-- DAY 1 | 本次更新 -->
+        <div class="day-header">📆 Day 1&nbsp;&nbsp;12/4（五）<br>臨空城同店取車 → 大阪飯店 → ミナモ十三屋台村 → 19:30 丸花心齋橋</div>
         <div class="section-card">
+            
             <ul class="timeline">
                 <li class="timeline-item">
-                    <span class="timeline-marker"></span>
-                    <span class="time-badge">04:25 - 06:55</span> <strong>高雄小港機場｜報到 & 通關</strong>
-                </li>
-                <li class="timeline-item">
-                    <span class="timeline-marker"></span>
-                    <span class="time-badge">10:45 - 12:15</span> <strong>抵達 大阪關西國際機場 (KIX)</strong>
-                    <div class="spot-intro">
-                        <div class="spot-img-container">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqcg_r8ol0MNdeYs7_RDIz-p54wv4HnYP4ee5HgpNDWQ&s=10" alt="關西國際機場">
-                            <span class="img-hint-tag">大圖呈現 - 可自訂圖片 src</span>
-                        </div>
-                        <div class="spot-desc">
-                            辦理入境填寫 Visit Japan Web，通關後至一樓大廳。
-                        </div>
-                    </div>
-                </li>
-                <li class="timeline-item">
-                   <span class="timeline-marker"></span>
-                   <span class="time-badge">12:15 - 13:15</span> <strong>機場｜臨櫃取車手續</strong>
-                   <div class="info-box traffic">         
-                      <strong><span class="text-blue">租車指南：</span></strong> 接駁車前往機場臨空轉運站的租車櫃檯（如Times、Toyota）。<br>
-                      ✈️機場租車資訊：<a href="https://rent.toyota.co.jp/zh-tw/reservation/airport_list.aspx?prevPage=1&shopMode=0" target="_blank">機場｜関西空港店連結</a><br>
-                      ✈️機場租車資訊：<a href="https://www.r-shinosaka.jp/shop/009/" target="_blank">機場｜臨空城站前店連結</a><br>
-                      ✈️機場租車資訊：<a href="https://www.r-shinosaka.jp/shop/kansaikukou/" target="_blank">機場｜TOYOTA租車連結</a><br>
-                      ⭐參考資訊：<a href="https://www2.tocoo.jp/cn/guide/2023/06/01/%E4%B8%8D%E6%9C%83%E5%86%8D%E5%9C%A8%E6%A9%9F%E5%A0%B4%E8%BF%B7%E8%B7%AF%E4%BA%86%EF%BC%81-%E6%82%A8%E5%8F%AF%E4%BB%A5%E5%9C%A8%E6%AD%A4%E8%99%95%E6%89%BE%E5%88%B0%E5%89%8D%E5%BE%80%E6%A9%9F-2/#m" target="_blank">ToCoo! 機場租車指南連結</a><br>
-                      ⭐參考資訊：<a href="https://spirit0926.pixnet.net/blog/posts/3050900748" target="_blank">網友租車教學連結</a><br>
-                   </div>
-
-                    <div class="info-box ticket">
-                        <strong><span class="text-green">ETC卡申辦：</span></strong> 現場取車時，務必向櫃檯加購 <span class="text-green text-bold">ETC卡</span> 借用與 <span class="text-green text-bold">KEP (Kansai Expressway Pass) 關西高速公路通行證</span>（依天數計費計價，約¥3,700-¥4,700）。這能讓您在後續行經阪神高速與跨海大橋時大幅節省過路費並直接走ETC車道，不需人工停車掏現。
-                    </div>
-                </li>
-                <li class="timeline-item">
-                    <span class="timeline-marker"></span>
-                    <span class="time-badge">13:15 - 14:00</span> <span class="text-red"><strong>【自駕🚗】</strong></span><strong>前往堺市｜大鳥大社</strong>
-                    <p style="margin:2px 0;">開車路線：走關西空港自動車道接阪神高速4號灣岸線，於「石津」出口下交流道，總車程約45分鐘。</p>
-                </li>
-                <li class="timeline-item">
-                    <span class="timeline-marker"></span>
-                    <span class="time-badge">14:00 - 15:30</span> <strong> ⛩️大鳥大社 </strong>
-                    <div class="spot-intro">
-                        <div class="spot-img-container">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpPYRree9YRR465R20u70vluhIoKf1VzfNk-cfyqoNQA&s=10" alt="大鳥大社">
-                            <span class="img-hint-tag">大圖呈現 - 可自訂圖片 src</span>
-                        </div>
-                        <div class="spot-desc">
-                            <span class="text-chichi"><strong> 【景點簡介】<br></strong></span> 和泉國一宮，名列日本古老官社。主祀日本武尊。其本殿建築樣式被稱為「大鳥造」，是與出雲大社大社造齊名的日本古老神社建築典範，境內莊嚴，非常適合做為落地日本祈求旅途平安的第一站。<br>神社內有一棵神木，隆起的樹根很有特色，說是事業和金運有幫助，可以買一堆金幣💰丟過去祈福
-                        </div>
-                    </div>
-                    <div class="info-box traffic"><span class="text-blue"><strong>停車資訊：</strong></span> 神社旁附設有參拜專用免費停車場。</div>
-                </li>
-                <li class="timeline-item">
-                    <span class="timeline-marker"></span>
-                    <span class="time-badge">15:30 - 16:30</span> <span class="text-red"><strong>【自駕🚗】</strong></span><strong>大阪市區｜飯店 Check-in</strong>
-                    <p style="margin:2px 0;">開車路線：走阪神高速15號堺線直達大阪市中心（難波/本町周邊），車程約40分鐘。建議尋找帶有配合立體停車場的飯店。</p>
-                </li>
-                <li class="timeline-item">
-                    <span class="timeline-marker"></span>
-                    <span class="time-badge">16:45 - 18:30</span> <strong>【美食/購物】 步行前往心齋橋。</strong>
-                    <div class="spot-intro">
-                        <div class="spot-img-container">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxL0lKfCGv7R1oKx6qKp8-4cPKNK9YE6ABaATZdVmLBw&s=10" alt="MooKEN 泡芙">
-                            <span class="img-hint-tag">大圖呈現 - 可自訂圖片 src</span>
-                        </div>
-                        <div class="spot-desc">
-                            <span class="text-chichi text-bold">【MooKEN 泡芙】<br></span> 大阪心齋橋的超高評價烘焙甜點。主打現點現灌餡。外皮經特殊烘烤工法呈現餅乾般的爽脆，咬下瞬間，醇厚細緻的卡士達內餡在口中爆漿，甜度拿捏極佳，是逛街的完美伴侶。
-                        </div>
-                    </div>
-                </li>
-                <li class="timeline-item">
-                    <span class="timeline-marker"></span>
-                    <span class="time-badge">18:30~</span> <strong>道頓堀（固力果跑跑人）｜晚餐</strong>
-                    <div class="info-box food"><span class="text-orange"><strong>美食推薦：</strong></span>next shikaku <br>🚩Map資訊：<a href="https://maps.app.goo.gl/ieYdBFReNEyq1Qdr8" target="_blank">https://maps.app.goo.gl/ieYdBFReNEyq1Qdr8</a><br>
-                    </div>
-                </li>
-            </ul>
-        </div>
-
-        <!-- DAY 2 -->
-        <div class="day-header">📆 Day 2&nbsp;&nbsp;12/5 (六) <br>大阪出發 ➔ ⛩️伏見稻荷神社 ➔ ⛩️天滿宮 ➔ ⛩️清水寺➔ 🗼八坂塔➔ ⛩️八坂神社</div>
-        <div class="section-card">
-            <ul class="timeline">
-                <li class="timeline-item">
-                    <span class="timeline-marker"></span>
-                    <span class="time-badge">06:30 - 08:00</span> <span class="text-red"><strong>【自駕🚗】</strong></span><strong>大阪出發 ➔ 京都｜⛩️伏見稻荷神社</strong>
-                    <div>
-                        <p style="margin:2px 0;">開車路線：從大阪市區出發，上阪神高速、經第二京阪道路直達京都伏見區（車程約60-70分鐘）。由於是週末，導遊強烈建議盡早出發，能有效避開稻荷大社周邊的觀光與停車車潮。</p>
-                    </div>
-                </li>
-                <li class="timeline-item">
-                    <span class="timeline-marker"></span>
-                    <span class="time-badge">08:00 - 11:00</span> <strong> ⛩️伏見稻荷神社 </strong>
-                    <div class="spot-intro">
-                        <div class="spot-img-container">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRoFxErjZ4p4QngFmXUxcUYBlDid_9-CcMXKDbSDYcVQ&s=10" alt="伏見稻荷神社">
-                            <span class="img-hint-tag">大圖呈現 - 可自訂圖片 src</span>
-                        </div>
-                        <div class="spot-desc">
-                            <span class="text-chichi text-bold">【景點簡介】</span><br>
-                            神社參拜免費。全日本三萬多座稻荷神社的總本宮，供奉掌管生意興隆、五穀豐登的稻荷大神。神社境內最震撼、最出名的便是綿延不絕、穿過一整座山頭的「千本鳥居」，朱紅色的隧道極具視覺衝擊力。這裡也是狐狸使者的故鄉，隨處可見栩栩如生的狐狸石雕。
-                        </div>
-                    </div>
-                    <div class="info-box food"><span class="text-orange"><strong>美食推薦：</strong></span> 前往周邊的稻荷參道商店街，品嚐當地極具代表性的「稻荷壽司（豆皮壽司）」與「狐狸烏龍麵」，豆皮吸滿甘甜高湯，非常道地！</div>
-                    <div class="info-box traffic"><span class="text-blue"><strong>停車資訊：</strong></span> 設有參拜者專用的免費停車場，若客滿，周邊亦有許多計時收費的民間 Orix 或 Times 停車場。</div>
-                </li>
-                <li class="timeline-item">
-                    <span class="timeline-marker"></span>
-                    <span class="time-badge">11:00 - 11:30</span> <span class="text-red"><strong>【自駕🚗】</strong></span><strong>前往 ⛩️北野天滿宮</strong>
-                </li>   
-                </li>
-                <li class="timeline-item">
-                    <span class="timeline-marker"></span>
-                    <span class="time-badge">11:30 - 13:30</span> <strong> ⛩️北野天滿宮 </strong>
-                        <div class="spot-intro">
-                        <div class="spot-img-container">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQalmmyhh--OFlFUo61AkdszkTZgQcRLMjes_yPZAKnRw&s=10" alt="伏見稻荷神社">
-                            <span class="img-hint-tag">大圖呈現 - 可自訂圖片 src</span>
-                        </div>
-                        <div class="spot-desc">
-                            <span class="text-chichi text-bold">【景點簡介】</span><br>
-                            供奉日本學問之神菅原道真，每年有眾多的考生為祈求學業有成和考試及格而到此來參拜。
-                        </div>
-                         <div class="info-box traffic"><span class="text-blue"><strong>停車資訊：</strong></span> 設有專用免費停車場（位於神社入口（一之鳥居）的西側），但須特別注意特定的「禁停日期」與尖峰時段。</div>
-                        <div class="info-box" style="background-color: #ffebee; border-left: 4px solid #f44336; padding: 10px; margin-bottom: 10px;"><span class="text-red text-bold"> 💥 推薦：</span> 11～12月楓葉季會推出夜間點燈，境內開放到晚上8點。詳細開放時間&特別活動日程請先上官網確認最新資訊<br>
-                            🚩官網資訊：<a href="https://kitanotenmangu.or.jp/access/" target="_blank">https://kitanotenmangu.or.jp/access/</a><br></div>
-                </li>
-                <li class="timeline-item">
-                    <span class="timeline-marker"></span>
-                    <span class="time-badge">13:30 - 16:30</span></span><strong>午餐｜飯店 Check-in</strong>
-                </li>
-                <li class="timeline-item">
-                    <span class="timeline-marker"></span>
-                    <span class="time-badge">16:30 - 18:00</span><strong>⛩️清水寺｜⛩️清水坂｜⛩️產寧坂｜⛩️二寧坂</strong>
-                        <div class="spot-intro">
-                        <div class="spot-img-container">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTi9zy3iP6IoEwD4kj3IyCS2O1Otp98ke9rZmsp5CuRVA&s=10" alt="清水寺">
-                            <span class="img-hint-tag">大圖呈現 - 可自訂圖片 src</span>
-                        </div>
-                        <div class="spot-desc">
-                            <span class="text-chichi text-bold">【景點簡介】</span><br>
-                            經典京都散步路線，依序經過二年坂（二寧坂）、產寧坂（三年坂）與清水坂。沿途充滿石板坡道與傳統町家建築，是體驗古都風情與品嘗和風點心、購買伴手禮最熱鬧的精華路段。亦可拍攝法觀寺（八坂塔）古都風情，一路散步至八坂神社。
-                        </div>
-                        <div class="info-box" style="background-color: #ffebee; border-left: 4px solid #f44336; padding: 10px; margin-bottom: 10px;"><span class="text-red text-bold"> 💥 超重要：</span> 開放時間：每日上午 06:00 開門，關門時間依季節而定（一般為 18:00，夏秋季延長或舉辦夜間參拜至 21:30）。詳細開放時間&特別活動日程請先上官網確認最新資訊<br>
-                            🚩官網資訊：<a href="https://www.kiyomizudera.or.jp/" target="_blank">https://www.kiyomizudera.or.jp/</a><br></div>
-                </li>
-                <li class="timeline-item">
-                    <span class="timeline-marker"></span>
-                    <span class="time-badge">18:00 - 20:00</span><strong>⛩️法觀寺（八坂塔）｜⛩️八坂神社</strong>
-                        <div class="spot-intro">
-                        <div class="spot-img-container">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWGz_9cdKuuXz-yD3lARhgfmv7miXi8jyDBb8cUM91FA&s=10" alt="清水寺">
-                            <span class="img-hint-tag">大圖呈現 - 可自訂圖片 src</span>
-                        </div>
-                        <div class="spot-desc">
-                            <span class="text-chichi text-bold">【景點簡介】</span><br>
-                         八坂神社全年免費開放，夜間會舉行點燈，但御守、御朱印等販售時間為9點至17點。
-                        </div>                              
-                </li>
-                <li class="timeline-item">
-                    <span class="timeline-marker"></span>
-                    <span class="time-badge">20:00~</span> <strong>晚餐</strong>
-                </li>
-            </ul>
-        </div>
-
-        <!-- DAY 3 -->
-        <div class="day-header">📆 Day 3&nbsp;&nbsp;12/6 (日)<br>海之京都｜由良川橋梁攝影點📷 ➔ 伊根舟屋🐟 ➔ 天橋立飛龍觀🚟 ➔ 梅田還車</div>
-        <div class="section-card">
-            <div class="info-box" style="background-color: #ffebee; border-left: 4px solid #f44336; padding: 10px; margin-bottom: 10px;">
-                <span class="text-red text-bold"> 💥 超重要：</span> 來回拉車較長，為了幫大家圓夢拍到完美的「神隱少女海上電車」，務必精準卡位列車通過時刻！務必準時出發。<br>
-                <span class="text-red text-bold"><strong>海上列車最佳角度：靠近「丹後由良車站」的水岸邊。</strong></span>
+            <span class="timeline-marker"></span>
+            <span class="time-badge">04:25 - 06:55</span> <strong>高雄小港機場｜報到 & 通關</strong>
+            <p style="margin:4px 0;">航班資訊詳見上方「航班」區塊，本次不調整班機與時間。</p>
+        </li><li class="timeline-item">
+            <span class="timeline-marker"></span>
+            <span class="time-badge">10:45 - 12:05</span> <strong>抵達大阪關西國際機場（KIX）｜入境與領行李</strong>
+            <p style="margin:4px 0;">事先填妥 Visit Japan Web。辦好入境及領取行李後，確認實際租車門市，不要直接把不同門市的櫃檯混為一談。</p>
+        </li><li class="timeline-item">
+            <span class="timeline-marker"></span>
+            <span class="time-badge">12:05 - 13:45</span> <strong>機場｜臨櫃取車手續（13:00 預約、臨空城同店租還）</strong>
+            
+    <div class="info-box traffic"><span class="text-blue text-bold">本次租車設定｜同店取還</span><br>
+    預定 <strong>12/4（五）13:00 取車 → 12/8（二）17:00 還車</strong>，全程 4 人自駕。<br>
+    以 Toyota <strong>りんくうタウン駅前店（臨空城站前店）</strong>為取還車示範；<strong>如果最後訂的是 Tabirai 其他租車公司，務必使用實際訂單上的營業所地址及集合方式</strong>。<br>
+    🚉 交通：關西機場 → JR／南海電鐵 1 站到臨空城站 → 5 號出口步行約 500m → 臨時營業所（泉佐野市松原 2-6-36）。<br>
+    📍 <a href="https://rent.toyota.co.jp/sp/shop/detail.aspx?eCode=009&amp;mode=&amp;rCode=65302&amp;udFlg=2" target="_blank" rel="noopener noreferrer">Toyota 臨空城站前店：2026/10/31 後新地址</a><br>
+    🔗 <a href="https://rent.toyota.co.jp/zh-tw/" target="_blank" rel="noopener noreferrer">Toyota 預約官網</a>　｜　<a href="https://tc.tabirai.net/car/" target="_blank" rel="noopener noreferrer">Tabirai 租車比價</a>
+    <br>📎 <a href="https://tc.tabirai.net/car/osaka/entryform/index.aspx?SYF=20261204&amp;SYT=20261208&amp;SAFG=1&amp;SATG=1&amp;SAF=127201&amp;SAT=127201&amp;SSM=0&amp;STP=5&amp;SSP=10&amp;SCL=2714&amp;PRV=0&amp;OFF=629&amp;OFT=629&amp;CDS=1&amp;TIME=&amp;SYFT=13%3A00&amp;SYTT=17%3A00&amp;SPF=127&amp;SPT=127&amp;PID=629&amp;ALLIANCE=&amp;utm_source=&amp;skyscanner_redirectid=&amp;coupon_cid=07caa67be2d04b3ab925340d871ea4a8&amp;OP1=3464&amp;OP2=4100&amp;OP3=4101&amp;OP4=4102&amp;OP5=4640&amp;OS1_1=1&amp;OS5_1=1" target="_blank" rel="noopener noreferrer">你提供的 Tabirai 原始設定連結</a>　｜　<a href="https://spirit0926.pixnet.net/blog/posts/3050900748" target="_blank" rel="noopener noreferrer">網友租車教學（舊址資訊請勿照搬）</a>　｜　<a href="https://www.youtube.com/watch?v=pptqmLZ1Gzc" target="_blank" rel="noopener noreferrer">租車教學影片</a></div>
+    <div class="info-box ticket"><strong class="text-green">ETC／高速公路：</strong> 加租 ETC 卡，按實際通行費結算即可。<strong class="text-red">不需加購「KEP 關西通行證」</strong>，因 KEP 實為九州通票。</div>
+    <details class="guide-details" id="rent-steps">
+    <summary>📖 日本租車完整操作流程（8 步驟，點選展開）</summary>
+    <div class="guide-details-body"><ol class="rental-steps"><li><div class="guide-step-title"><span class="guide-step-num">1</span><strong>準備駕駛文件</strong></div><div class="guide-step-body">持有效<strong>台灣駕照正本＋日本認可的駕照日文譯本＋護照</strong>。可在台灣監理機關申請譯本；若有兩位駕駛，兩位都要備齊文件並在取車時申報。<strong class="text-red">台灣國際駕照不能代替日文譯本。</strong> <a href="https://www.npa.go.jp/policies/application/license_renewal/have_DL_issed_another_country.html" target="_blank" rel="noopener noreferrer">日本警察廳說明</a></div></li>
+    <li><div class="guide-step-title"><span class="guide-step-num">2</span><strong>在網站輸入正確租期</strong></div><div class="guide-step-body"><strong>2026/12/4（五）13:00 取車 → 2026/12/8（二）17:00 還車</strong>，全程在<strong>同一家實際預約營業所</strong>取還車（非京都異地還車）。若選 Toyota 臨空城站前店，往返均選該店；若使用 Tabirai，請先核對訂單顯示的租車公司及門市名稱。 <a href="https://rent.toyota.co.jp/zh-tw/" target="_blank" rel="noopener noreferrer">Toyota 繁中預約</a></div></li>
+    <li><div class="guide-step-title"><span class="guide-step-num">3</span><strong>選擇車型與配件</strong></div><div class="guide-step-body">這趟以<strong>4 人＋全部行李</strong>挑車，先確認後車廂容量；建議自排車、ETC 車載器、加租 ETC 卡。若 12/7 想開往伊根／天橋立，預訂前須確認<strong>冬用雪胎可以供應並實際裝車</strong>，否則不建議勉強開往北部。</div></li>
+    <li><div class="guide-step-title"><span class="guide-step-num">4</span><strong>勾選完整保險</strong></div><div class="guide-step-body">Toyota 一般乘用車參考：<strong>免責補償約 ¥1,100／24 小時</strong>；含免責及 NOC 營業損失免除的<strong>安心 W 方案約 ¥1,650／24 小時</strong>。這趟多天自駕建議優先考慮安心 W，留意不保事項，實際總價依所選車型與結帳頁面計算。 <a href="https://rent.toyota.co.jp/static/service/insurance/index.html" target="_blank" rel="noopener noreferrer">Toyota 保障說明</a></div></li>
+    <li><div class="guide-step-title"><span class="guide-step-num">5</span><strong>完成預約並保存確認信</strong></div><div class="guide-step-body">再次核對：<strong>12/4 13:00～12/8 17:00、同店取還、四人用車、冬胎／ETC／保障費及取消條款</strong>。保存訂單號、門市地址與取車指示。Toyota 自 2026/7/22 起新受理的網路預約不接受簽帳金融卡或預付卡網路付款，請準備信用卡。 <a href="https://rent.toyota.co.jp/notice/?site=1" target="_blank" rel="noopener noreferrer">官方公告</a></div></li>
+    <li><div class="guide-step-title"><span class="guide-step-num">6</span><strong>從機場前往門市、簽約及驗車</strong></div><div class="guide-step-body"><strong>如預約 Toyota「臨空城站前店」：</strong>在關西機場搭 JR 或南海電鐵到「臨空城（りんくうタウン）站」，從<strong>5 號出口</strong>往東南步行約 500 公尺，前往<strong>泉佐野市松原 2-6-36</strong>（2026/10/31 起臨時門市）；本店<strong>無機場接駁車</strong>，不是 Aeroplaza 櫃檯。若訂的是「關西機場店」或其他公司，請完全依訂單指示辦理。現場出示證件、確認保險、刮痕、輪胎、油量、導航、ETC 卡並拍攝車況。 <a href="https://rent.toyota.co.jp/sp/shop/detail.aspx?eCode=009&amp;mode=&amp;rCode=65302&amp;udFlg=2" target="_blank" rel="noopener noreferrer">Toyota 新店址</a></div></li>
+    <li><div class="guide-step-title"><span class="guide-step-num">7</span><strong>日本開車注意事項</strong></div><div class="guide-step-body">日本靠<strong>左側行駛</strong>，轉彎留意行人、自行車、止まれ（一時停止）、收費停車場與狹窄道路。走 ETC 車道前確認卡片已插入；過路費依租車公司方式結算。若有事故，即使輕微也要通知警察與租車公司。<strong>KEP 是「九州高速公路通票」</strong>，不是關西吃到飽通票，本次直接使用 ETC 卡支付實際通行費即可。 <a href="https://www.w-nexco.co.jp/global/en/kep/" target="_blank" rel="noopener noreferrer">NEXCO KEP 官方說明</a></div></li>
+    <li><div class="guide-step-title"><span class="guide-step-num">8</span><strong>12/8 加滿油、回原店還車結算</strong></div><div class="guide-step-body"><strong>12/8（二）16:15～16:40</strong> 左右抵達臨空城附近加油站，加滿指定油種（保留收據），<strong>17:00 前後回到原取車門市</strong>；工作人員驗車後交還鑰匙及 ETC 卡、支付尚未結清的過路費等。之後前往 <strong>OMO5 關西機場</strong> Check-in，晚上逛臨空城 Outlet。</div></li></ol>
+    <div class="info-box recommend"><strong>💬 常用日文：</strong><br>
+    加滿一般汽油：「レギュラー、満タンでお願いします。」（一般汽油請加滿。）<br>
+    預約雪胎：「スタッドレスタイヤ付きで予約できますか？」（可以租附雪胎的車嗎？）</div></div>
+    </details>
+    <details class="guide-details">
+    <summary>🔍 Toyota／Tabirai／樂天租車比較</summary>
+    <div class="guide-details-body"><table class="rental-compare">
+    <thead><tr><th>網站</th><th>用途</th><th>這趟建議</th></tr></thead><tbody>
+    <tr><td><a href="https://rent.toyota.co.jp/zh-tw/" target="_blank" rel="noopener noreferrer">Toyota 官方</a></td><td>直接選門市與保障</td><td>確認同店取還、四人行李車型、ETC 卡與雪胎</td></tr>
+    <tr><td><a href="https://tc.tabirai.net/car/" target="_blank" rel="noopener noreferrer">Tabirai 比價</a></td><td>不同業者套餐／總額比較</td><td>帶入 12/4 13:00～12/8 17:00、同店取還，比較含保險最終價</td></tr>
+    <tr><td><a href="https://travel.rakuten.co.jp/cars/" target="_blank" rel="noopener noreferrer">樂天旅遊租車</a></td><td>優惠券與其他租車方案</td><td>看可否使用優惠券，注意配件、保險不一定相同</td></tr>
+    </tbody></table><p class="guide-note">樂天操作可參考 <a href="https://www.travelclassroom.net/2010/11/how-to-rent-car.html" target="_blank" rel="noopener noreferrer">旅遊教室教學</a>；Tabirai 可用你原先設定的「同店取還」條件繼續比價。注意：不同網站顯示的價格、取車營業所及保險內容未必一致。</p></div>
+    </details>
+    <details class="guide-details">
+    <summary>☑️ 訂車確認清單（可勾選） <span id="rental-progress" aria-live="polite">0/8 完成</span></summary>
+    <div class="guide-details-body"><div class="rental-check-list"><label class="rental-check"><input type="checkbox" data-rental-check><span>台灣駕照正本、合格日文譯本及護照都已備齊</span></label><label class="rental-check"><input type="checkbox" data-rental-check><span>12/4 13:00 取車、12/8 17:00 同門市還車已核對</span></label><label class="rental-check"><input type="checkbox" data-rental-check><span>車款可載 4 位乘客及全部大型行李</span></label><label class="rental-check"><input type="checkbox" data-rental-check><span>若要去伊根／天橋立，已確認冬季輪胎及氣象備案</span></label><label class="rental-check"><input type="checkbox" data-rental-check><span>ETC 卡、免責補償、NOC 保障已確認</span></label><label class="rental-check"><input type="checkbox" data-rental-check><span>大阪及京都住宿附近停車地點與費用已確認</span></label><label class="rental-check"><input type="checkbox" data-rental-check><span>已保存訂單、取還車門市位置及取消條款</span></label><label class="rental-check"><input type="checkbox" data-rental-check><span>出發前再檢查京都／丹後天氣、道路與停車資訊</span></label></div></div>
+    </details>
+    
+        </li><li class="timeline-item">
+            <span class="timeline-marker"></span>
+            <span class="time-badge">13:45 - 15:15</span> <strong><span class="text-red">【自駕🚗】</span> 臨空城 → 大阪 BAKURO 飯店</strong>
+            <p style="margin:4px 0;">直接前往大阪住宿放行李與停車。原本的大鳥大社先列為刪減景點，避免影響今晚兩個指定美食行程。車程依塞車與導航約需 60～90 分鐘。</p><div class="info-box traffic"><span class="text-blue text-bold">停車：</span> 先查 BAKURO 周邊 Times／Repark 收費停車場，車輛停妥後改搭大眾運輸移動，避免大阪鬧區反覆找車位。</div>
+        </li><li class="timeline-item">
+            <span class="timeline-marker"></span>
+            <span class="time-badge">15:15 - 16:00</span> <strong>飯店 Check-in／稍作休息</strong>
+            <p style="margin:4px 0;">若未達入住時間，先寄放行李；隨後準備搭車前往十三。</p>
+        </li><li class="timeline-item">
+            <span class="timeline-marker"></span>
+            <span class="time-badge">16:00 - 16:45</span> <strong><span class="text-green">【大眾運輸🚃】</span> 大阪住宿 → 十三站</strong>
+            <p style="margin:4px 0;">飯店附近搭車轉乘阪急至「十三站」，再步行約 5 分鐘至淀川河岸，預留轉乘與步行時間。</p>
+        </li><li class="timeline-item">
+            <span class="timeline-marker"></span>
+            <span class="time-badge">16:45 - 17:45</span> <strong>🍢 淀川つつみ市 ミナモ十三｜屋台村外帶點心</strong>
+            <div class="spot-intro">
+            <div class="spot-img-container">
+                <img src="https://images.keizai.biz/umeda_keizai/headline/1786942129_photo.jpg" alt="ミナモ十三 屋台村" loading="lazy" referrerpolicy="no-referrer">
+                <span class="img-hint-tag">景點實景 / 店家圖片</span>
             </div>
-            <ul class="timeline">
-                <li class="timeline-item">
-                    <span class="timeline-marker"></span>
-                    <span class="time-badge">07:30 - 10:30</span> <span class="text-red"><strong>【自駕🚗】</strong></span><strong>大阪出發 ➔ 經京都縱貫道 ➔ 丹後神崎（由良川東側堤防）</strong>
-                    <div class="info-box traffic">                
-                        <strong><span class="text-blue">導航路線：</span></strong> 導航至LAWSON宮津由良店，超商前方有一小徑走到河邊就可看到鐵橋<br>🚩Map資訊：<a href="https://maps.app.goo.gl/a73w5V1GxdtVKWAk9" target="_blank">https://maps.app.goo.gl/a73w5V1GxdtVKWAk9</a><br>
-                    </div>
-                </li>
-                <li class="timeline-item">
-                    <span class="timeline-marker"></span>
-                    <span class="time-badge">11:00 - 11:40</span> <strong>由良川橋梁｜海上列車</strong>
-                    <div class="spot-intro">
-                        <div class="spot-img-container">
-                            <img src="https://farm66.static.flickr.com/65535/54290327217_35868e52f1_b.jpg" alt="由良川橋梁海之列車">
-                            <span class="img-hint-tag">大圖呈現 - 可自訂圖片 src</span>
-                        </div>
-                        <div class="spot-desc">
-                            <span class="text-chichi text-bold">【景點介紹】</span> 神隱少女「海之列車」<br>⭐丹後鐵道官網：<a href="https://trains.willer.co.jp/" target="_blank">https://trains.willer.co.jp/</a><br>
-                            ⭐參考資訊：<a href="https://www.threads.com/@solitary.photographer/post/DCT3EAhyliT?hl=zh-tw" target="_blank">Threads 攝影貼文</a><br>
-                            <a href="https://vocus.cc/article/6678bbcdfd89780001725d8e" target="_blank">方格子文章參考</a><br>
-                            <a href="https://ourtravel.tw/shottantetsu/" target="_blank">我們的旅遊日記攻略</a><br>
-                        </div>
-                    </div>
-                </li>
-                <li class="timeline-item">
-                    <span class="timeline-marker"></span>
-                    <span class="time-badge">11:40 - 14:00</span> <strong>伊根舟屋漁村｜海景午餐｜餵海鷗 </strong>
-                    <div class="spot-intro">
-                        <div class="spot-img-container">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAa6d6YJeTyAPWqd9gEC0WqRJ2aKTVvNar3AtcTU--Bg&s=10" alt="伊根舟屋">
-                            <span class="img-hint-tag">大圖呈現 - 可自訂圖片 src</span>
-                        </div>
-                        <div class="spot-desc">
-                            <span class="text-chichi text-bold">【景點介紹】</span> 開車約 45 分鐘抵達被譽為「日本最美漁村」的伊根舟屋。這裏有 230 多棟沿海岸建造的木造舟屋建築，可以自由散步或自費自選搭乘遊覽船，用手上的蝦味先體驗震撼的海鷗與老鷹空中爭食體驗！
-                        </div>
-                    </div>
-                    <div class="info-box food"><span class="text-orange"><strong>美食推薦：</strong></span>推薦前往觀光案內所二樓的「舟屋食堂」享用在地老舖經營的現撈海鮮與生魚片定食，從落地窗俯瞰整片灣景。</div>
-                    <div class="info-box food"><span class="text-orange"><strong>咖啡推薦：</strong></span>INE CAFE（伊根町）</div>
-                </li>
-                <li class="timeline-item">
-                    <span class="timeline-marker"></span>
-                    <span class="time-badge">14:00 - 14:30</span> <span class="text-red"><strong>【自駕🚗】</strong></span><strong>前往天橋立</strong>
-                </li>
-                <li class="timeline-item">
-                    <span class="timeline-marker"></span>
-                    <span class="time-badge">14:30 - 16:30</span> <strong>天橋立飛龍觀｜智恩寺智慧之餅</strong>
-                    <div class="spot-intro">
-                        <div class="spot-img-container">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT68PDsKgJim2vafPfZv296wIxMm1x7RG_nWIMnyJbJCw&s=10" alt="天橋立飛龍觀">
-                            <span class="img-hint-tag">大圖呈現 - 可自訂圖片 src</span>
-                        </div>
-                        <div class="spot-desc">
-                            <span class="text-chichi text-bold">【景點介紹】</span> 搭乘露天吊椅纜車登上展望台，背對沙洲從胯下倒過來觀看著名的「飛龍沙洲」絕景！可在頂端樂園挑戰刺激的高空腳踏車。<br>下山後前往上千年歷史的「智恩寺」參拜文殊菩薩，並品嚐限定特產「智慧之餅」，最後觀看特殊的「旋轉迴旋橋」。
-                        </div>
-                    </div>
-                </li>
-                <li class="timeline-item">
-                    <span class="timeline-marker"></span>
-                    <span class="time-badge">16:30 - 19:00</span> <span class="text-red"><strong>【自駕🚗】</strong></span><strong>返回大阪梅田還車</strong>
-                </li>
-                <li class="timeline-item">
-                    <span class="timeline-marker"></span>
-                    <span class="time-badge">19:30 - 20:30</span> <strong>搭乘阪急/京阪電車🚃→前往京都飯店｜晚餐</strong>
-                </li>
-            </ul>
-        </div>
-
-        <!-- DAY 4 -->
-        <div class="day-header">📆 Day 4&nbsp;&nbsp;12/7 (一) <br>🚇叡山電車紅葉隧道🍁🍁🍁 ➔ ⛩️貴船神社 ➔ ⛩️鞍馬寺 ➔ 鴨川三角洲跳烏龜🏃</div>
-        <div class="section-card">
-            <ul class="timeline">
-                <li class="timeline-item">
-                    <span class="timeline-marker"></span>
-                    <span class="time-badge">07:00 - 07:30</span> <span class="text-green text-bold">【大眾運輸🚎】</span><strong>京都市區 ➔ 出町柳站</strong>
-                    <p style="margin:2px 0;">可從「祇園四条站」乘坐「京阪本線」至「出町柳站」轉公車。</p>
-                </li>
-                <li class="timeline-item">
-                    <span class="timeline-marker"></span>
-                    <span class="time-badge">07:30 - 08:00</span> <span class="text-green text-bold">【叡山電車🚇】</span><strong>叡山電車紅葉隧道｜出町柳站 ➔ 貴船口站 </strong>
-                    <p style="margin:2px 0;">從「出町柳站」乘坐「叡山電鐵鞍馬線」至「貴船口站」車程約28分鐘。<br>早晨班次約 15–20 分鐘一班。車上多為當地居民或極少數早起遊客，搭乘體驗舒適悠閒。</p>
-                    <div class="spot-intro">
-                        <div class="spot-img-container">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuZ04zEq5jgwlJeRe6wi8w2-9DLQ1PCje_YEuc6bdngw&s=10" alt="叡山電車紅葉隧道">
-                            <span class="img-hint-tag">大圖呈現 - 可自訂圖片 src</span>
-                        </div>
-                        <div class="spot-desc">
-                            <span class="text-chichi text-bold">【景點簡介】<br></span> 叡山電車鞍馬線在「市原站」至「二之瀨站」之間，有一段長約250公尺的兩側密植楓樹路段，被譽為「紅葉隧道」。12月初初冬時分，列車駛入此區間時，車廂內會熄燈，列車會慢速緩行，讓乘客透過大片觀景窗凝視窗外如夢似幻的深秋與初冬冬景。
-                        </div>
-                    </div>
-                </li>
-                <li class="timeline-item">
-                    <div class="info-box traffic">
-                        <div>                  
-                        <strong><span class="text-blue">搭乘指南：</span></strong><br>
-                        1. 於出町柳站轉乘【叡山電車・鞍馬線】開往鞍馬方向的列車。<br>
-                        2. <strong>票價：</strong>出町柳站至貴船口站，單程 ¥430。<br>
-                        3. <strong>購票方式：</strong>不需要、也無法提前劃位！全線支援 <span class="text-blue text-bold">ICOCA / Suica 交通卡</span>，進出站直接刷卡即可。若無IC卡，請在出町柳站的售票機購買單程車票即可。建議上車時爭取靠窗的座位（特別是觀光列車「きらら (Kirara)」設有面窗座椅）。<br>
-                        4. <strong>官網資訊：</strong><a href="https://eizandensha.co.jp/tc/" target="_blank">https://eizandensha.co.jp/tc/</a><br>
-                        ⭐<strong>路線指引影片1：<strong><a href="https://www.youtube.com/watch?v=0N7rrKNzW_Y" target="_blank">https://www.youtube.com/watch?v=0N7rrKNzW_Y</a><br>
-                        ⭐<strong>路線指引影片2：<strong><a href="https://www.youtube.com/watch?v=rAJRhIrV1zw" target="_blank">https://www.youtube.com/watch?v=rAJRhIrV1zw</a>
-                        </div>
-                    </div>
-                </li>
-                <li class="timeline-item">
-                    <span class="timeline-marker"></span>
-                    <span class="time-badge">08:00 - 08:15</span> <span class="text-green text-bold">【轉乘公車🚍】</span><strong>抵達貴船 </strong>
-                    <div class="info-box traffic">                
-                        <strong><span class="text-blue">搭乘指南：</span></strong>從「貴船口站」出站後，列車站外搭乘【京都巴士33號】前往「貴船」巴士總站下車（車程約5分鐘，可刷交通卡）。<br>
-                        ⭐<strong>京都巴士33號-時刻表：</strong><a href="https://japantravel.navitime.com/zh-tw/area/jp/depArrTimeList/00056787/00056789/00016721?direction=down" target="_blank">https://japantravel.navitime.com/zh-tw/area/jp/depArrTimeList/00056787/00056789/00016721?direction=down</a><br>
-                    </div>
-                    <div class="info-box food"><span class="text-orange"><strong>美食推薦：</strong></span> 貴船川畔的日式茶屋，享用京都冬日限定的熱山藥烏龍麵或蕎麥定食。</div>
-                </li>
-                <li class="timeline-item">
-                    <span class="timeline-marker"></span>
-                    <span class="time-badge">08:15 - 10:30</span> <strong> ⛩️貴船神社 </strong>
-                    <div class="spot-intro">
-                        <div class="spot-img-container">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIps2nzHqXDAEod-XXg-1xVuRfyqheJDePZ6fiwdHzzA&s=10" alt="貴船神社">
-                            <span class="img-hint-tag">大圖呈現 - 可自訂圖片 src</span>
-                        </div>
-                        <div class="spot-desc">
-                            <span class="text-chichi text-bold">【景點簡介】<br></span> 日本全國貴船神社的總本社，奉祀水神。這裏也是日本「繪馬」的發源地。神社最著名的是沿山路蜿蜒而上的參道階梯，兩側排列著整齊的朱紅燈籠。傍晚17:00左右，夜幕低垂，兩側燈籠火光點亮，將古老神社渲染得極其神聖與浪漫，是情侶牽手漫步的極致機位。
-                        </div>
-                    </div>
-                    <div class="info-box ticket">
-                        <span class="text-green text-bold">推薦體驗：</span> <br>神社參拜免費。<br>務必花費 ¥300 購買一張「水占卜籤詩（水占いみくじ）」。拿到時是一張空白紙，將其輕輕平鋪於境內的御神水水池中，幾秒鐘後吉凶籤文便會奇蹟般地浮現，值回票價！
-                    </div>
-                </li>
-                <li class="timeline-item">
-                    <span class="timeline-marker"></span>
-                    <span class="time-badge">10:30 - 11:00</span> <span class="text-green text-bold">【叡山電車🚇】</span><strong>⛩️鞍馬寺<strong>
-                    <div class="spot-intro">
-                        <div class="spot-img-container">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-xGm38omjIJkDZDRDWd7bV6QThADFu3577JlfgQ3ulw&s=10" alt="鞍馬寺">
-                            <span class="img-hint-tag">大圖呈現 - 可自訂圖片 src</span>
-                        </div>
-                        <div class="spot-desc">
-                            <span class="text-chichi text-bold">【景點簡介】<br></span> 以天狗傳說的發源地與源義經修行之地而聞名。<br>
-                            ◆開放時間：每日 09:00 – 16:00<br>
-                            ◆門票：¥500<br>
-                            ◆官方網站：</strong><a href="https://www.kuramadera.or.jp/" target="_blank">https://www.kuramadera.or.jp/</a><br>
-                        </div>
-                    </div>
-                    <div class="info-box traffic">                
-                        <strong><span class="text-blue">搭乘指南：<br>
-                        </span></strong>1. 搭乘【京都巴士33號🚍】前往貴船口→搭乘【叡山電車🚇】1 站抵達「鞍馬站」，車程約 3 分鐘。<br>
-                        </span></strong>2. 從「鞍馬站」旁的「山門站」乘坐纜車至「多寶塔站」，再步行即可到達「鞍馬寺」。<br>
-                        ⭐<strong>京都巴士33號-時刻表：</strong><a href="https://japantravel.navitime.com/zh-tw/area/jp/depArrTimeList/00056787/00056789/00016721?direction=down" target="_blank">https://japantravel.navitime.com/zh-tw/area/jp/depArrTimeList/00056787/00056789/00016721?direction=down</a><br>
-                        ⭐<strong>鞍馬山鋼索鐵道(纜車)：</strong>山門站&nbsp;08:40 - 16:30、多寶塔站&nbsp;08:45 - 16：35<br>
-                        <span class="text-red text-bold"><strong>※每小時 10分、25分、40分、55分（人潮多時會視情況增加班次頻繁行駛）。</strong></span>
-                    </div>
-                <li>
-                    <li class="timeline-item">
-                    <span class="timeline-marker"></span>
-
-                    
-                    <span class="time-badge">11:00 - 11:30</span> <span class="text-green text-bold">【叡山電車🚇】</span><strong> ➔ 出町柳站｜午餐<strong>
-
-                <li>
-                    <li class="timeline-item">
-                    <span class="timeline-marker"></span>
-                    <span class="time-badge">13:30 - 15:30</span> <strong> 鴨川三角洲跳烏龜 </strong>
-                    <div class="spot-intro">
-                        <div class="spot-img-container">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAazJFOek6tGBMBhKZu8IQB_AdbMsNunDaJjxqErdi1w&s alt="鴨川三角洲跳烏龜">
-                            <span class="img-hint-tag">大圖呈現 - 可自訂圖片 src</span>
-                        </div>
-                        <div class="spot-desc">
-                            <span class="text-chichi text-bold">【景點簡介】<br></span> 從出町柳站出站即達。清澈的鴨川在此匯流，踩著烏龜與石塊形狀的踏腳石跨越溪流。<br>
-                    </div>
-                <li class="timeline-item">
-                    <span class="timeline-marker"></span>
-                    <span class="time-badge">15:30 ~</span> <span class="text-green text-bold">【大眾運輸🚎】</span><strong>返回京都市區</strong>
-                </li>
-            </ul>
-        </div>
-
-        <!-- DAY 5 -->
-        <div class="day-header">📆 Day 5&nbsp;&nbsp; 12/8 (二)&nbsp;&nbsp; LINKS UMEDA / 友都八喜 ➔ 泉佐野市飯店 Check-in&nbsp;&nbsp;&nbsp;&nbsp;</div>
-        <div class="section-card">
-        <div class="info-box" style="background-color: #ffebee; border-left: 4px solid #f44336; padding: 10px; margin-bottom: 10px;">
-                <span class="text-red text-bold"> 💥 超重要：</span> 飯店拉車較長，先找梅田車站（JR/阪急）櫃置物寄放行李，採購完再Check-in<br>
-                <span class="text-red text-bold">寄放查詢：</span><a href="https://cloak.ecbo.io/zh-TW/jpn/city/osaka/860" target="_blank" class="hotel-link">🔗 店家 / 空位查詢</a>
+            <div class="spot-desc"><span class="text-chichi text-bold">【景點簡介】</span><br>淀川河岸的常設屋台聚落，可逛章魚燒、串燒、炸物及各式特色小吃攤，順便欣賞傍晚河景。今晚 19:30 還要吃蟹料理，建議每人只買少量點心。<br><strong>營業：</strong>各屋台各自決定時間；平日多為下午至晚間營業，出發前查指定攤位。<div class="photo-credit">圖片來源：<a href="https://umeda.keizai.biz/headline/4659/" target="_blank" rel="noopener noreferrer">梅田經濟新聞</a></div></div>
+        </div><div class="info-box traffic"><span class="text-blue text-bold">交通：</span> 阪急十三站步行約 5 分鐘；<strong>官方不提供顧客停車場</strong>，本行程建議搭電車。<br>🔗 <a href="https://www.minamo-juso.com/" target="_blank" rel="noopener noreferrer">ミナモ十三官網／屋台營業資訊</a></div>
+        </li><li class="timeline-item">
+            <span class="timeline-marker"></span>
+            <span class="time-badge">17:45 - 19:15</span> <strong><span class="text-green">【大眾運輸🚃】</span> 十三 → 心齋橋｜逛街／前往餐廳</strong>
+            <p style="margin:4px 0;">搭阪急回大阪梅田並轉大阪 Metro 御堂筋線至心齋橋；保留充裕交通及找餐廳的時間。若晚點出發，優先準時到餐廳。</p>
+        </li><li class="timeline-item">
+            <span class="timeline-marker"></span>
+            <span class="time-badge">19:30 - 21:30</span> <strong>🦀 蟹屋 丸花 心齋橋｜蟹・壽司・和牛吃到飽（預計 4 人訂位）</strong>
+            <div class="spot-intro">
+            <div class="spot-img-container">
+                <img src="https://cdn.r-corona.jp/prd.rb.r-corona.jp/assets/site_files/rj8r7mem/79902014/6iqh_w1140h600.jpg" alt="蟹屋 丸花 心齋橋 蟹料理與鍋物實際照片" loading="lazy" referrerpolicy="no-referrer">
+                <span class="img-hint-tag">景點實景 / 店家圖片</span>
             </div>
+            <div class="spot-desc"><span class="text-chichi text-bold">【店家簡介】</span><br>心齋橋的日式吃到飽餐廳，以蟹涮涮鍋、和牛、壽司、海鮮、天婦羅等不同等級套餐為特色，距心齋橋站步行約 4 分鐘，店內全席禁菸。建議<strong>事先完成四人訂位</strong>，確認當晚 19:30 有位再定案。<div class="photo-credit">圖片來源：<a href="https://akr2749144058.owst.jp/" target="_blank" rel="noopener noreferrer">丸花店家官網／餐點照片</a></div></div>
+        </div>
+    <div class="info-box food"><span class="text-orange text-bold">🍽️ 套餐建議（4 人）：</span><br>
+    <strong>¥7,700／人｜蟹しゃぶ贅沢</strong>：以蟹肉壽喜涮鍋、牛豬肉、壽司及海鮮為主，適合重點想吃螃蟹。<br>
+    <strong>¥12,000／人｜本ズワイ×和牛極み</strong>：本松葉蟹類＋和牛涮涮鍋與壽司、海鮮，<strong class="text-orange">若四人都要蟹＋和牛，優先考慮此方案</strong>。<br>
+    <strong>¥19,800／人｜タラバ蟹×和牛至福</strong>：升級帝王蟹類與和牛，預算較高時再選。<br>
+    <small>※ 此為 Hot Pepper 2026/10/19 套餐頁所列參考價格；店家官方網站部分價格不同，必須以實際選擇平台的預訂結帳金額與餐點範圍為準；¥3,000／¥4,000 套餐非主打蟹＋和牛。</small></div>
+    <div class="info-box ticket"><span class="text-green text-bold">🔗 四人預訂網址：</span><br>
+    ① <a href="https://www.hotpepper.jp/strJ004444131/course/" target="_blank" rel="noopener noreferrer">Hot Pepper｜丸花心齋橋 套餐與訂位（推薦）</a><br>
+    ② <a href="https://akr2749144058.owst.jp/" target="_blank" rel="noopener noreferrer">丸花心齋橋｜店家官方網站</a><br>
+    ③ <a href="https://www.tablecheck.com/zh-TW/shinsaibashi-maruhana" target="_blank" rel="noopener noreferrer">TableCheck｜繁中菜單參考</a><br>
+    <strong>預訂步驟：</strong>
+    <ol class="booking-steps">
+    <li>進入 Hot Pepper 套餐頁，先確認想吃的「蟹しゃぶ贅沢」或「本ズワイ×和牛極み」，按「詳細・予約」。</li>
+    <li>選擇 <strong>2026/12/4（五）、19:30、4 名</strong>，查看實際空位。</li>
+    <li>選擇「即予約」可直接成立的名額；「リクエスト予約」僅提出申請，需收到店家確認才算成功。</li>
+    <li>輸入聯絡資料，確認套餐、用餐時間限制、加價飲料及取消規定，再提交並保存確認信。</li>
+    </ol>
+    <strong>提醒：</strong> 19:30–21:30 是行程預留的 2 小時，<strong>不是保證套餐可吃滿 120 分鐘</strong>；仍依店家當日方案的用餐限制。4 人空位尚未查證、未代為訂位。<br>
+    📞 店家電話：<a href="tel:+81662240257" target="_blank" rel="noopener noreferrer">+81-6-6224-0257</a><br>
+    📍 地址：大阪府大阪市中央區東心齋橋 2-8-26 FUKU BLD. 心齋橋 2F A號（無專用停車場；已停車後搭電車較方便）。</div>
+    
+        </li><li class="timeline-item">
+            <span class="timeline-marker"></span>
+            <span class="time-badge">21:30 之後</span> <strong>道頓堀、固力果跑跑人｜夜景拍照（選擇性）</strong>
+            <p style="margin:4px 0;">如果吃完還有體力，可短暫走到道頓堀拍照；原本 MooKEN 泡芙或其他小吃可視食量改成候補，不必強行插入。</p>
+        </li>
+            </ul>
+        </div>
+    
+    <!-- DAY 2 | 本次更新 -->
+        <div class="day-header">📆 Day 2&nbsp;&nbsp;12/5（六）<br>大阪 → 伏見稻荷 → 京都勝林寺 → 清水寺／八坂塔／八坂神社</div>
         <div class="section-card">
+            
             <ul class="timeline">
                 <li class="timeline-item">
-                    <span class="timeline-marker"></span>
-                    <span class="time-badge">09:00 - 10:00</span> <span class="text-green text-bold">【阪急特急🚎】</span><strong>京都 ➔ 直達大阪梅田</strong>
-                    <div class="info-box traffic">                
-                        <strong><span class="text-blue">搭乘指南：</span></strong>於京都「四条烏丸站」或「京都河原町站」搭乘 <span class="text-red text-bold">阪急電鐵・京都線特急列車</span>，終點站即為大阪梅田。
-                    </div>
-                </li>
+            <span class="timeline-marker"></span>
+            <span class="time-badge">07:00 - 08:15</span> <strong><span class="text-red">【自駕🚗】</span> 大阪退房 → 京都伏見稻荷</strong>
+            <p style="margin:4px 0;">經第二京阪道路前往京都；週六建議早出發，抵達後優先找可合法停放的收費停車場。</p>
+        </li><li class="timeline-item">
+            <span class="timeline-marker"></span>
+            <span class="time-badge">08:15 - 09:40</span> <strong>⛩️ 伏見稻荷大社｜千本鳥居</strong>
+            <div class="spot-intro">
+            <div class="spot-img-container">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRoFxErjZ4p4QngFmXUxcUYBlDid_9-CcMXKDbSDYcVQ&amp;s=10" alt="伏見稻荷大社 千本鳥居" loading="lazy" referrerpolicy="no-referrer">
+                <span class="img-hint-tag">景點實景 / 店家圖片</span>
+            </div>
+            <div class="spot-desc"><span class="text-chichi text-bold">【景點簡介】</span><br>全日本稻荷神社總本宮，以綿延朱紅色千本鳥居聞名。這次為了同日造訪勝林寺，建議走前段經典拍照路線，不必爬完整座稻荷山。</div>
+        </div>
+        </li><li class="timeline-item">
+            <span class="timeline-marker"></span>
+            <span class="time-badge">09:40 - 10:10</span> <strong><span class="text-red">【自駕🚗】</span> 伏見稻荷 → 東福寺／勝林寺附近</strong>
+            <p style="margin:4px 0;">勝林寺秋季特別拜觀期間走<strong>東門</strong>進入，南門關閉；先找周邊合法收費停車場後步行前往。</p>
+        </li><li class="timeline-item">
+            <span class="timeline-marker"></span>
+            <span class="time-badge">10:10 - 11:30</span> <strong>🍁 京都勝林寺｜秋季特別拜觀、吉祥紅葉</strong>
+            <div class="spot-intro">
+            <div class="spot-img-container">
+                <img src="https://stat.ameba.jp/user_images/20191124/10/mayo717/fd/28/j/o1080081014647987522.jpg" alt="京都勝林寺 秋季紅葉" loading="lazy" referrerpolicy="no-referrer">
+                <span class="img-hint-tag">景點實景 / 店家圖片</span>
+            </div>
+            <div class="spot-desc"><span class="text-chichi text-bold">【景點簡介】</span><br>京都東福寺塔頭，以花手水、吉祥紅葉及靜謐庭園聞名。<strong>2026 年秋季特別拜觀為 11/14～12/6，10:00～16:30（16:00 最後入場）</strong>，成人參考 ¥800；<strong>今年不舉辦夜間點燈</strong>。可搭配附近東福寺短暫散步。<div class="photo-credit">圖片來源：<a href="https://ameblo.jp/mayo717/entry-12548275972.html" target="_blank" rel="noopener noreferrer">勝林寺賞楓照片</a></div></div>
+        </div><div class="info-box ticket"><span class="text-green text-bold">官方資訊：</span> <a href="https://shourin-ji.org/admission/" target="_blank" rel="noopener noreferrer">勝林寺秋季特別拜觀、入口與票價</a><br><strong>提醒：</strong>參拜寺院時依指示攝影，花手水圖樣會依日期不同。</div>
+        </li><li class="timeline-item">
+            <span class="timeline-marker"></span>
+            <span class="time-badge">11:30 - 13:45</span> <strong>京都午餐 → Shiki Homes Ikkō 一耕の宿 8｜寄放行李／安排停車</strong>
+            <p style="margin:4px 0;">可在東福寺周邊午餐，之後移動至京都住宿。若尚未到入住時間，依住宿規定寄放行李；附近停車費與可停放時段請事前確認。</p>
+        </li><li class="timeline-item">
+            <span class="timeline-marker"></span>
+            <span class="time-badge">14:15 - 17:00</span> <strong>⛩️ 清水寺、清水坂、三年坂、二年坂</strong>
+            <div class="spot-intro">
+            <div class="spot-img-container">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTi9zy3iP6IoEwD4kj3IyCS2O1Otp98ke9rZmsp5CuRVA&amp;s=10" alt="京都清水寺與清水坂" loading="lazy" referrerpolicy="no-referrer">
+                <span class="img-hint-tag">景點實景 / 店家圖片</span>
+            </div>
+            <div class="spot-desc"><span class="text-chichi text-bold">【景點簡介】</span><br>沿清水寺、產寧坂、二寧坂步行，欣賞傳統町家與古都街景。冬季天黑較早，優先安排白天拍照；<strong>景點周圍不適合逐點開車</strong>，建議停妥車後步行。<br>🔗 <a href="https://www.kiyomizudera.or.jp/" target="_blank" rel="noopener noreferrer">清水寺官網</a></div>
+        </div>
+        </li><li class="timeline-item">
+            <span class="timeline-marker"></span>
+            <span class="time-badge">17:00 - 19:00</span> <strong>法觀寺八坂塔 → 八坂神社｜傍晚散策</strong>
+            <div class="spot-intro">
+            <div class="spot-img-container">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWGz_9cdKuuXz-yD3lARhgfmv7miXi8jyDBb8cUM91FA&amp;s=10" alt="八坂塔與八坂神社" loading="lazy" referrerpolicy="no-referrer">
+                <span class="img-hint-tag">景點實景 / 店家圖片</span>
+            </div>
+            <div class="spot-desc"><span class="text-chichi text-bold">【景點簡介】</span><br>欣賞京都古街夜色和八坂塔外觀；八坂神社可夜間參拜，但御守與御朱印等服務以白天時段為主。之後自行覓食、返回住宿。</div>
+        </div>
+        </li><li class="timeline-item">
+            <span class="timeline-marker"></span>
+            <span class="time-badge">19:00 之後</span> <strong>京都晚餐｜回住宿休息</strong>
+            <p style="margin:4px 0;">隔天安排整日自駕賞楓，晚上不必再跨城移動。</p>
+        </li>
+            </ul>
+        </div>
+    
+    <!-- DAY 3 | 本次更新 -->
+        <div class="day-header">📆 Day 3&nbsp;&nbsp;12/6（日）<br>🚗 自駕賞楓｜嵐山／天龍寺 → 北野天滿宮紅葉苑夜間點燈</div>
+        <div class="section-card">
+            <div class="info-box recommend"><span class="text-red text-bold">🍁 本日賞楓核心：</span> 以自駕、景點步行為主，安排嵐山白天＋<strong>北野天滿宮 2026/12/6 最後一天夜間點燈</strong>為主要動線；依當週實際紅葉狀況彈性刪減。</div>
+            <ul class="timeline">
                 <li class="timeline-item">
-                    <span class="timeline-marker"></span>
-                    <span class="time-badge">10:00 - 16:00</span> <strong> 🛒 梅田巨型商圈購物（LINKS UMEDA / Lucua 1100 / Yodobashi） </strong>
-                    <div class="spot-intro">
-                        <div class="spot-img-container">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRLD06EjntLXxKCuaz7cvkOtZ1vaKqcbW-fae0KgUnzA&s=10" alt="梅田購物">
-                            <span class="img-hint-tag">大圖呈現 - 可自訂圖片 src</span>
-                        </div>
-                        <div class="spot-desc">
-                            <span class="text-chichi text-bold">【景點簡介】<br></span> 梅田是西日本最大的購物樞紐，LINKS UMEDA與友都八喜結合了極致龐大的電器、動漫、服飾與雜貨店鋪；Lucua 與 Lucua 1100 則齊聚許多質感潮流品牌與話題甜點（如 GARIGUETTE 千層派）。
-                        </div>
-                    </div>
-                    <div class="info-box food">
-                        <span class="text-orange"><strong>甜點與美食推薦：</strong></span> GARIGUETTE 拿破崙千層派、HARBS 蛋糕、梅田地下街串炸。
-                    </div>
-                </li>
+            <span class="timeline-marker"></span>
+            <span class="time-badge">08:00 - 09:00</span> <strong><span class="text-red">【自駕🚗】</span> 京都住宿 → 嵐山停車場</strong>
+            <p style="margin:4px 0;">以京都市區為起點，自駕前往嵐山。週日觀光區容易塞車，建議早出發，抵達後先停車再步行。</p>
+        </li><li class="timeline-item">
+            <span class="timeline-marker"></span>
+            <span class="time-badge">09:00 - 11:30</span> <strong>🍁 嵐山、天龍寺曹源池庭園｜自駕賞楓</strong>
+            <div class="spot-intro">
+            <div class="spot-img-container">
+                <img src="https://img01.jalannews.jp/img/2020/09/2020930_arashiyama-koyo_03.jpg" alt="京都嵐山天龍寺秋季庭園" loading="lazy" referrerpolicy="no-referrer">
+                <span class="img-hint-tag">景點實景 / 店家圖片</span>
+            </div>
+            <div class="spot-desc"><span class="text-chichi text-bold">【景點簡介】</span><br>世界遺產天龍寺以曹源池庭園借景山色聞名，可順遊竹林小徑和嵐山散策。<strong>12 月初紅葉可能已過高峰</strong>，以當週狀況為準，若已落葉可縮短停留。<br><strong>天龍寺：</strong>08:30～17:00；庭園成人參考 ¥500。<br>🔗 <a href="https://www.tenryuji.com/cn/visit/" target="_blank" rel="noopener noreferrer">天龍寺官方參觀與停車資訊</a><div class="photo-credit">圖片來源：<a href="https://www.jalan.net/news/article/374638/" target="_blank" rel="noopener noreferrer">じゃらん嵐山賞楓照片</a></div></div>
+        </div><div class="info-box traffic"><span class="text-blue text-bold">停車資訊：</span> 天龍寺官方停車場一般乘用車參考 ¥1,000／次，先到先停；旺季視情況改用周邊民營停車場。</div>
+        </li><li class="timeline-item">
+            <span class="timeline-marker"></span>
+            <span class="time-badge">11:30 - 13:00</span> <strong>嵐山午餐、渡月橋散步</strong>
+            <p style="margin:4px 0;">可吃湯豆腐、蕎麥麵或茶點。若嵐山太擠，縮短此段，提早往北野天滿宮移動。</p>
+        </li><li class="timeline-item">
+            <span class="timeline-marker"></span>
+            <span class="time-badge">13:00 - 14:00</span> <strong><span class="text-red">【自駕🚗】</span> 嵐山 → 北野天滿宮</strong>
+            <p style="margin:4px 0;">市區假日車流較多，導航時預留停車和步行時間；停車場是否開放請依當日公告。</p>
+        </li><li class="timeline-item">
+            <span class="timeline-marker"></span>
+            <span class="time-badge">14:00 - 15:30</span> <strong>北野天滿宮｜參拜與附近休息</strong>
+            <p style="margin:4px 0;">先參拜供奉學問之神菅原道真的北野天滿宮，附近找茶屋休息或簡單喝咖啡，等待傍晚賞楓。</p>
+        </li><li class="timeline-item">
+            <span class="timeline-marker"></span>
+            <span class="time-badge">15:30 - 18:30</span> <strong>🍁 北野天滿宮 御土居紅葉苑｜日景接夜間點燈</strong>
+            <div class="spot-intro">
+            <div class="spot-img-container">
+                <img src="https://ja.kyoto.travel/resource/event/5054-2.jpg" alt="北野天滿宮御土居紅葉苑點燈" loading="lazy" referrerpolicy="no-referrer">
+                <span class="img-hint-tag">景點實景 / 店家圖片</span>
+            </div>
+            <div class="spot-desc"><span class="text-chichi text-bold">【景點簡介】</span><br>「御土居」紅葉苑以紙屋川與朱紅鶯橋、晚間燈光映照楓葉聞名。<strong>2026 年紅葉苑開放到 12/6（日），夜間點燈也到這一天</strong>；夜間最晚入苑 19:40，20:00 閉苑；成人參考 ¥1,500。可視實際日落與入苑規則由午後欣賞至傍晚。<br>🔗 <a href="https://kitanotenmangu.or.jp/guidance/odoi/" target="_blank" rel="noopener noreferrer">北野天滿宮紅葉苑官方資訊</a><div class="photo-credit">圖片來源：<a href="https://ja.kyoto.travel/event/single.php?event_id=5054" target="_blank" rel="noopener noreferrer">京都市官方觀光圖片</a></div></div>
+        </div><div class="info-box ticket"><strong class="text-red">重要：</strong>紅葉狀況與點燈活動會因天氣變動，出發前再查當週公告。本日採用開車＋景區步行，<strong>不搭叡山電車</strong>。</div>
+        </li><li class="timeline-item">
+            <span class="timeline-marker"></span>
+            <span class="time-badge">18:30 - 19:30</span> <strong><span class="text-red">【自駕🚗】</span> 返回京都住宿｜晚餐</strong>
+            <p style="margin:4px 0;">紅葉夜景拍完返回住宿。若有疲勞或塞車可提早撤離，不必硬待到 18:30。</p>
+        </li>
+            </ul>
+        </div>
+    
+    <!-- DAY 4 | 本次更新 -->
+        <div class="day-header">📆 Day 4&nbsp;&nbsp;12/7（一）<br>🚗 海之京都候補｜由良川橋梁（可刪）→ 天橋立 → 伊根舟屋</div>
+        <div class="section-card">
+            <div class="info-box ticket"><span class="text-red text-bold">🌨️ 北部行程彈性處理：</span> 僅在<strong>已備妥冬胎、道路安全且天氣許可</strong>時自駕；若有雪或不想長途拉車，改走下方京都市區備案。</div><details class="guide-details"><summary>🌧️ 12/7 天氣不好／不想長途駕駛：京都市區備案</summary>
+    <div class="guide-details-body"><p><strong>不用搭叡山電車，也不需要往北部開車。</strong> 可改走：09:30 下鴨神社、鴨川三角洲 → 12:00 午餐 → 13:30 錦市場與河原町購物 → 傍晚返回住宿。</p>
+    <div class="spot-intro">
+            <div class="spot-img-container">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAazJFOek6tGBMBhKZu8IQB_AdbMsNunDaJjxqErdi1w&amp;s=10" alt="鴨川三角洲跳烏龜" loading="lazy" referrerpolicy="no-referrer">
+                <span class="img-hint-tag">景點實景 / 店家圖片</span>
+            </div>
+            <div class="spot-desc"><span class="text-chichi text-bold">【候補景點】</span><br>溪水低且步道安全時，可以體驗「烏龜石」踏腳石、拍攝鴨川合流處；雨天或水位上升時切勿踩入溪流。</div>
+        </div></div></details>
+            <ul class="timeline">
                 <li class="timeline-item">
-                    <span class="timeline-marker"></span>
-                    <span class="time-badge">16:30 - 17:30</span> <span class="text-green text-bold">【JR 關空快速🚎】</span><strong>梅田 ➔ 前往泉佐野市飯店 Check-in</strong>
-                    <p style="margin:2px 0;">從 JR 大阪站搭乘關空快速列車至「臨空城站（Rinku-Town）」，辦理入住，徹底為明日早班機做好萬全準備。</p>
-                </li>
+            <span class="timeline-marker"></span>
+            <span class="time-badge">07:15 - 09:45</span> <strong><span class="text-red">【自駕🚗】</span> 京都住宿 → 丹後由良方向（天氣許可才出發）</strong>
+            <p style="margin:4px 0;">12/7 規劃為<strong>海之京都候補主線</strong>；若北部有雪、結冰、強風或車輛沒冬胎，就改為下方京都市區備案。行車時間依氣候與道路狀況而變。</p>
+        </li><li class="timeline-item">
+            <span class="timeline-marker"></span>
+            <span class="time-badge">09:45 - 10:15</span> <strong>由良川橋梁｜海上列車拍攝點（可刪除）</strong>
+            <div class="spot-intro">
+            <div class="spot-img-container">
+                <img src="https://farm66.static.flickr.com/65535/54290327217_35868e52f1_b.jpg" alt="由良川橋梁海上列車" loading="lazy" referrerpolicy="no-referrer">
+                <span class="img-hint-tag">景點實景 / 店家圖片</span>
+            </div>
+            <div class="spot-desc"><span class="text-chichi text-bold">【景點簡介】</span><br>京都丹後鐵道列車通過由良川入海口長橋的獨特景色；<strong>是否拍到列車取決於班次</strong>，不保證本時間必有火車。為趕行程，若抵達時間較晚可整站刪除。<br>🔗 <a href="https://trains.willer.co.jp/" target="_blank" rel="noopener noreferrer">京都丹後鐵道時刻資訊</a></div>
+        </div><div class="info-box traffic"><strong>定位參考：</strong> <a href="https://maps.app.goo.gl/a73w5V1GxdtVKWAk9" target="_blank" rel="noopener noreferrer">原行程拍攝點地圖</a>；勿在堤防與道路禁止停車處停車。</div>
+        </li><li class="timeline-item">
+            <span class="timeline-marker"></span>
+            <span class="time-badge">10:15 - 11:00</span> <strong><span class="text-red">【自駕🚗】</span> 前往天橋立</strong>
+            <p style="margin:4px 0;">途中如遇交通延誤，優先保留天橋立及伊根，捨棄由良川橋梁。</p>
+        </li><li class="timeline-item">
+            <span class="timeline-marker"></span>
+            <span class="time-badge">11:00 - 12:30</span> <strong>天橋立 View Land｜飛龍觀</strong>
+            <div class="spot-intro">
+            <div class="spot-img-container">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT68PDsKgJim2vafPfZv296wIxMm1x7RG_nWIMnyJbJCw&amp;s=10" alt="天橋立飛龍觀" loading="lazy" referrerpolicy="no-referrer">
+                <span class="img-hint-tag">景點實景 / 店家圖片</span>
+            </div>
+            <div class="spot-desc"><span class="text-chichi text-bold">【景點簡介】</span><br>搭乘吊椅或單軌電車上觀景台欣賞天橋立沙洲，經典視角是「股のぞき（從胯下倒看）」；下山可短逛智恩寺及迴旋橋。<strong>冬季部分設施可能受天候影響</strong>，出發前核對當天營業及最末上山時間。<br>🔗 <a href="https://www.viewland.jp/" target="_blank" rel="noopener noreferrer">天橋立 View Land 官方網站</a></div>
+        </div>
+        </li><li class="timeline-item">
+            <span class="timeline-marker"></span>
+            <span class="time-badge">12:30 - 13:15</span> <strong>天橋立午餐／前往伊根途中簡餐</strong>
+            <p style="margin:4px 0;">避免用餐拖太久；有長輩或旅伴體力不足時，二選一只留天橋立或伊根。</p>
+        </li><li class="timeline-item">
+            <span class="timeline-marker"></span>
+            <span class="time-badge">13:15 - 14:00</span> <strong><span class="text-red">【自駕🚗】</span> 天橋立 → 伊根舟屋</strong>
+            <p style="margin:4px 0;">冬季山區與沿海路段注意風速、積雪、結冰及行車燈光。</p>
+        </li><li class="timeline-item">
+            <span class="timeline-marker"></span>
+            <span class="time-badge">14:00 - 15:15</span> <strong>伊根舟屋｜漁村散策、海景咖啡</strong>
+            <div class="spot-intro">
+            <div class="spot-img-container">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAa6d6YJeTyAPWqd9gEC0WqRJ2aKTVvNar3AtcTU--Bg&amp;s=10" alt="伊根舟屋木造漁村" loading="lazy" referrerpolicy="no-referrer">
+                <span class="img-hint-tag">景點實景 / 店家圖片</span>
+            </div>
+            <div class="spot-desc"><span class="text-chichi text-bold">【景點簡介】</span><br>伊根灣沿岸木造舟屋風景，適合短暫散步、欣賞海景。若天氣許可可視現場營業選擇舟屋食堂或 INE CAFE；請遵守住宅私領域與攝影禮儀。<br>🔗 <a href="https://www.ine-kankou.jp/view/ine-winter" target="_blank" rel="noopener noreferrer">伊根町觀光協會：冬季自駕注意事項</a></div>
+        </div><div class="info-box ticket"><span class="text-red text-bold">冬季行車：</span> 官方建議前往伊根的車輛即使未預報下雪，也應使用冬季輪胎；若租不到雪胎或路面不安全，取消本日海之京都行程。</div>
+        </li><li class="timeline-item">
+            <span class="timeline-marker"></span>
+            <span class="time-badge">15:15 - 18:00</span> <strong><span class="text-red">【自駕🚗】</span> 伊根 → 京都住宿｜晚餐</strong>
+            <p style="margin:4px 0;">避免日落後長時間停留在不熟悉的山區，盡量準時回程。此為參考時間，冬季路況可能更久。</p>
+        </li>
+            </ul>
+        </div>
+    
+    <!-- DAY 5 | 本次更新 -->
+        <div class="day-header">📆 Day 5&nbsp;&nbsp;12/8（二）<br>京都退房 → 梅田購物 → 臨空城同店還車 17:00 → OMO5</div>
+        <div class="section-card">
+            
+            <ul class="timeline">
                 <li class="timeline-item">
-                    <span class="timeline-marker"></span>
-                    <span class="time-badge">18:00~</span> <strong>臨空城 Outlet ｜晚餐 & 購物</strong>
-                        <div class="spot-intro">
-                            <div class="spot-img-container">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSq4zdujkK5uhBszzq5rH44a7eoVLNWs3uKVqucKZi0Zw&s" alt="臨空城 Outlet">
-                            <span class="img-hint-tag">大圖呈現 - 可自訂圖片 src</span>
-                        </div>
-                        <div class="spot-desc">
-                            <span class="text-chichi text-bold">【景點簡介】<br></span> 整個園區分為 Main Side（主館） 與 Sea Side（海濱區），中間有空橋連接。<br>
-◆輕奢精品（主館1F）：COACH、Michael Kors、Kate Spade 等品牌折扣力度極大，常有 5 折後再打 7-7.5 折的超級優惠。<br>
-◆運動休閒（主館2F / 海濱區2F）：Nike、Adidas、New Balance 等佔地遼闊，零碼區經常能挖到台幣千元以下的球鞋。<br>
-※Nike 、 Adidas 不參與免稅，本身折扣已非常便宜。<br>
-◆日系質感服飾（主館1F）：日本三大選品店 BEAMS、United Arrows、Urban Research 齊聚，價格比台灣專櫃便宜 2 至 3 成。<br>
-<span class="text-red text-bold">💥官網樓層介紹：</span><a href="https://www.premiumoutlets.co.jp/cht/kobesanda/brands/?tab=1" target="_blank" class="hotel-link">🔗 樓層介紹</a>
-                        <div class="info-box traffic">                
-                        <strong><span class="text-blue">路線指南：</span></strong>若住宿OMO5 關西機場，步行11分鐘。<br>
-                    </div>
-                </li>
+            <span class="timeline-marker"></span>
+            <span class="time-badge">08:30 - 10:00</span> <strong><span class="text-red">【自駕🚗】</span> 京都住宿退房 → 大阪梅田停車</strong>
+            <p style="margin:4px 0;">行李隨車帶回大阪，不用先到車站寄放；抵達梅田後停入商場或合法收費停車場。貴重物品及易見行李不要留在車內。</p>
+        </li><li class="timeline-item">
+            <span class="timeline-marker"></span>
+            <span class="time-badge">10:00 - 15:00</span> <strong>🛍️ 梅田商圈：LINKS UMEDA／友都八喜／LUCUA</strong>
+            <div class="spot-intro">
+            <div class="spot-img-container">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRLD06EjntLXxKCuaz7cvkOtZ1vaKqcbW-fae0KgUnzA&amp;s=10" alt="大阪梅田購物商圈" loading="lazy" referrerpolicy="no-referrer">
+                <span class="img-hint-tag">景點實景 / 店家圖片</span>
+            </div>
+            <div class="spot-desc"><span class="text-chichi text-bold">【景點簡介】</span><br>大型電器、動漫、日系服飾與雜貨集中地，可順道吃 GARIGUETTE 千層派或 HARBS 蛋糕。購買大型商品前確認租車行李廂仍放得下所有戰利品。</div>
+        </div>
+        </li><li class="timeline-item">
+            <span class="timeline-marker"></span>
+            <span class="time-badge">15:00 - 16:20</span> <strong><span class="text-red">【自駕🚗】</span> 梅田 → 臨空城</strong>
+            <p style="margin:4px 0;">上高速返回臨空城，週二仍可能塞車；建議不要把購物時間延到 16:00 才離開梅田。</p>
+        </li><li class="timeline-item">
+            <span class="timeline-marker"></span>
+            <span class="time-badge">16:20 - 17:00</span> <strong>⛽ 加滿油 → 同一營業所還車（17:00）</strong>
+            <div class="info-box traffic"><span class="text-blue text-bold">與 12/4 同店：</span> 以實際租車訂單上的營業所為準。若使用 Toyota 臨空城站前店，返回<strong>泉佐野市松原 2-6-36 臨時店址</strong>。歸還鑰匙、ETC 卡、保留加油收據，完成車況與過路費結算。</div>
+        </li><li class="timeline-item">
+            <span class="timeline-marker"></span>
+            <span class="time-badge">17:15 - 18:00</span> <strong>OMO5 關西機場 by 星野集團｜Check-in</strong>
+            <p style="margin:4px 0;">完成還車後搭車或步行前往臨空城站旁住宿，行李放妥後再出門。</p>
+        </li><li class="timeline-item">
+            <span class="timeline-marker"></span>
+            <span class="time-badge">18:00 之後</span> <strong>臨空城 Outlet｜晚餐、最後採買</strong>
+            <div class="spot-intro">
+            <div class="spot-img-container">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSq4zdujkK5uhBszzq5rH44a7eoVLNWs3uKVqucKZi0Zw&amp;s" alt="臨空城購物中心" loading="lazy" referrerpolicy="no-referrer">
+                <span class="img-hint-tag">景點實景 / 店家圖片</span>
+            </div>
+            <div class="spot-desc"><span class="text-chichi text-bold">【景點簡介】</span><br>Rinku Premium Outlets 與車站周邊商店，可安排最後一晚的運動品牌、服飾與伴手禮採買。各品牌營業時間依當日公告，晚間以仍有營業的店家為主。</div>
+        </div>
+        </li>
             </ul>
         </div>
 
+    <script>
+        // 僅更新租車待辦的已完成數量，不會上傳或送出資料。
+        (function () {
+            const inputs = document.querySelectorAll('[data-rental-check]');
+            const progress = document.getElementById('rental-progress');
+            function update() { if (progress) progress.textContent = Array.from(inputs).filter(x => x.checked).length + '/' + inputs.length + ' 完成'; }
+            inputs.forEach(x => x.addEventListener('change', update));
+            update();
+        })();
+    </script>
         <!-- DAY 6 -->
         <div class="day-header">📆 Day 6&nbsp;&nbsp;12/9 (三)&nbsp;&nbsp;泉佐野飯店&nbsp;&nbsp; ➔&nbsp;&nbsp; 關西國際機場✈️&nbsp;&nbsp;  ➔&nbsp;&nbsp; 順利返台</div>
         <div class="section-card">
