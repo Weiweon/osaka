@@ -292,11 +292,19 @@
   }
   function render() {renderNav(); state.day ? renderDay(days[state.day-1]) : renderOverview(); renderMap();}
   function selectDay(number) {state.day=number;render();}
-  nav.addEventListener('click', e=>{const b=e.target.closest('[data-day]');if(b) selectDay(Number(b.dataset.day));});
+  // 日期列置頂後，切換日期時把內容帶回置頂列正下方，避免停在新內容的中段或頁尾。
+  // 12/6 有分組切換鈕時以它為準，確保切換鈕看得到。
+  const workspace = document.querySelector('.workspace');
+  function scrollBelowNav(target, onlyIfPast) {
+    const top = target.getBoundingClientRect().top - nav.offsetHeight - 8;
+    if (onlyIfPast && top >= 0) return;
+    window.scrollBy({top});
+  }
+  nav.addEventListener('click', e=>{const b=e.target.closest('[data-day]');if(b){selectDay(Number(b.dataset.day));scrollBelowNav(groupControl.hidden?itinerary:groupControl,true);}});
   groupControl.addEventListener('click', e=>{const b=e.target.closest('[data-group]');if(b){state.group=b.dataset.group;render();}});
   mapDays.addEventListener('click', e=>{const b=e.target.closest('[data-map-day]');if(b) selectRoute(Number(b.dataset.mapDay),b.dataset.mapGroup);});
   stopBar.addEventListener('click', e=>{const b=e.target.closest('[data-map-stop]');if(!b||!map)return;const marker=markerRefs.get(Number(b.dataset.mapStop));if(marker){map.setView(marker.getLatLng(),Math.max(map.getZoom(),13));marker.openPopup();}});
-  itinerary.addEventListener('click', e=>{const b=e.target.closest('[data-open-day]');if(b){selectDay(Number(b.dataset.openDay));document.querySelector('#day-nav').scrollIntoView({behavior:'smooth',block:'start'});}});
+  itinerary.addEventListener('click', e=>{const b=e.target.closest('[data-open-day]');if(b){selectDay(Number(b.dataset.openDay));scrollBelowNav(groupControl.hidden?workspace:groupControl);}});
   itinerary.addEventListener('input', e=>{
     if (e.target.id !== 'dealer-search') return;
     const query=e.target.value.trim().toLocaleLowerCase();
@@ -309,5 +317,9 @@
     const status=itinerary.querySelector('#dealer-search-status');
     status.hidden=!query;status.textContent=query ? `找到 ${shown} 組攤商。` : '';
   });
-  initMap();render();
+  const syncNavHeight = () => document.documentElement.style.setProperty('--day-nav-h', nav.offsetHeight+'px');
+  const markNavStuck = () => nav.classList.toggle('is-stuck', window.scrollY>0 && nav.getBoundingClientRect().top<=0.5);
+  window.addEventListener('scroll', markNavStuck, {passive:true});
+  window.addEventListener('resize', ()=>{syncNavHeight();markNavStuck();});
+  initMap();render();syncNavHeight();markNavStuck();
 })();

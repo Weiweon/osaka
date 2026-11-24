@@ -38,3 +38,9 @@
 .stop-photo-link{display:block;border-radius:9px}.stop-photo figcaption{margin-top:5px;color:#687f77;font-size:.7rem;line-height:1.4;overflow-wrap:anywhere}.stop-photo figcaption span,.stop-photo figcaption small{display:block}.stop-photo figcaption small{font-size:.64rem;color:#7b8c85}.stop-photo figcaption a{color:inherit}
 .transport-leg{margin:12px 0 2px;padding:10px 12px;border-left:3px solid var(--route-color,#759187);border-radius:0 8px 8px 0;background:#f5f8f6}.transport-leg-head{display:flex;flex-wrap:wrap;align-items:center;gap:7px 11px}.transport-mode{display:inline-flex;align-items:center;gap:5px;color:var(--route-color,#39785f);font-size:.84rem}.transport-icon{display:block;width:20px;height:20px;flex:none}.transport-time{color:#5f776f;font-size:.76rem;font-weight:700;line-height:1.5}.transport-leg p,.return-note{margin:7px 0 0;color:#607a70;font-size:.78rem;line-height:1.65}.transport-leg .stop-link{margin-right:12px}.return-note{padding:12px;border-radius:9px;background:#eef6f1}.return-note strong{color:#375f51}
 @media(max-width:600px){.stop-info-grid{grid-template-columns:1fr}.stop-photo{width:min(100%,280px)}.stop-photo-frame{aspect-ratio:var(--photo-ratio,16/10)}}
+/* 日期列置頂：往下捲動時固定在畫面最上方；--day-nav-h 由 app.js 依實際高度寫入 */
+.day-nav{position:sticky;top:0;z-index:500;margin-block:13px 10px;margin-inline:calc(-1 * clamp(20px,4vw,64px));padding-block:12px;padding-inline:clamp(20px,4vw,64px);background:var(--cream);transition:box-shadow .2s}
+.day-nav.is-stuck{box-shadow:0 1px 0 var(--line),0 12px 18px -16px rgba(23,56,49,.3)}
+.map-panel{top:calc(var(--day-nav-h,96px) + 8px)}
+@media(min-width:901px){.map{height:clamp(300px,calc(100dvh - var(--day-nav-h,96px) - 310px),440px)}}
+.practical{scroll-margin-top:var(--day-nav-h,96px)}
