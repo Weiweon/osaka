@@ -13,10 +13,10 @@
   // 色彩只用於辨認路線；地點、順序與時間仍以行程資料為準。
   const routeStyles = {
     1:{color:'#c25234',area:'關西機場・堺・大阪',anchor:'glico',pinAnchor:[36,32],badge:'1'},
-    2:{color:'#08766f',area:'天橋立・伊根・京都',anchor:'viewland',pinAnchor:[16,16],badge:'2'},
+    2:{color:'#08766f',area:'阪神・天橋立・伊根・京都',anchor:'viewland',pinAnchor:[16,16],badge:'2'},
     3:{color:'#754ba1',area:'京都市區｜西瓜・柏祥',anchor:'inari',pinAnchor:[36,42],badge:'3京'},
     4:{color:'#55752e',area:'貴船・鞍馬・大阪十三',anchor:'kifune',pinAnchor:[-2,16],badge:'4'},
-    5:{color:'#96600b',area:'大阪梅田・臨空城・京都',anchor:'umeda',pinAnchor:[-2,32],badge:'5'},
+    5:{color:'#96600b',area:'勝林寺・大阪梅田・臨空城',anchor:'umeda',pinAnchor:[-2,32],badge:'5'},
     6:{color:'#2867a7',area:'臨空城・關西機場',anchor:'kix',pinAnchor:[16,16],badge:'6'}
   };
   const nagoyaStyle = {color:'#b0366c',area:'京都・名古屋｜家偉',anchor:'hall',pinAnchor:[16,16],badge:'3名'};
@@ -29,14 +29,16 @@
   const legend = document.querySelector('#map-legend');
   const mapDays = document.querySelector('#map-days');
   const stopBar = document.querySelector('#map-stops');
-  let map, mapLayer;
+  let map, mapLayer, overviewMarkerLayer;
   let currentMapPoints = [];
+  let overviewStops = new Map();
   let markerRefs = new Map();
   const escape = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const mapSearch = place => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.query)}`;
   const mapRoute = (from, to, mode) => `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(from.query)}&destination=${encodeURIComponent(to.query)}&travelmode=${mode}`;
   const getCurrent = day => day.index === 3 && state.group === 'jiawei' ? { ...day, ...day.alternate } : day;
   const getLeg = (day,group,index) => (transport[day.index===3&&group==='jiawei'?'3-jiawei':String(day.index)] || [])[index];
+  const stopCode = (day,group,index) => `${day.index}${day.index===3?(group==='jiawei'?'名':'京'):''}-${index+1}`;
   const link = (url, text, className = 'action-link') => `<a class="${className}" href="${escape(url)}" target="_blank" rel="noopener noreferrer">${escape(text)} ↗</a>`;
 
   function renderNav() {
@@ -48,8 +50,26 @@
   }
   function renderOverview() {
     itinerary.style.removeProperty('--route-color');
-    const cards = days.map(d => `<article class="overview-card" style="--route-color:${routeStyle(d).color}"><button class="overview-button" data-open-day="${d.index}" aria-label="查看 ${d.date} 第 ${d.index} 天行程"><span class="overview-date">DAY ${d.index}<strong>${d.date} 週${d.weekday}</strong></span><span class="overview-content"><strong>${escape(d.title)}</strong><span>${escape(d.summary)}</span></span><span class="overview-more" aria-hidden="true">›</span></button></article>`).join('');
-    itinerary.innerHTML = `<div class="day-banner"><div><div class="kicker">SIX DAYS TO REMEMBER</div><h2>六天，一起出發</h2><p>已於 2026/11/23 對照去趣六天的景點順序及時間，並依你的要求交換 12/5 與 12/6。</p></div><span class="date-pill">6 DAYS</span></div><div class="note info">12/5 為去趣原本 12/6 的天橋立、伊根行程；12/6 的<strong>西瓜・柏祥</strong>保留去趣原本 12/5 的京都行程，<strong>家偉</strong>另前往名古屋玩具展。點選當天即可切換。</div><div class="overview-list">${cards}</div><div class="note warning" style="margin-top:15px"><strong>出發前先確認</strong><br>去趣有幾段移動時間列為 0 分，12/8 還車動線與 12/9 機場報到時間也有衝突。各日頁面已保留原資料並註明。</div>`;
+    const index=days.flatMap(day=>{
+      const groups=day.index===3?['friends','jiawei']:['friends'];
+      return groups.map(group=>{
+        const route=day.index===3 && group==='jiawei'?{...day,...day.alternate}:day;
+        const groupName=day.index===3?(group==='jiawei'?' · 家偉名古屋':' · 西瓜柏祥京都'):'';
+        return `<div class="overview-index-row" style="--route-color:${routeStyle(day,group).color}"><strong>${day.date}${groupName}</strong><div class="overview-index-stops">${route.stops.map((s,i)=>{const code=stopCode(day,group,i);return `<a class="overview-index-link" href="#stop-${escape(code)}"><b>${escape(code)}</b><span>${escape(places[s.place].name)}</span></a>`;}).join('')}</div></div>`;
+      });
+    }).join('');
+    const cards = days.flatMap(day => {
+      const groups=day.index===3?['friends','jiawei']:['friends'];
+      return groups.map(group => {
+        const isAlternate=day.index===3 && group==='jiawei';
+        const route=isAlternate?{...day,...day.alternate}:day;
+        const heading=day.index===3?(isAlternate?'家偉｜名古屋':'西瓜・柏祥｜京都'):route.title;
+        const guide=!isAlternate && dayGuides[String(day.index)]?`<div class="note info">${escape(dayGuides[String(day.index)])}</div>`:'';
+        const event=isAlternate?`<details class="overview-event"><summary>名古屋玩具展入場資訊與攤商 IG</summary>${renderEvent()}</details>`:'';
+        return `<article class="overview-route" style="--route-color:${routeStyle(day,group).color}"><header class="overview-route-header"><div><span class="overview-route-date">DAY ${day.index} · ${day.date} 週${day.weekday}</span><h3>${escape(heading)}</h3><p>${escape(route.summary)}</p></div><button class="overview-open-day" data-open-day="${day.index}" data-open-group="${group}" type="button">查看單日</button></header>${renderNotes(route.notes)}${guide}<ol class="timeline">${renderStops(route,isAlternate)}</ol>${event}</article>`;
+      });
+    }).join('');
+    itinerary.innerHTML = `<div class="day-banner"><div><div class="kicker">SIX DAYS TO REMEMBER</div><h2>六天行程總覽</h2><p>所有景點、住宿與每段交通都在下方；編號如 1-1 代表第 1 天的第 1 站。</p></div><span class="date-pill">6 DAYS</span></div><div class="note info">12/6 的 <strong>3京</strong> 是西瓜・柏祥，<strong>3名</strong> 是家偉。原列時間與新增的住宿銜接分開標示。</div><section class="overview-index" aria-label="全部行程停靠點"><h3>每天的所有停靠點</h3><p>點編號可直接跳到該站細節；不需切換日期也能往下看完整行程。</p>${index}</section><p class="timeline-mode-note overview-timing-note">交通時間為 Google 地圖於 ${escape(window.TRIP_TRANSPORT_CHECKED || '2026/11/25')} 查詢的快照，並非即時結果。推算時間依原列各站停留 1 小時；12/5 另假設看兩場後 10:35 從賽馬場開車離場。不含停車、取車、候車或排隊；可點各段連結查看當日路況。</p><div class="overview-list overview-full">${cards}</div>`;
   }
   function renderNotes(notes) {
     return notes.map(n => `<div class="note ${escape(n.type)}">${escape(n.text)}</div>`).join('');
@@ -78,7 +98,10 @@
       transit:'<rect x="4" y="3" width="16" height="15" rx="3"/><path d="M4 10h16M7 18v2m10-2v2M7 14h.1m9.9 0h.1"/>'
     };
     const svg=name=>`<svg class="transport-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${symbols[name]}</svg>`;
-    return mode==='car-pickup'?svg('walk')+svg('car'):svg(symbols[mode]?mode:'transit');
+    if(mode==='rail-car') return svg('rail')+svg('walk')+svg('car');
+    if(mode==='car-walk') return svg('car')+svg('walk');
+    if(mode==='walk-car-walk') return svg('walk')+svg('car')+svg('walk');
+    return svg(symbols[mode]?mode:'transit');
   }
   function renderPhoto(place) {
     const photo=photos[place];
@@ -91,22 +114,68 @@
     const credit=photo.source?`<a href="${escape(photo.source)}" target="_blank" rel="noopener noreferrer">${escape(photo.author)}</a>${photo.license && photo.licenseUrl?` · <a href="${escape(photo.licenseUrl)}" target="_blank" rel="noopener noreferrer">${escape(photo.license)}</a>`:''}`:'來源：本機訂房資料';
     return `<figure class="stop-photo">${visual}<figcaption><span>${escape(photo.caption)}</span><small>${credit}</small></figcaption></figure>`;
   }
+  function renderRaceGuide() {
+    const races = [
+      ['1R','09:50','2 歲未勝利・泥地 1,400 m'],
+      ['2R','10:20','2 歲未勝利（雌馬）・草地外圈 1,600 m'],
+      ['3R','10:50','2 歲未勝利・泥地 1,800 m'],
+      ...Array.from({length:7},(_,i)=>[`${i+4}R`,'待核對','發跑時間與條件待逐場核實']),
+      ['11R','15:30','鳴尾記念 GⅢ・草地外圈 1,800 m'],
+      ['12R','待核對','發跑時間與條件待逐場核實']
+    ];
+    return `<section class="race-guide" aria-label="阪神競馬入門指南">
+      <div class="race-guide-head"><span class="race-tag">12/05 SAT · HANSHIN</span><h4>第一次看賽馬：先看馬，再看比賽</h4><p>以下時間均為日本時間；活動及發跑安排可能變動。</p></div>
+      <div class="race-facts"><div><small>一般入場</small><strong>免費入場日</strong><span>當日可現場入場；指定席另計</span></div><div><small>停車費</small><strong>車輛 2,000 日圓</strong><span>JRA 直營停車場・開催日參考</span></div></div>
+      <p class="race-copy">JRA 公告 12/5 為「フリーパスの日」，一般入場免費；第 5 回阪神也有不需事前預約的當日入場方式。入場時依入口指示辦理；如需指定席，請先查預約與費用。停車場是否有位、開放時間及當日入場細節出發前再查。</p>
+      <div class="race-morning"><h5>建議早上的節奏</h5><ol><li><b>07:55–08:00</b><span>從 BAKURO 退房取車出發；開車約 44 分鐘，再預留停車及步行。</span></li><li><b>08:45–09:00</b><span>希望抵達停車場附近；開門時間尚須以當日公告為準，可能需要等候。</span></li><li><b>約 09:20</b><span>找「パドック」展示圈看 1R 馬匹；馬一般約在發跑前 30 分鐘進展示圈，實際以現場為準。</span></li><li><b>09:50／10:20</b><span>看 1R；若續看 2R，可在第一場後盡快回展示圈，可能錯過 2R 展示的開頭。</span></li></ol></div>
+      <div class="race-options"><div><b>只看 1 場</b><strong>假設 10:05 開車離場</strong><span>約 11:55 抵達宮津 Lawson</span></div><div><b>看 2 場</b><strong>假設 10:35 開車離場</strong><span>約 12:25 抵達宮津 Lawson</span></div></div>
+      <p class="race-caution">離場時間是規劃假設，已預留少量步行取車時間；實際車流、排隊與休息另計。無論選哪個方案，原本的 08:00 便利商店與 14:45 前舟屋食堂午餐都無法照原停留時間銜接。</p>
+      <div class="race-alternative"><h5>備案：午餐優先，再回天橋立</h5><p>以下是看兩場後調整順序的參考，原本行程點仍保留。假設約 12:25 到 Lawson、停留 10–15 分，再開車約 56 分到舟屋食堂，順利的話約 <strong>13:31–13:36</strong> 抵達，可望趕在 14:45 午餐最後點餐前用餐。</p><p>約 14:20 用完餐後，短逛伊根舟屋與 INE CAFE，約 15:20–15:30 取車離開；開車約 38 分回天橋立山麓站，理想狀況約 15:58–16:08 抵達，接著遊覽天橋立及智恩寺。另計停車、走回車位、上山等候及實際營業時間。</p><p><strong>上山時間很緊：</strong>官方冬季售票至 16:30；單軌上山末班 16:20、吊椅上山末班 16:30。以上是假設行程，不保證趕得上；若遇塞車或等候，需再縮短停留或調整景點。智恩寺預計較晚到，請先確認開放時間；結束後回停車處取車，自智恩寺開回京都住宿約 1 小時 48 分，另計步行及路況。</p><div class="race-links">${link(mapRoute(places.lawson,places.funaya,'driving'),'Lawson 到舟屋食堂')}${link(mapRoute(places.inecafe,places.viewlandBase,'driving'),'伊根返回天橋立山麓')}${link(mapRoute(places.chion,places.ikko,'driving'),'智恩寺返回京都住宿')}${link('https://www.viewland.jp/','天橋立官方營業時間')}</div></div>
+      <h5>當日場次參考</h5><p class="race-copy">預定 12 場；已查得的發跑時間如下。未逐場核實不代表尚未公布，請點 JRA 查看完整最新賽程及出馬表。早上離場<strong>看不到下午的鳴尾記念</strong>。</p>
+      <div class="race-table-wrap"><table class="race-table"><thead><tr><th scope="col">場次</th><th scope="col">發跑</th><th scope="col">賽事／賽道</th></tr></thead><tbody>${races.map(r=>`<tr><th scope="row">${escape(r[0])}</th><td>${escape(r[1])}</td><td>${escape(r[2])}</td></tr>`).join('')}</tbody></table></div>
+      <p class="race-source">資料查核至 2026/11/25；JRA 預定賽程可能調整，正式出馬表通常於賽事週四 16:00 左右公布，馬號、騎師、賠率及截止時間請以當日顯示為準。</p>
+      <h5>看完馬怎麼買馬券？</h5><div class="race-steps"><div><span aria-hidden="true">🐎</span><strong>1 · 先到展示圈</strong><p>看「パドック」裡這一場的馬匹步態與狀態，對照出馬表上的馬號。照片是歷年資料照，並非本次出賽馬。</p></div><div><span aria-hidden="true">✎</span><strong>2 · 填投注卡</strong><p>拿現場「マークカード」並依指示塗選「阪神」、場次、投注種類與馬號。初學可認識「單勝（単勝）」：所選馬拿第一才算中。</p></div><div><span aria-hidden="true">¥</span><strong>3 · 到售票機</strong><p>把卡投入對應的自動售票機，按機器指示投入日圓現金；通常以 100 日圓為單位。先核對場次、馬號與金額，取走馬券及找零。</p></div><div><span aria-hidden="true">🏁</span><strong>4 · 觀賽與兌獎</strong><p>在截止前完成購買，再到跑道旁看比賽；保留馬券，賽後確認正式結果及派彩，若中獎按現場指示到払い戻し機兌領。</p></div></div>
+      <div class="ticket-example" aria-label="示意投注卡範例"><div><small>虛構教學範例・非實際出馬表</small><strong>阪神　1R　単勝</strong></div><div><span>馬號</span><b>03</b><span>金額</span><b>¥100</b></div></div>
+      <p class="race-copy">舉例僅表示「阪神 1R、買 3 號馬單勝 100 日圓」，不代表 3 號確定出賽或推薦投注。現場操作與停止售票時間請看機器和廣播；展示圈與售票處有距離，建議提早數分鐘購票。未滿 20 歲不得購買馬券，也可以完全不下注只觀賽。</p>
+      <div class="race-links">${link('https://www.jra.go.jp/keiba/calendar2026/2026/12/1205.html','JRA 當日完整預定賽程')}${link('https://sports.yahoo.co.jp/keiba/schedule/yearly?year=2026&type=p9','Yahoo 阪神賽程')}${link('https://www.jra.go.jp/facilities/race/hanshin/news/nyujou.html','JRA 阪神入場方式')}${link('https://www.jra.go.jp/facilities/race/hanshin/access/index.html','JRA 停車與交通')}${link('https://www.jra.go.jp/facilities/race/hanshin/rcmap/','JRA 場內地圖')}${link('https://jra-fun.jp/event/hanshin/202605/','JRA 活動與免費日')}</div>
+    </section>`;
+  }
+  function calculatedArrivals(day, isAlternate) {
+    const arrivals=Array(day.stops.length).fill(null);
+    if(isAlternate) return arrivals;
+    let expected=null;
+    day.stops.forEach((s,i)=>{
+      const toMinutes = value => { const match=/^(\d{2}):(\d{2})$/.exec(value || ''); return match?Number(match[1])*60+Number(match[2]):null; };
+      const original=toMinutes(s.time);
+      if(original!==null && expected!==null && expected>original+4) arrivals[i]=expected;
+      const arrival=original===null?expected:Math.max(original,expected??original);
+      const leg=getLeg(day,'friends',i);
+      const proposed=toMinutes(s.departureTime);
+      const departure=proposed!==null ? Math.max(proposed,arrival??proposed) : arrival!==null ? arrival+(s.stayMinutes??(s.stay?60:0)) : null;
+      expected=departure!==null && leg && Number.isFinite(leg.minutes) ? departure+leg.minutes : null;
+    });
+    return arrivals;
+  }
+  const formatMinutes = value => `${String(Math.floor(value/60)%24).padStart(2,'0')}:${String(value%60).padStart(2,'0')}`;
+  const googleMode = mode => mode==='walk'?'walking':mode==='car'?'driving':'transit';
   function renderStops(day, isAlternate) {
+    const group=isAlternate?'jiawei':'friends';
+    const arrivals=calculatedArrivals(day,isAlternate);
     return day.stops.map((s,i) => {
       const p = places[s.place];
       const nextStop = day.stops[i+1];
       const next = nextStop && places[nextStop.place];
-      const tripLeg=next && getLeg(day,isAlternate?'jiawei':'friends',i);
-      const mode=tripLeg?.mode==='walk'?'walking':tripLeg?.mode==='car'?'driving':'transit';
+      const tripLeg=next && getLeg(day,group,i);
+      const timeLabel=s.timeLabel || (day.index===5 && s.stay ? '去趣原列・待調整' : '');
       let route='';
-      if(next && tripLeg?.mode==='car-pickup' && places[tripLeg.pickupAt]) {
-        const pickup=places[tripLeg.pickupAt];
-        route=`<a class="stop-link" href="${escape(mapRoute(p,pickup,'walking'))}" target="_blank" rel="noopener noreferrer">步行回停車處 ↗</a> <a class="stop-link" href="${escape(mapRoute(pickup,next,'driving'))}" target="_blank" rel="noopener noreferrer">取車後開車導航 ↗</a>`;
+      if(tripLeg?.segments?.length) {
+        route=`<div class="transport-segments">${tripLeg.segments.map(segment=>`<a class="transport-segment" href="${escape(mapRoute(places[segment.from],places[segment.to],googleMode(segment.mode)))}" target="_blank" rel="noopener noreferrer">${transportIcon(segment.mode)}<span>${escape(segment.duration)} · Google 地圖</span></a>`).join('')}</div>`;
       } else if(next) {
-        route=`<a class="stop-link" href="${escape(mapRoute(p,next,mode))}" target="_blank" rel="noopener noreferrer">查看下一段導航 ↗</a>`;
+        route=`<a class="stop-link" href="${escape(mapRoute(p,next,googleMode(tripLeg?.mode)))}" target="_blank" rel="noopener noreferrer">查看 Google 地圖當日路線 ↗</a>`;
       }
-      const legMarkup=tripLeg?`<div class="transport-leg"><div class="transport-leg-head"><span class="transport-mode">${transportIcon(tripLeg.mode)}<strong>${escape(tripLeg.label)}</strong></span><span class="transport-time">${escape(tripLeg.duration || s.leg || '時間待確認')}</span></div>${tripLeg.note?`<p>${escape(tripLeg.note)}</p>`:''}${route}</div>`:'';
-      return `<li class="timeline-item"><span class="timeline-number">${i+1}</span><div class="stop-body"><div class="stop-info-grid"><div class="stop-details"><div class="stop-top"><span class="stop-time">${escape(s.time)}</span><span class="stop-name">${escape(p.name)}</span></div>${s.stay ? `<p class="stop-meta">${escape(s.stay)} · 去趣原列</p>` : ''}${s.note ? `<p class="stop-note">${escape(s.note)}</p>` : ''}<a class="stop-link" href="${escape(mapSearch(p))}" target="_blank" rel="noopener noreferrer">景點位置 ↗</a>${p.website ? ` · <a class="stop-link" href="${escape(p.website)}" target="_blank" rel="noopener noreferrer">營業資訊 ↗</a>` : ''}</div>${renderPhoto(s.place)}</div>${s.pickup ? renderSimPickup() : ''}${legMarkup}</div></li>`;
+      const legMarkup=tripLeg?`<div class="transport-leg"><div class="transport-leg-head"><span class="transport-mode">${transportIcon(tripLeg.mode)}<strong>${escape(tripLeg.label)}</strong></span><span class="transport-time">${escape(tripLeg.duration)}</span></div>${tripLeg.note?`<p>${escape(tripLeg.note)}</p>`:''}${route}</div>`:'';
+      const revised=arrivals[i]!==null?`<p class="calculated-time">${day.index===2?'兩場方案：假設 10:35 開車離場，':'依原停留時間與交通推算，'}約 ${formatMinutes(arrivals[i])} 抵達（未計額外緩衝）</p>`:'';
+      return `<li class="timeline-item" id="stop-${escape(stopCode(day,group,i))}"><span class="timeline-number">${escape(stopCode(day,group,i))}</span><div class="stop-body"><div class="stop-info-grid"><div class="stop-details"><div class="stop-top"><span class="stop-time">${escape(s.time)}</span>${timeLabel?`<span class="time-label">${escape(timeLabel)}</span>`:''}<span class="stop-name">${escape(p.name)}</span></div>${s.stay ? `<p class="stop-meta">${escape(s.stay)} · ${escape(s.stayLabel || '去趣原列')}</p>` : ''}${revised}${s.note ? `<p class="stop-note">${escape(s.note)}</p>` : ''}<a class="stop-link" href="${escape(mapSearch(p))}" target="_blank" rel="noopener noreferrer">景點位置 ↗</a>${p.website ? ` · <a class="stop-link" href="${escape(p.website)}" target="_blank" rel="noopener noreferrer">營業資訊 ↗</a>` : ''}</div>${renderPhoto(s.place)}</div>${s.pickup ? renderSimPickup() : ''}${s.raceInfo ? renderRaceGuide() : ''}${legMarkup}</div></li>`;
     }).join('');
   }
   function dealerCard(dealer) {
@@ -149,12 +218,13 @@
     itinerary.style.setProperty('--route-color',routeStyle(day,state.group).color);
     const guide=!isAlternate && dayGuides[String(day.index)]?`<div class="note info">${escape(dayGuides[String(day.index)])}</div>`:'';
     const after=!isAlternate && returnNotes[String(day.index)]?`<p class="return-note"><strong>回程與取車</strong><br>${escape(returnNotes[String(day.index)])}</p>`:'';
-    itinerary.innerHTML = `<div class="day-banner"><div><div class="kicker">DAY ${day.index} · ${escape(current.area.toUpperCase())}</div><h2>${escape(current.title)}</h2><p>${escape(current.summary)}</p></div><span class="date-pill">${day.date} 週${day.weekday}</span></div>${renderNotes(current.notes)}${guide}<section class="timeline-card" aria-labelledby="timeline-title"><div class="timeline-card-head"><h3 id="timeline-title">${isAlternate ? '建議交通與時間' : '今日行程'}</h3><span>${isAlternate ? '時間為規劃參考' : '時間保留去趣資料'}</span></div><p class="timeline-mode-note">交通圖示是建議方式；去趣原列時間不一定適用於新建議，實際請查導航與班次。</p><ol class="timeline">${renderStops(current,isAlternate)}</ol>${after}</section>${isAlternate ? renderEvent() : ''}`;
+    itinerary.innerHTML = `<div class="day-banner"><div><div class="kicker">DAY ${day.index} · ${escape(current.area.toUpperCase())}</div><h2>${escape(current.title)}</h2><p>${escape(current.summary)}</p></div><span class="date-pill">${day.date} 週${day.weekday}</span></div>${renderNotes(current.notes)}${guide}<section class="timeline-card" aria-labelledby="timeline-title"><div class="timeline-card-head"><h3 id="timeline-title">${isAlternate ? '建議交通與時間' : '今日行程'}</h3><span>${isAlternate ? '時間為規劃參考' : '原列時間與銜接估計'}</span></div><p class="timeline-mode-note">交通時間是 Google 地圖於 ${escape(window.TRIP_TRANSPORT_CHECKED || '2026/11/25')} 查詢的快照，並非即時結果。推算時間依原列各站停留 1 小時；12/5 另假設看兩場後 10:35 開車離場。不含停車、取車、候車及排隊；請查當日導航。</p><ol class="timeline">${renderStops(current,isAlternate)}</ol>${after}</section>${isAlternate ? renderEvent() : ''}`;
   }
   function initMap() {
     if (!window.L) { document.querySelector('#map-fallback').hidden=false; return; }
     map = L.map('map', {scrollWheelZoom:false, zoomControl:true, minZoom:5}).setView([35.1,135.7],7);
-    map.on('resize', fitCurrentRoute);
+    map.on('resize', () => { fitCurrentRoute(); redrawOverviewMarkers(); });
+    map.on('zoomend', redrawOverviewMarkers);
     const warning=document.querySelector('#map-fallback');
     map.attributionControl.addAttribution('<a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">© OpenStreetMap contributors</a> · <a href="https://www.openstreetmap.org/fixthemap" target="_blank" rel="noopener noreferrer">回報地圖問題</a>');
     let vectorLayer, fallbackStarted=false, timer;
@@ -188,6 +258,7 @@
       gl.on('error',()=>{if(++errors>=3) useFallback();});
     } catch (error) { console.warn('Map style unavailable:', error.message); useFallback(); }
     mapLayer = L.layerGroup().addTo(map);
+    overviewMarkerLayer = L.layerGroup().addTo(map);
   }
   function drawLine(coords, dashed, overview, color) {
     if (coords.length<2) return;
@@ -204,6 +275,24 @@
     const icon=L.divIcon({className:'map-direction-icon',html:`<span style="--route-color:${color};transform:rotate(${angle}deg)">▲</span>`,iconSize:[18,18],iconAnchor:[9,9]});
     L.marker(coords[i],{icon,interactive:false,keyboard:false}).addTo(mapLayer);
   }
+  function drawMapSegment(fromId,toId,mode,points,overview,color) {
+    const from=places[fromId],to=places[toId];
+    if(!from?.coord || !to?.coord || fromId===toId) return;
+    points.push(from.coord,to.coord);
+    const road=roads[`${fromId}|${toId}`];
+    const roadMode=mode==='walk'?'foot':mode==='car'?'car':null;
+    if(roadMode && road?.mode===roadMode && road.points?.length>1) {
+      const path=road.points;
+      drawLine(path,false,overview,color);
+      if(L.latLng(from.coord).distanceTo(L.latLng(path[0]))>25) drawLine([from.coord,path[0]],true,overview,color);
+      if(L.latLng(to.coord).distanceTo(L.latLng(path[path.length-1]))>25) drawLine([path[path.length-1],to.coord],true,overview,color);
+      points.push(...path);
+      if(!overview) drawArrow(path,color);
+    } else {
+      drawLine([from.coord,to.coord],true,overview,color);
+      if(!overview && L.latLng(from.coord).distanceTo(L.latLng(to.coord))>80) drawArrow([from.coord,to.coord],color);
+    }
+  }
   function drawRoute(entry, points, markers, overview) {
     const {route,label,color}=entry;
     let previous = null;
@@ -212,24 +301,22 @@
       if (!p.coord) {previous=null; return;}
       points.push(p.coord);
       if (previous) {
-        const road=roads[`${previous.id}|${s.place}`];
         const leg=getLeg(entry.day,entry.group,i-1);
-        const roadMode=leg?.mode==='walk'?'foot':leg?.mode==='car'?'car':null;
-        if(roadMode && road?.mode===roadMode && road.points?.length>1) {
-          const path=road.points;
-          drawLine(path,false,overview,color);
-          if(L.latLng(previous.coord).distanceTo(L.latLng(path[0]))>25) drawLine([previous.coord,path[0]],true,overview,color);
-          if(L.latLng(p.coord).distanceTo(L.latLng(path[path.length-1]))>25) drawLine([path[path.length-1],p.coord],true,overview,color);
-          points.push(...path);
-          if(!overview) drawArrow(path,color);
+        if(leg?.segments?.length) {
+          let last=previous.id;
+          leg.segments.forEach(segment=>{
+            if(last!==segment.from) drawMapSegment(last,segment.from,'transit',points,overview,color);
+            drawMapSegment(segment.from,segment.to,segment.mode,points,overview,color);
+            last=segment.to;
+          });
+          if(last!==s.place) drawMapSegment(last,s.place,'transit',points,overview,color);
         } else {
-          drawLine([previous.coord,p.coord],true,overview,color);
-          if(!overview && L.latLng(previous.coord).distanceTo(L.latLng(p.coord))>80) drawArrow([previous.coord,p.coord],color);
+          drawMapSegment(previous.id,s.place,leg?.mode,points,overview,color);
         }
       }
       const key=p.coord.map(n=>n.toFixed(5)).join(',');
       const marker=markers.get(key) || {coord:p.coord,stops:[]};
-      marker.stops.push({number:i+1,time:s.time,place:p,prefix:label});
+      marker.stops.push({number:i+1,code:stopCode(entry.day,entry.group,i),time:s.time,place:p,prefix:label,color});
       markers.set(key,marker);
       previous={coord:p.coord,id:s.place};
     });
@@ -237,11 +324,11 @@
   function drawMarkers(markers,color) {
     markerRefs = new Map();
     for (const {coord,stops} of markers.values()) {
-      const numbers=stops.map(s=>s.number).join('·');
+      const numbers=stops[0].code+(stops.length>1?` +${stops.length-1}`:'');
       const names=[...new Set(stops.map(s=>s.place.name))];
-      const size=30;
-      const icon=L.divIcon({className:'',html:`<span class="map-marker" style="--marker-color:${color}">${escape(numbers)}</span>`,iconSize:[size,size],iconAnchor:[size/2,size/2]});
-      const popup=stops.map(s=>`<div class="map-popup-stop"><strong>${escape(s.prefix)} · ${s.number}. ${escape(s.place.name)}</strong><br>${escape(s.time)}${s.place.approx ? ' · 位置為附近參考' : ''}<br><a href="${escape(mapSearch(s.place))}" target="_blank" rel="noopener noreferrer">查看地圖 ↗</a></div>`).join('');
+      const width=Math.max(40,numbers.length*8+14), height=30;
+      const icon=L.divIcon({className:'',html:`<span class="map-marker map-marker-code" style="--marker-color:${color}">${escape(numbers)}</span>`,iconSize:[width,height],iconAnchor:[width/2,height/2]});
+      const popup=stops.map(s=>`<div class="map-popup-stop"><strong>${escape(s.code)} · ${escape(s.place.name)}</strong><br>${escape(s.prefix)} · ${escape(s.time)}${s.place.approx ? ' · 位置為附近參考' : ''}<br><a href="${escape(mapSearch(s.place))}" target="_blank" rel="noopener noreferrer">查看地圖 ↗</a></div>`).join('');
       const marker=L.marker(coord,{icon,keyboard:true,title:names.join('、')}).bindPopup(popup).addTo(mapLayer);
       stops.forEach(s=>markerRefs.set(s.number,marker));
     }
@@ -250,12 +337,27 @@
     if (day===3) state.group=group || 'friends';
     selectDay(day);
   }
-  function drawOverviewBadges(entries) {
-    entries.forEach(entry=>{
-      const p=places[entry.anchor];
-      if (!p?.coord) return;
-      const icon=L.divIcon({className:'overview-pin',html:`<span style="--route-color:${entry.color}">${escape(entry.badge)}</span>`,iconSize:[32,32],iconAnchor:entry.pinAnchor});
-      L.marker(p.coord,{icon,keyboard:true,title:`查看第 ${entry.day.index} 天 ${entry.area}`}).on('click',()=>selectRoute(entry.day.index,entry.group)).addTo(mapLayer);
+  function redrawOverviewMarkers() {
+    if(!map || !overviewMarkerLayer) return;
+    overviewMarkerLayer.clearLayers();
+    if(state.day!==0) return;
+    const groups=[];
+    for(const item of overviewStops.values()) {
+      const point=map.latLngToContainerPoint(item.coord);
+      let group=groups.find(g=>g.point.distanceTo(point)<25);
+      if(!group) { group={point,items:[]}; groups.push(group); }
+      group.items.push(item);
+      if(group.items.length>1) group.point=group.point.multiplyBy((group.items.length-1)/group.items.length).add(point.divideBy(group.items.length));
+    }
+    groups.forEach(group=>{
+      const stops=group.items.flatMap(item=>item.stops);
+      const first=stops[0];
+      const label=first.code+(stops.length>1?` +${stops.length-1}`:'');
+      const width=Math.max(42,label.length*8+14);
+      const mixed=new Set(stops.map(s=>s.color)).size>1;
+      const icon=L.divIcon({className:'overview-stop-icon',html:`<span class="map-marker map-marker-code" style="--marker-color:${mixed?'#385d60':first.color}">${escape(label)}</span>`,iconSize:[width,30],iconAnchor:[width/2,15]});
+      const popup=stops.map(s=>`<div class="map-popup-stop"><strong><span style="color:${s.color}">${escape(s.code)}</span> · ${escape(s.place.name)}</strong><br>${escape(s.prefix)} · ${escape(s.time)}${s.place.approx?' · 位置為附近參考':''}<br><a href="${escape(mapSearch(s.place))}" target="_blank" rel="noopener noreferrer">查看地圖 ↗</a></div>`).join('');
+      L.marker(map.containerPointToLatLng(group.point),{icon,keyboard:true,title:stops.length>1?`本區 ${stops.length} 個行程點，放大可分開`:`${first.code} ${first.place.name}`}).bindPopup(popup,{maxHeight:200,maxWidth:260}).addTo(overviewMarkerLayer);
     });
   }
   function fitCurrentRoute() {
@@ -267,7 +369,7 @@
     const day=days.find(d=>d.index===state.day);
     const current=day && getCurrent(day);
     document.querySelector('#map-title').textContent=day ? `${day.date} ${day.index===3?(state.group==='jiawei'?'家偉・名古屋':'西瓜・柏祥・京都'):'當日路線'}` : '六天路線總覽';
-    document.querySelector('#map-intro').textContent=day ? current.summary : '顏色與編號對應下方日期和主要區域，點選即可查看當天路線。';
+    document.querySelector('#map-intro').textContent=day ? current.summary : '地圖標記對應各站編號；相近景點會合併，放大地圖可分開查看。下方完整列出每天所有行程。';
     const allRoutes=days.flatMap(d=>d.index===3?[routeEntry(d,'friends'),routeEntry(d,'jiawei')]:[routeEntry(d)]);
     const chosen=day ? [routeEntry(day,state.group)] : allRoutes;
     mapDays.hidden=!!day;
@@ -276,19 +378,20 @@
     legend.innerHTML='<span class="legend-item"><span class="route-key"></span>道路參考</span><span class="legend-item"><span class="route-key dashed"></span>大眾運輸／待確認</span>';
     if(day) stopBar.style.setProperty('--route-color',chosen[0].color);
     stopBar.hidden=!day;
-    stopBar.innerHTML=day ? current.stops.map((s,i)=>`<button class="map-stop" data-map-stop="${i+1}" type="button" aria-label="查看第 ${i+1} 站 ${escape(places[s.place].name)}"><span>${i+1}</span>${escape(places[s.place].name)}</button>`).join('') : '';
+    stopBar.innerHTML=day ? current.stops.map((s,i)=>`<button class="map-stop" data-map-stop="${i+1}" type="button" aria-label="查看 ${escape(stopCode(day,state.group,i))} ${escape(places[s.place].name)}"><span>${escape(stopCode(day,state.group,i))}</span>${escape(places[s.place].name)}</button>`).join('') : '';
     const missing=document.querySelector('#map-missing');
     const missingNames = day ? [...new Set(current.stops.filter(s=>!places[s.place].coord).map(s=>places[s.place].name))] : [];
     missing.hidden=!missingNames.length;
     missing.textContent=missingNames.length ? `尚未確認位置，未標在地圖上：${missingNames.join('、')}。可由下方「景點位置」查詢。` : '';
     if (!map) return;
-    mapLayer.clearLayers(); const points=[],markers=new Map();
+    mapLayer.clearLayers(); overviewMarkerLayer.clearLayers(); const points=[],markers=new Map();
     chosen.forEach(x=>drawRoute(x,points,markers,!day));
-    if(day) drawMarkers(markers,chosen[0].color);
-    else drawOverviewBadges(chosen);
     currentMapPoints=points;
+    overviewStops=day?new Map():markers;
     map.invalidateSize({pan:false});
     fitCurrentRoute();
+    if(day) drawMarkers(markers,chosen[0].color);
+    else redrawOverviewMarkers();
   }
   function render() {renderNav(); state.day ? renderDay(days[state.day-1]) : renderOverview(); renderMap();}
   function selectDay(number) {state.day=number;render();}
@@ -304,7 +407,7 @@
   groupControl.addEventListener('click', e=>{const b=e.target.closest('[data-group]');if(b){state.group=b.dataset.group;render();}});
   mapDays.addEventListener('click', e=>{const b=e.target.closest('[data-map-day]');if(b) selectRoute(Number(b.dataset.mapDay),b.dataset.mapGroup);});
   stopBar.addEventListener('click', e=>{const b=e.target.closest('[data-map-stop]');if(!b||!map)return;const marker=markerRefs.get(Number(b.dataset.mapStop));if(marker){map.setView(marker.getLatLng(),Math.max(map.getZoom(),13));marker.openPopup();}});
-  itinerary.addEventListener('click', e=>{const b=e.target.closest('[data-open-day]');if(b){selectDay(Number(b.dataset.openDay));scrollBelowNav(groupControl.hidden?workspace:groupControl);}});
+  itinerary.addEventListener('click', e=>{const b=e.target.closest('[data-open-day]');if(b){const day=Number(b.dataset.openDay);if(day===3)state.group=b.dataset.openGroup||'friends';selectDay(day);scrollBelowNav(groupControl.hidden?workspace:groupControl);}});
   itinerary.addEventListener('input', e=>{
     if (e.target.id !== 'dealer-search') return;
     const query=e.target.value.trim().toLocaleLowerCase();

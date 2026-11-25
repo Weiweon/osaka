@@ -8,16 +8,17 @@
   <title>京阪・名古屋旅行手冊 | 2026.12.04—12.09</title>
   <link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css">
   <link rel="stylesheet" href="assets/vendor/maplibre/maplibre-gl.css">
-  <link rel="stylesheet" href="assets/style.css?v=20261124b">
+  <link rel="stylesheet" href="assets/style.css?v=20261125h">
   <script src="assets/vendor/leaflet/leaflet.js" defer></script>
   <script src="assets/vendor/maplibre/maplibre-gl.js" defer></script>
   <script src="assets/vendor/maplibre/leaflet-maplibre-gl.js" defer></script>
   <script src="assets/dealers.js?v=20261124" defer></script>
-  <script src="assets/itinerary.js?v=20261124" defer></script>
-  <script src="assets/transport.js?v=20261124" defer></script>
-  <script src="assets/photos.js?v=20261124" defer></script>
-  <script src="assets/routes.js?v=20261124" defer></script>
-  <script src="assets/app.js?v=20261124b" defer></script>
+  <script src="assets/itinerary.js?v=20261125i" defer></script>
+  <script src="assets/transport.js?v=20261125i" defer></script>
+  <script src="assets/photos.js?v=20261125i" defer></script>
+  <script src="assets/routes.js?v=20261125" defer></script>
+  <script src="assets/routes-extra.js?v=20261125g" defer></script>
+  <script src="assets/app.js?v=20261125i" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">跳到行程內容</a>
@@ -45,7 +46,7 @@
   </div></div>
 
   <main class="wrap main" id="main">
-    <div class="section-heading intro-heading"><div><div class="kicker">YOUR TRIP AT A GLANCE</div><h2>這趟旅程，從這裡開始。</h2><p>選擇總覽或日期，地圖與行程會一起切換。</p></div><span class="heading-note">大阪 · 京都 · 名古屋</span></div>
+    <div class="section-heading intro-heading"><div><div class="kicker">YOUR TRIP AT A GLANCE</div><h2>這趟旅程，從這裡開始。</h2><p>總覽可直接看全部行程，也可以選擇日期查看當天路線。</p></div><span class="heading-note">大阪 · 京都 · 名古屋</span></div>
     <nav id="day-nav" class="day-nav" aria-label="選擇行程日期"></nav>
     <div id="group-control" class="group-control" hidden></div>
     <div class="workspace">
@@ -58,7 +59,7 @@
         <div id="map-days" class="map-days" aria-label="各日路線與區域" hidden></div>
         <div id="map-legend" class="map-legend"></div>
         <p id="map-missing" class="map-missing" hidden></p>
-        <p class="map-caption">實線是開車或步行道路參考；虛線表示大眾運輸、接駁或交通方式待確認的路段，僅顯示移動順序。實際路線請以導航及當日班次為準。</p>
+        <p class="map-caption">相近標記會合併，點選可看全部編號，放大地圖可分開。實線為道路參考；虛線為大眾運輸或待確認路段示意，實際路線請以導航及當日班次為準。</p>
       </section>
       <section id="itinerary" class="itinerary" aria-live="polite"></section>
     </div>
@@ -67,7 +68,7 @@
       <div class="section-heading"><div><div class="kicker">BEFORE YOU GO</div><h2 id="practical-title">旅程資訊</h2><p>航班、住宿與租車重點，出發前再核對一次。</p></div></div>
       <div class="practical-grid">
         <article class="info-card"><span class="info-icon">✈</span><h3>航班與報到</h3><p><strong>12/4 IT284</strong><br>高雄 06:55 → 關西 10:45</p><p><strong>12/9 IT285</strong><br>關西 11:30 → 高雄 14:15</p><p class="muted">原手冊提醒：去程 04:25 前到機場；回程 08:30 前到關西機場第一航廈。請再核對航空公司最新規定。</p></article>
-        <article class="info-card"><span class="info-icon">⌂</span><h3>五晚住宿</h3><ul class="stay-list"><li><b>12/4</b><span>大阪 BAKURO - DOYANEN HOTELS<br><a href="BAKURO%20DOYANEN%20HOTELS.jpg" target="_blank" rel="noopener">查看預訂截圖</a></span></li><li><b>12/5–8</b><span>京都 Shiki Homes Ikkō 一耕の宿 8<br><a href="1205-1208%EF%BD%9CShiki%20Homes%20Ikk%C5%8D%20%E4%B8%80%E8%80%95%E3%81%AE%E5%AE%BF%208.jpg" target="_blank" rel="noopener">查看預訂截圖</a></span></li><li><b>12/8</b><span>OMO5 關西機場<br><a href="1208%EF%BD%9COMO%E6%98%9F%E9%87%8E%E9%A3%AF%E5%BA%97.jpg" target="_blank" rel="noopener">查看預訂截圖</a></span></li></ul></article>
+        <article class="info-card"><span class="info-icon">⌂</span><h3>五晚住宿</h3><ul class="stay-list"><li><b>12/4</b><span>大阪 BAKURO - DOYANEN HOTELS<br><a href="https://www.doyanen.jp/bakuro" target="_blank" rel="noopener">查看住宿官網</a></span></li><li><b>12/5–7</b><span>京都 Shiki Homes Ikkō 一耕の宿 8（12/8 退房）<br><a href="https://shikiproperties.com/kyoto/ikko-8/" target="_blank" rel="noopener">查看住宿官網</a></span></li><li><b>12/8</b><span>OMO5 關西機場<br><a href="https://hoshinoresorts.com/ja/hotels/omokansaiairport/" target="_blank" rel="noopener">查看住宿官網</a></span></li></ul></article>
         <article class="info-card"><span class="info-icon">⌁</span><h3>租車與行前</h3><p>原手冊規劃 12/4 13:00 取車、12/8 17:00 同店還車，請依實際訂單核對。</p><p>台灣駕照正本、合格日文譯本及護照；前往伊根請確認冬胎、天氣與道路狀況。</p><a class="text-link" href="osaka.html" target="_blank" rel="noopener">開啟原版手冊，查看完整說明 ↗</a></article>
       </div>
     </section>

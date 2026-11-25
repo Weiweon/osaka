@@ -44,3 +44,45 @@
 .map-panel{top:calc(var(--day-nav-h,96px) + 8px)}
 @media(min-width:901px){.map{height:clamp(300px,calc(100dvh - var(--day-nav-h,96px) - 310px),440px)}}
 .practical{scroll-margin-top:var(--day-nav-h,96px)}
+/* 總覽直接展開各日行程；編號同時對應地圖與單日頁。 */
+.overview-full{gap:18px}.overview-route{min-width:0;padding:22px 23px;background:#fff;border:1px solid #e3ebe5;border-left:4px solid var(--route-color);border-radius:18px;box-shadow:var(--shadow)}
+.overview-index{margin:0 0 20px;padding:20px 22px;background:#fff;border:1px solid #e3ebe5;border-radius:18px;box-shadow:var(--shadow)}.overview-index h3{font-size:1rem;margin:0 0 5px}.overview-index>p{font-size:.78rem;line-height:1.6;color:#6a817b;margin:0 0 15px}
+.overview-index-row{padding:11px 0;border-top:1px solid #eaf0ec}.overview-index-row>strong{display:block;margin-bottom:8px;color:var(--route-color);font-size:.88rem}.overview-index-stops{display:flex;flex-wrap:wrap;gap:6px 8px}.overview-index-link{display:inline-flex;align-items:center;gap:5px;max-width:100%;padding:4px 7px 4px 4px;border:1px solid #e1eae5;border-radius:8px;background:#f9fbf9;color:#33564e;text-decoration:none;font-size:.84rem;line-height:1.35}.overview-index-link b{flex:none;padding:3px 5px;border-radius:5px;background:var(--route-color);color:#fff;font-size:.75rem}.overview-index-link span{overflow-wrap:anywhere}.overview-index-link:hover{border-color:var(--route-color)}
+.overview-timing-note{margin:0 0 18px}.timeline-item{scroll-margin-top:calc(var(--day-nav-h,96px) + 14px)}
+.overview-route-header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:18px}.overview-route-header h3{font-size:1.12rem;line-height:1.45;margin:5px 0}.overview-route-header p{font-size:.84rem;line-height:1.5;color:#687f79;margin:0}.overview-route-date{font-size:.74rem;font-weight:800;color:var(--route-color)}
+.overview-open-day{flex:none;padding:8px 10px;border:1px solid #d9e5df;border-radius:8px;background:#fff;color:#365c50;font-size:.78rem;font-weight:700;cursor:pointer}.overview-open-day:hover{border-color:var(--route-color)}
+.overview-event{border-top:1px solid #e4ede7;padding-top:14px}.overview-event>summary{cursor:pointer;font-size:.9rem;font-weight:800;color:#315d50}.overview-event .event-card{box-shadow:none}
+.timeline-item{grid-template-columns:48px minmax(0,1fr);column-gap:12px}.timeline-item:not(:last-child):before{left:23px;top:28px}.timeline-number{width:48px;height:28px;padding:0 3px;border-radius:15px;font-size:.7rem;white-space:nowrap}
+.time-label{font-size:.7rem;font-weight:700;color:#668077}.calculated-time{margin:7px 0 0;color:#9a512e;font-size:.78rem;line-height:1.5;font-weight:700}
+.transport-segments{display:grid;gap:7px;margin-top:10px}.transport-segment{display:flex;align-items:center;gap:7px;color:#236c68;font-size:.78rem;font-weight:700;line-height:1.45}.transport-segment .transport-icon{width:17px;height:17px}
+.map-marker-code{width:100%;height:30px;padding:0 5px;border-radius:16px;white-space:nowrap;font-size:11px}.map-stop span{width:auto;min-width:34px;flex:0 0 auto;padding:0 5px;font-size:.68rem}.map-popup-stop strong{overflow-wrap:anywhere}
+@media(max-width:600px){.overview-route{padding:18px 15px}.overview-route-header{gap:8px}.overview-open-day{font-size:.72rem;padding:7px 8px}.timeline-item{grid-template-columns:43px minmax(0,1fr);column-gap:9px}.timeline-item:not(:last-child):before{left:21px}.timeline-number{width:43px;font-size:.66rem}}
+
+/* 12/5 阪神競馬的入場、賽程與現場購票說明。 */
+.race-guide{min-width:0;margin:18px 0;padding:18px;border:1px solid #cbded4;border-radius:14px;background:#f3f8f4;color:#294e42}
+.race-guide-head h4{font-size:1.1rem;line-height:1.45;margin:8px 0 4px}
+.race-guide-head p,.race-copy,.race-source{font-size:.84rem;line-height:1.7;margin:8px 0;color:#506b60}
+.race-tag{display:inline-block;background:#d7eadc;color:#286c4d;font-size:.7rem;font-weight:800;letter-spacing:.08em;border-radius:5px;padding:5px 8px}
+.race-guide h5{font-size:.95rem;margin:20px 0 8px;color:#244b3b}
+.race-facts,.race-options,.race-steps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.race-facts{margin:14px 0}
+.race-facts>div,.race-options>div,.race-steps>div{min-width:0;background:#fff;border:1px solid #dce9df;border-radius:10px;padding:11px}
+.race-facts small,.race-facts strong,.race-facts span,.race-options b,.race-options strong,.race-options span{display:block;line-height:1.5}
+.race-facts small,.race-options b{font-size:.73rem;color:#658676;font-weight:700}
+.race-facts strong,.race-options strong{font-size:.9rem;margin:3px 0}
+.race-facts span,.race-options span{font-size:.76rem;color:#617c6f}
+.race-morning ol{list-style:none;padding:0;margin:0;display:grid;gap:7px}
+.race-morning li{display:grid;grid-template-columns:104px minmax(0,1fr);gap:6px;font-size:.82rem;line-height:1.55}
+.race-morning b{color:#28765a;white-space:nowrap}
+.race-options{margin:15px 0 8px}
+.race-caution{font-size:.82rem;line-height:1.65;padding:10px;border-left:3px solid #d58b5e;background:#fff4e9;color:#815438}
+.race-alternative{padding:12px;margin:14px 0;background:#fff;border:1px solid #dce9df;border-radius:10px}.race-alternative h5{margin:0 0 8px}.race-alternative p{font-size:.8rem;line-height:1.7;color:#506b60;margin:8px 0}.race-alternative strong{color:#a15c38}
+.race-table-wrap{max-width:100%;overflow-x:auto;border:1px solid #d5e5db;border-radius:9px;background:white}
+.race-table{border-collapse:collapse;width:100%;min-width:320px;text-align:left;font-size:.78rem;line-height:1.5}
+.race-table th,.race-table td{padding:7px 9px;border-bottom:1px solid #e5eee8;vertical-align:top}
+.race-table thead{background:#e5f2e9}.race-table tbody tr:last-child>*{border-bottom:0}.race-table tbody th{color:#2c7356;white-space:nowrap}.race-table td:nth-child(2){white-space:nowrap}
+.race-steps>div>span{display:block;font-size:1.4rem;margin-bottom:6px}.race-steps strong{display:block;font-size:.86rem}.race-steps p{font-size:.79rem;line-height:1.65;color:#5a7567;margin:6px 0 0}
+.ticket-example{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;background:#fff;border:1px dashed #ce9b73;border-left:5px solid #cd8056;padding:13px;margin-top:13px;border-radius:7px}
+.ticket-example small,.ticket-example strong{display:block}.ticket-example small{font-size:.7rem;color:#936e56}.ticket-example strong{font-size:.95rem;margin-top:4px}.ticket-example>div+div{display:flex;align-items:baseline;gap:7px}.ticket-example span{font-size:.72rem;color:#8a7565}.ticket-example b{font-size:1rem;color:#a45737}
+.race-links{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.race-links a{font-size:.76rem}
+@media(max-width:600px){.race-guide{position:relative;width:calc(100% + 52px);margin-left:-52px;padding:13px}.race-facts,.race-options,.race-steps{grid-template-columns:1fr}.race-morning li{grid-template-columns:1fr;gap:0}.race-table{min-width:0;table-layout:fixed}.race-table th:first-child{width:3.1rem}.race-table th:nth-child(2){width:4rem}.race-table th,.race-table td{padding:7px 5px}}

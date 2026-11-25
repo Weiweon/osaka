@@ -50,6 +50,24 @@ window.TRIP_PHOTOS = {
     "author": "千日前道具屋筋商店街",
     "source": "https://www.doguyasuji.or.jp/zh/shop/nextshikaku/"
   },
+  "tobita": {
+    "src": "assets/places/tobita.jpg",
+    "caption": "飛田新地街景（2009 年資料照）",
+    "alt": "大阪飛田新地的歷年街景",
+    "author": "Kamagasaki450",
+    "license": "CC BY-SA 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Tobitashinchi20090101_0940.jpg",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/"
+  },
+  "hanshin": {
+    "src": "assets/places/hanshin-paddock.jpg",
+    "caption": "阪神競馬場展示圈（2013 年資料照）",
+    "alt": "阪神競馬場歷年賽馬展示圈，照片中的馬匹與本次參賽馬無關",
+    "author": "Ogiyoshisan",
+    "license": "CC BY-SA 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Lord_Kanaloa_Hankyuhai_Paddock_IMG_1276-2_20130224.JPG",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/"
+  },
   "lawson": {
     "src": "assets/places/lawson.jpg",
     "caption": "丹後由良站周邊，非店面實拍",
@@ -253,43 +271,34 @@ window.TRIP_PHOTOS = {
     "source": "https://commons.wikimedia.org/wiki/File:Nagoya_Trade_%26_Industry_Center_ac.jpg",
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
   },
+  "shorinji": {
+    "src": "assets/places/shorinji.jpg",
+    "caption": "勝林寺花手水（2022 年資料照；花況隨季節變化）",
+    "alt": "京都勝林寺花手水，水面鋪滿鮮花",
+    "author": "Skate-song",
+    "license": "CC0",
+    "source": "https://commons.wikimedia.org/wiki/File:%E6%AF%98%E6%B2%99%E9%96%80%E5%A0%82_%E5%8B%9D%E6%9E%97%E5%AF%BA.jpeg",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+  },
   "bakuro": {
-    "src": "BAKURO DOYANEN HOTELS.jpg",
-    "caption": "訂房資料中的飯店房型照片",
-    "alt": "DOYANEN HOTELS BAKURO 訂房資料中的房型照片",
-    "crop": {
-      "x": 17,
-      "y": 28,
-      "w": 154,
-      "h": 108,
-      "width": 952,
-      "height": 597
-    }
+    "src": "assets/places/bakuro-official.jpg",
+    "caption": "DOYANEN HOTELS BAKURO 外觀",
+    "alt": "DOYANEN HOTELS BAKURO 建築外觀",
+    "author": "飯店官方網站",
+    "source": "https://www.doyanen.jp/bakuro"
   },
   "ikko": {
-    "src": "1205-1208｜Shiki Homes Ikkō 一耕の宿 8.jpg",
-    "caption": "訂房資料中的住宿照片",
-    "alt": "Ikkō 一耕の宿訂房資料中的住宿照片",
-    "crop": {
-      "x": 90,
-      "y": 111,
-      "w": 118,
-      "h": 80,
-      "width": 855,
-      "height": 677
-    }
+    "src": "assets/places/ikko-official.webp",
+    "caption": "Ikkō 8 住宿外觀",
+    "alt": "Shiki Homes Ikkō 8 住宿門口",
+    "author": "住宿官方網站",
+    "source": "https://shikiproperties.com/kyoto/ikko-8/"
   },
   "omo": {
-    "src": "1208｜OMO星野飯店.jpg",
-    "caption": "訂房資料中的飯店房型照片",
-    "alt": "OMO 關西機場訂房資料中的房型照片",
-    "crop": {
-      "x": 670,
-      "y": 183,
-      "w": 161,
-      "h": 120,
-      "width": 2048,
-      "height": 1049
-    }
+    "src": "assets/places/omo-official.jpg",
+    "caption": "OMO5 關西機場官方房型示意",
+    "alt": "OMO5 關西機場雙床房示意",
+    "author": "飯店官方網站",
+    "source": "https://hoshinoresorts.com/ja/hotels/omokansaiairport/"
   }
 };
