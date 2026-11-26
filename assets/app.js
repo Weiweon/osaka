@@ -9,6 +9,7 @@
   const returnNotes = window.TRIP_RETURN_NOTES || {};
   const dayGuides = window.TRIP_DAY_GUIDES || {};
   const roads = window.TRIP_ROUTES || {};
+  const schedule = window.TRIP_SCHEDULE;
   const state = { day: 0, group: 'friends' };
   // 色彩只用於辨認路線；地點、順序與時間仍以行程資料為準。
   const routeStyles = {
@@ -69,7 +70,7 @@
         return `<article class="overview-route" style="--route-color:${routeStyle(day,group).color}"><header class="overview-route-header"><div><span class="overview-route-date">DAY ${day.index} · ${day.date} 週${day.weekday}</span><h3>${escape(heading)}</h3><p>${escape(route.summary)}</p></div><button class="overview-open-day" data-open-day="${day.index}" data-open-group="${group}" type="button">查看單日</button></header>${renderNotes(route.notes)}${guide}<ol class="timeline">${renderStops(route,isAlternate)}</ol>${event}</article>`;
       });
     }).join('');
-    itinerary.innerHTML = `<div class="day-banner"><div><div class="kicker">SIX DAYS TO REMEMBER</div><h2>六天行程總覽</h2><p>所有景點、住宿與每段交通都在下方；編號如 1-1 代表第 1 天的第 1 站。</p></div><span class="date-pill">6 DAYS</span></div><div class="note info">12/6 的 <strong>3京</strong> 是西瓜・柏祥，<strong>3名</strong> 是家偉。原列時間與新增的住宿銜接分開標示。</div><section class="overview-index" aria-label="全部行程停靠點"><h3>每天的所有停靠點</h3><p>點編號可直接跳到該站細節；不需切換日期也能往下看完整行程。</p>${index}</section><p class="timeline-mode-note overview-timing-note">交通時間為 Google 地圖於 ${escape(window.TRIP_TRANSPORT_CHECKED || '2026/11/25')} 查詢的快照，並非即時結果。推算時間依原列各站停留 1 小時；12/5 另假設看兩場後 10:35 從賽馬場開車離場。不含停車、取車、候車或排隊；可點各段連結查看當日路況。</p><div class="overview-list overview-full">${cards}</div>`;
+    itinerary.innerHTML = `<div class="day-banner"><div><div class="kicker">SIX DAYS TO REMEMBER</div><h2>六天行程總覽</h2><p>所有景點、住宿與每段交通都在下方；編號如 1-1 代表第 1 天的第 1 站。</p></div><span class="date-pill">6 DAYS</span></div><div class="note info">12/6 的 <strong>3京</strong> 是西瓜・柏祥，<strong>3名</strong> 是家偉。各站以新推算的抵達時間與停留時間顯示。</div><section class="overview-index" aria-label="全部行程停靠點"><h3>每天的所有停靠點</h3><p>點編號可直接跳到該站細節；不需切換日期也能往下看完整行程。</p>${index}</section><p class="timeline-mode-note overview-timing-note">一般行程點停留 1 小時；伏見稻荷、清水寺及貴船神社各 2 小時，12/8 行程點各 3 小時，賽馬安排看到第 3 場。住宿出發／終點、轉乘及取車銜接依各站標示，不另視為遊玩停留。交通依 ${escape(window.TRIP_TRANSPORT_CHECKED || '2026/11/25')} 的 Google 地圖快照及標示的吊椅時間估算，非即時或當日預測；除已標示的緩衝外，停車、候車、排隊和休息另計。</p><div class="overview-list overview-full">${cards}</div>`;
   }
   function renderNotes(notes) {
     return notes.map(n => `<div class="note ${escape(n.type)}">${escape(n.text)}</div>`).join('');
@@ -127,10 +128,10 @@
       <div class="race-guide-head"><span class="race-tag">12/05 SAT · HANSHIN</span><h4>第一次看賽馬：先看馬，再看比賽</h4><p>以下時間均為日本時間；活動及發跑安排可能變動。</p></div>
       <div class="race-facts"><div><small>一般入場</small><strong>免費入場日</strong><span>當日可現場入場；指定席另計</span></div><div><small>停車費</small><strong>車輛 2,000 日圓</strong><span>JRA 直營停車場・開催日參考</span></div></div>
       <p class="race-copy">JRA 公告 12/5 為「フリーパスの日」，一般入場免費；第 5 回阪神也有不需事前預約的當日入場方式。入場時依入口指示辦理；如需指定席，請先查預約與費用。停車場是否有位、開放時間及當日入場細節出發前再查。</p>
-      <div class="race-morning"><h5>建議早上的節奏</h5><ol><li><b>07:55–08:00</b><span>從 BAKURO 退房取車出發；開車約 44 分鐘，再預留停車及步行。</span></li><li><b>08:45–09:00</b><span>希望抵達停車場附近；開門時間尚須以當日公告為準，可能需要等候。</span></li><li><b>約 09:20</b><span>找「パドック」展示圈看 1R 馬匹；馬一般約在發跑前 30 分鐘進展示圈，實際以現場為準。</span></li><li><b>09:50／10:20</b><span>看 1R；若續看 2R，可在第一場後盡快回展示圈，可能錯過 2R 展示的開頭。</span></li></ol></div>
-      <div class="race-options"><div><b>只看 1 場</b><strong>假設 10:05 開車離場</strong><span>約 11:55 抵達宮津 Lawson</span></div><div><b>看 2 場</b><strong>假設 10:35 開車離場</strong><span>約 12:25 抵達宮津 Lawson</span></div></div>
-      <p class="race-caution">離場時間是規劃假設，已預留少量步行取車時間；實際車流、排隊與休息另計。無論選哪個方案，原本的 08:00 便利商店與 14:45 前舟屋食堂午餐都無法照原停留時間銜接。</p>
-      <div class="race-alternative"><h5>備案：午餐優先，再回天橋立</h5><p>以下是看兩場後調整順序的參考，原本行程點仍保留。假設約 12:25 到 Lawson、停留 10–15 分，再開車約 56 分到舟屋食堂，順利的話約 <strong>13:31–13:36</strong> 抵達，可望趕在 14:45 午餐最後點餐前用餐。</p><p>約 14:20 用完餐後，短逛伊根舟屋與 INE CAFE，約 15:20–15:30 取車離開；開車約 38 分回天橋立山麓站，理想狀況約 15:58–16:08 抵達，接著遊覽天橋立及智恩寺。另計停車、走回車位、上山等候及實際營業時間。</p><p><strong>上山時間很緊：</strong>官方冬季售票至 16:30；單軌上山末班 16:20、吊椅上山末班 16:30。以上是假設行程，不保證趕得上；若遇塞車或等候，需再縮短停留或調整景點。智恩寺預計較晚到，請先確認開放時間；結束後回停車處取車，自智恩寺開回京都住宿約 1 小時 48 分，另計步行及路況。</p><div class="race-links">${link(mapRoute(places.lawson,places.funaya,'driving'),'Lawson 到舟屋食堂')}${link(mapRoute(places.inecafe,places.viewlandBase,'driving'),'伊根返回天橋立山麓')}${link(mapRoute(places.chion,places.ikko,'driving'),'智恩寺返回京都住宿')}${link('https://www.viewland.jp/','天橋立官方營業時間')}</div></div>
+      <div class="race-morning"><h5>建議早上的節奏</h5><ol><li><b>07:55</b><span>從 BAKURO 退房取車出發；開車約 44 分鐘，停車及步行另預留時間。</span></li><li><b>約 08:39</b><span>估計抵達賽馬場附近；開門、停車及入場時間以當日公告和現場為準。</span></li><li><b>約 09:20</b><span>到「パドック」展示圈看 1R 馬匹；馬一般約在發跑前 30 分鐘進展示圈，實際以現場為準。</span></li><li><b>09:50／10:20／10:50</b><span>依目前資料看第 1、2、3 場；發跑與展示圈時間請再核對 JRA 公告。</span></li><li><b>約 11:10</b><span>假設看完第 3 場、步行回停車場後開車離開；若離場塞車會再延後。</span></li></ol></div>
+      <div class="race-options"><div><b>看到第 3 場</b><strong>假設 11:10 開車離場</strong><span>約 13:00 抵達宮津 Lawson</span></div></div>
+      <p class="race-caution">離場時間是規劃假設，實際賽事、走回車位、排隊與車流可能不同。照原順序每站停 1 小時，INE CAFE 與舟屋食堂都會在關門後才到達。</p>
+      <div class="race-alternative"><h5>營業時間衝突</h5><p>依伊根町觀光協會資料，INE CAFE <strong>17:00 關門、16:30 最後點餐</strong>；本方案預計 17:19 到。舟屋食堂 <strong>16:00 關門、午餐 14:45 最後點餐</strong>；本方案預計 19:27 到。要在兩家用餐需重新安排順序或停留時間。</p><p>天橋立冬季吊椅上山末班 16:30、下山末班 16:50；單軌上山末班 16:20。排隊、停車或天候變動都可能影響時間。</p><div class="race-links">${link('https://www.ine-kankou.jp/taste/ine-cafe','INE CAFE 營業資訊')}${link('https://www.ine-kankou.jp/taste/funayasyokudou','舟屋食堂營業資訊')}${link('https://www.viewland.jp/lift_mono/','天橋立吊椅與單軌資訊')}</div></div>
       <h5>當日場次參考</h5><p class="race-copy">預定 12 場；已查得的發跑時間如下。未逐場核實不代表尚未公布，請點 JRA 查看完整最新賽程及出馬表。早上離場<strong>看不到下午的鳴尾記念</strong>。</p>
       <div class="race-table-wrap"><table class="race-table"><thead><tr><th scope="col">場次</th><th scope="col">發跑</th><th scope="col">賽事／賽道</th></tr></thead><tbody>${races.map(r=>`<tr><th scope="row">${escape(r[0])}</th><td>${escape(r[1])}</td><td>${escape(r[2])}</td></tr>`).join('')}</tbody></table></div>
       <p class="race-source">資料查核至 2026/11/25；JRA 預定賽程可能調整，正式出馬表通常於賽事週四 16:00 左右公布，馬號、騎師、賠率及截止時間請以當日顯示為準。</p>
@@ -140,33 +141,27 @@
       <div class="race-links">${link('https://www.jra.go.jp/keiba/calendar2026/2026/12/1205.html','JRA 當日完整預定賽程')}${link('https://sports.yahoo.co.jp/keiba/schedule/yearly?year=2026&type=p9','Yahoo 阪神賽程')}${link('https://www.jra.go.jp/facilities/race/hanshin/news/nyujou.html','JRA 阪神入場方式')}${link('https://www.jra.go.jp/facilities/race/hanshin/access/index.html','JRA 停車與交通')}${link('https://www.jra.go.jp/facilities/race/hanshin/rcmap/','JRA 場內地圖')}${link('https://jra-fun.jp/event/hanshin/202605/','JRA 活動與免費日')}</div>
     </section>`;
   }
-  function calculatedArrivals(day, isAlternate) {
-    const arrivals=Array(day.stops.length).fill(null);
-    if(isAlternate) return arrivals;
-    let expected=null;
-    day.stops.forEach((s,i)=>{
-      const toMinutes = value => { const match=/^(\d{2}):(\d{2})$/.exec(value || ''); return match?Number(match[1])*60+Number(match[2]):null; };
-      const original=toMinutes(s.time);
-      if(original!==null && expected!==null && expected>original+4) arrivals[i]=expected;
-      const arrival=original===null?expected:Math.max(original,expected??original);
-      const leg=getLeg(day,'friends',i);
-      const proposed=toMinutes(s.departureTime);
-      const departure=proposed!==null ? Math.max(proposed,arrival??proposed) : arrival!==null ? arrival+(s.stayMinutes??(s.stay?60:0)) : null;
-      expected=departure!==null && leg && Number.isFinite(leg.minutes) ? departure+leg.minutes : null;
-    });
-    return arrivals;
+  function stopTiming(day, item) {
+    const time=value=>schedule.format(day,value);
+    if(item.role==='start') return '出發時間為規劃起點；準備及當日交通請預留緩衝。';
+    if(item.role==='end') return '行程終點；住宿、報到及休息依實際情況安排。';
+    if(item.role==='race') return `觀賞至第 3 場 · 預計 ${time(item.departure)} 取車出發`;
+    if(item.role==='transfer') return item.stay ? `預留轉乘 ${item.stay} 分鐘；實際候車依班次` : '轉乘銜接；實際候車依班次';
+    if(item.role==='pickup') return `回住宿附近取車 · 預留 ${item.stay} 分鐘`;
+    const duration=item.stay%60===0?`${item.stay/60} 小時`:`${item.stay} 分鐘`;
+    const waiting=item.wait?` · 抵達後等候至 ${time(item.begin)}`:'';
+    return `停留 ${duration} · ${time(item.begin)}–${time(item.departure)}${waiting}`;
   }
-  const formatMinutes = value => `${String(Math.floor(value/60)%24).padStart(2,'0')}:${String(value%60).padStart(2,'0')}`;
   const googleMode = mode => mode==='walk'?'walking':mode==='car'?'driving':'transit';
   function renderStops(day, isAlternate) {
     const group=isAlternate?'jiawei':'friends';
-    const arrivals=calculatedArrivals(day,isAlternate);
+    const times=schedule.calculate(day,group);
     return day.stops.map((s,i) => {
       const p = places[s.place];
       const nextStop = day.stops[i+1];
       const next = nextStop && places[nextStop.place];
       const tripLeg=next && getLeg(day,group,i);
-      const timeLabel=s.timeLabel || (day.index===5 && s.stay ? '去趣原列・待調整' : '');
+      const timing=times[i], timeLabel=timing.first==='departure'?'預計出發':'預計抵達';
       let route='';
       if(tripLeg?.segments?.length) {
         route=`<div class="transport-segments">${tripLeg.segments.map(segment=>`<a class="transport-segment" href="${escape(mapRoute(places[segment.from],places[segment.to],googleMode(segment.mode)))}" target="_blank" rel="noopener noreferrer">${transportIcon(segment.mode)}<span>${escape(segment.duration)} · Google 地圖</span></a>`).join('')}</div>`;
@@ -174,8 +169,7 @@
         route=`<a class="stop-link" href="${escape(mapRoute(p,next,googleMode(tripLeg?.mode)))}" target="_blank" rel="noopener noreferrer">查看 Google 地圖當日路線 ↗</a>`;
       }
       const legMarkup=tripLeg?`<div class="transport-leg"><div class="transport-leg-head"><span class="transport-mode">${transportIcon(tripLeg.mode)}<strong>${escape(tripLeg.label)}</strong></span><span class="transport-time">${escape(tripLeg.duration)}</span></div>${tripLeg.note?`<p>${escape(tripLeg.note)}</p>`:''}${route}</div>`:'';
-      const revised=arrivals[i]!==null?`<p class="calculated-time">${day.index===2?'兩場方案：假設 10:35 開車離場，':'依原停留時間與交通推算，'}約 ${formatMinutes(arrivals[i])} 抵達（未計額外緩衝）</p>`:'';
-      return `<li class="timeline-item" id="stop-${escape(stopCode(day,group,i))}"><span class="timeline-number">${escape(stopCode(day,group,i))}</span><div class="stop-body"><div class="stop-info-grid"><div class="stop-details"><div class="stop-top"><span class="stop-time">${escape(s.time)}</span>${timeLabel?`<span class="time-label">${escape(timeLabel)}</span>`:''}<span class="stop-name">${escape(p.name)}</span></div>${s.stay ? `<p class="stop-meta">${escape(s.stay)} · ${escape(s.stayLabel || '去趣原列')}</p>` : ''}${revised}${s.note ? `<p class="stop-note">${escape(s.note)}</p>` : ''}<a class="stop-link" href="${escape(mapSearch(p))}" target="_blank" rel="noopener noreferrer">景點位置 ↗</a>${p.website ? ` · <a class="stop-link" href="${escape(p.website)}" target="_blank" rel="noopener noreferrer">營業資訊 ↗</a>` : ''}</div>${renderPhoto(s.place)}</div>${s.pickup ? renderSimPickup() : ''}${s.raceInfo ? renderRaceGuide() : ''}${legMarkup}</div></li>`;
+      return `<li class="timeline-item" id="stop-${escape(stopCode(day,group,i))}"><span class="timeline-number">${escape(stopCode(day,group,i))}</span><div class="stop-body"><div class="stop-info-grid"><div class="stop-details"><div class="stop-top"><span class="stop-time">${escape(schedule.format(day,timing.arrival))}</span><span class="time-label">${escape(timeLabel)}</span><span class="stop-name">${escape(p.name)}</span></div><p class="stop-meta">${escape(stopTiming(day,timing))}</p>${s.note ? `<p class="stop-note">${escape(s.note)}</p>` : ''}<a class="stop-link" href="${escape(mapSearch(p))}" target="_blank" rel="noopener noreferrer">景點位置 ↗</a>${p.website ? ` · <a class="stop-link" href="${escape(p.website)}" target="_blank" rel="noopener noreferrer">營業資訊 ↗</a>` : ''}</div>${renderPhoto(s.place)}</div>${s.pickup ? renderSimPickup() : ''}${s.raceInfo ? renderRaceGuide() : ''}${legMarkup}</div></li>`;
     }).join('');
   }
   function dealerCard(dealer) {
@@ -205,7 +199,7 @@
     return `<section class="event-card" aria-labelledby="event-title"><div class="event-heading"><span class="event-badge">TOY EVENT</span><div><h3 id="event-title">SUPER FESTIVAL 名古屋</h3><p>スーパーフェスティバル＆モダン文化マーケット</p></div></div>
       <div class="event-facts"><div class="event-fact"><small>日期與開放時間</small><strong>12/6（日）11:00–16:00</strong></div><div class="event-fact"><small>會場</small><strong>名古屋・吹上 Hall 2F</strong></div></div>
       <div class="reminder">出門前記得帶：台灣零食 ＋ 日本現金<small>準備送給設計師的零食，以及現場購物／交通所需現金。零食建議保留原包裝並避開肉製品，依日本入境檢疫規定為準。</small></div>
-      <h4>入場、優先排隊與門票</h4><ul><li>名古屋海報確認一般開放時間為 <strong>11:00–16:00</strong>；官網目前未列出這場的票價、售票方式或優先入場規則。建議先查看最新公告，或聯繫主辦方（電話 03-3469-0398；官網另頁列日本時間週一至週五 13:00–18:00，請再核對）。</li><li>建議 10:00–10:30 抵達，只是一般排隊緩衝，<strong>不是已確認的優先入場時間</strong>。東京場的 08:00 抽籤、10:15 優先入場及票價，不能直接套用到名古屋場。</li><li>若有個別商品抽選通知，確認中籤者本人、購買時段、付款、領取地點及所需證件；商品抽選與展場入場是不同程序。</li></ul>
+      <h4>入場、優先排隊與門票</h4><ul><li>名古屋海報確認一般開放時間為 <strong>11:00–16:00</strong>；官網目前未列出這場的票價、售票方式或優先入場規則。建議先查看最新公告，或聯繫主辦方（電話 03-3469-0398；官網另頁列日本時間週一至週五 13:00–18:00，請再核對）。</li><li>按交通時間及轉乘緩衝估算約 09:48 到場，僅供提早排隊，<strong>不是已確認的優先入場時間</strong>。東京場的 08:00 抽籤、10:15 優先入場及票價，不能直接套用到名古屋場。</li><li>若有個別商品抽選通知，確認中籤者本人、購買時段、付款、領取地點及所需證件；商品抽選與展場入場是不同程序。</li></ul>
       <h4>參展品牌與攤商</h4><p>名古屋官網目前列出 <strong>${dealers.length} 筆攤商／品牌</strong>，包含 headlockstudio、PLANET-X、シカルナ・工房、T-BASE JAPAN 等。名單本身未標明場次日期；品牌上榜不等於設計師本人確定到場，請點各帳號再確認。</p>
       <p>HEADLOCK STUDIO 已公告 12/6 會場商品的<strong>事前抽選已結束</strong>；公告未保證設計師本人出席。若已參加抽選，請依個別通知確認購買辦法。</p>
       <div class="event-actions">${link(official,'名古屋場官方網站')}${link(listing,'官方完整攤商名單')}${link('https://www.instagram.com/p/De-XHBlTnT7/','HEADLOCK 商品抽選公告')}${link('https://artstorm.co.jp/sufes_access2.html','官方會場交通')}</div>
@@ -218,7 +212,7 @@
     itinerary.style.setProperty('--route-color',routeStyle(day,state.group).color);
     const guide=!isAlternate && dayGuides[String(day.index)]?`<div class="note info">${escape(dayGuides[String(day.index)])}</div>`:'';
     const after=!isAlternate && returnNotes[String(day.index)]?`<p class="return-note"><strong>回程與取車</strong><br>${escape(returnNotes[String(day.index)])}</p>`:'';
-    itinerary.innerHTML = `<div class="day-banner"><div><div class="kicker">DAY ${day.index} · ${escape(current.area.toUpperCase())}</div><h2>${escape(current.title)}</h2><p>${escape(current.summary)}</p></div><span class="date-pill">${day.date} 週${day.weekday}</span></div>${renderNotes(current.notes)}${guide}<section class="timeline-card" aria-labelledby="timeline-title"><div class="timeline-card-head"><h3 id="timeline-title">${isAlternate ? '建議交通與時間' : '今日行程'}</h3><span>${isAlternate ? '時間為規劃參考' : '原列時間與銜接估計'}</span></div><p class="timeline-mode-note">交通時間是 Google 地圖於 ${escape(window.TRIP_TRANSPORT_CHECKED || '2026/11/25')} 查詢的快照，並非即時結果。推算時間依原列各站停留 1 小時；12/5 另假設看兩場後 10:35 開車離場。不含停車、取車、候車及排隊；請查當日導航。</p><ol class="timeline">${renderStops(current,isAlternate)}</ol>${after}</section>${isAlternate ? renderEvent() : ''}`;
+    itinerary.innerHTML = `<div class="day-banner"><div><div class="kicker">DAY ${day.index} · ${escape(current.area.toUpperCase())}</div><h2>${escape(current.title)}</h2><p>${escape(current.summary)}</p></div><span class="date-pill">${day.date} 週${day.weekday}</span></div>${renderNotes(current.notes)}${guide}<section class="timeline-card" aria-labelledby="timeline-title"><div class="timeline-card-head"><h3 id="timeline-title">${isAlternate ? '建議交通與時間' : '今日行程'}</h3><span>預計抵達及停留</span></div><p class="timeline-mode-note">依每站停留時間及下一段交通逐站推算；一般 1 小時、指定寺社 2 小時、12/8 行程點 3 小時，賽馬看到第 3 場。住宿出發／終點、轉乘與取車銜接依各站標示。交通為 ${escape(window.TRIP_TRANSPORT_CHECKED || '2026/11/25')} 查詢快照及標示的吊椅時間，非即時預測；另計停車、候車及排隊。</p><ol class="timeline">${renderStops(current,isAlternate)}</ol>${after}</section>${isAlternate ? renderEvent() : ''}`;
   }
   function initMap() {
     if (!window.L) { document.querySelector('#map-fallback').hidden=false; return; }
@@ -295,6 +289,7 @@
   }
   function drawRoute(entry, points, markers, overview) {
     const {route,label,color}=entry;
+    const times=schedule.calculate(entry.day,entry.group);
     let previous = null;
     route.stops.forEach((s,i) => {
       const p=places[s.place];
@@ -316,7 +311,9 @@
       }
       const key=p.coord.map(n=>n.toFixed(5)).join(',');
       const marker=markers.get(key) || {coord:p.coord,stops:[]};
-      marker.stops.push({number:i+1,code:stopCode(entry.day,entry.group,i),time:s.time,place:p,prefix:label,color});
+      const timing=times[i];
+      const time=`${schedule.format(entry.day,timing.arrival)} ${timing.first==='departure'?'出發':'抵達'}`;
+      marker.stops.push({number:i+1,code:stopCode(entry.day,entry.group,i),time,place:p,prefix:label,color});
       markers.set(key,marker);
       previous={coord:p.coord,id:s.place};
     });

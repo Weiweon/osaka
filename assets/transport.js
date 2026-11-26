@@ -17,9 +17,9 @@ window.TRIP_LEGS = {
   '2': [
     {mode:'car',label:'開車前往阪神競馬場',duration:'約 44 分',note:'約 27 公里，含收費道路；另計退房取車、塞車、停車及步行入場。'},
     {mode:'car',label:'開車前往宮津',duration:'約 1 小時 50 分',note:'約 126 公里，含收費道路；由場館回停車處取車與上路前等候未計入。'},
-    {mode:'car',label:'開車至山麓站',duration:'約 23 分',note:'飛龍觀在山上，開車抵達山麓站後，另計停車、等候與搭單軌／吊椅上山的時間。',segments:[
+    {mode:'car',label:'開車至山麓站＋吊椅上山',duration:'約 29 分（23＋6 分）',note:'開車到山麓站約 23 分，依官方資料吊椅上山約 6 分；未計停車、購票及等候。單軌車程約 7 分，且需按班次候車。',segments:[
       {from:'lawson',to:'viewlandBase',mode:'car',duration:'開車至山麓站約 23 分'}]},
-    {mode:'walk',label:'下山後步行',duration:'山麓站至智恩寺約 4 分',note:'Google 地圖的 4 分鐘從 View Land 山麓站開始計算；飛龍觀在山上，請另外預留搭單軌／吊椅下山及等候時間。',segments:[
+    {mode:'walk',label:'吊椅下山＋步行',duration:'約 10 分（6＋4 分）',note:'依官方資料吊椅下山約 6 分，再由山麓站步行至智恩寺約 4 分；未計等候與回停車處取車。',segments:[
       {from:'viewlandBase',to:'chion',mode:'walk',duration:'山麓站步行至智恩寺約 4 分'}]},
     {mode:'car',label:'取車後開車',duration:'約 40 分',note:'先由智恩寺附近回停車處取車；取車步行時間未計入。'},
     {mode:'walk',label:'步行',duration:'約 7 分',note:'伊根舟屋是範圍較大的區域，實際時間依走訪位置而異。'},
@@ -53,7 +53,7 @@ window.TRIP_LEGS = {
   '5': [
     {mode:'walk',label:'步行前往勝林寺',duration:'約 24 分',note:'約 1.7 公里；寺方沒有汽車停車場，車輛先留在住宿附近。'},
     {mode:'walk',label:'步行回住宿附近取車',duration:'約 25 分',note:'參觀後走回住宿附近停車處；確切車位與取車時間請另計。'},
-    {mode:'car',label:'取車後開車前往梅田',duration:'約 1 小時',note:'另計取車、路況、停車與步行。'},
+    {mode:'car',label:'取車後開車前往梅田',duration:'約 1 小時',note:'前站已預留 10 分鐘取車；路況、停車與步行另計。'},
     {mode:'walk',label:'步行',duration:'約 4 分',note:'建議先將車停在梅田，再步行逛周邊商場。'},
     {mode:'walk',label:'步行',duration:'約 2 分'},
     {mode:'walk',label:'步行',duration:'約 4 分'},
@@ -64,8 +64,9 @@ window.TRIP_LEGS = {
     {mode:'walk',label:'步行返回 OMO',duration:'約 11 分',note:'由 Outlet 步行回飯店，實際取道及出口依當日導航為準。'}
   ],
   '6': [
-    {mode:'rail',label:'電車＋步行',duration:'約 10 分至關西空港站',note:'由 OMO 步行至臨空城站，搭 JR 或南海電車至關西空港站；另預留候車及前往第一航廈報到的時間。',segments:[
-      {from:'omo',to:'airportStation',mode:'rail',duration:'至關西空港站約 10 分'}]}
+    {mode:'rail',label:'電車＋步行',duration:'約 15 分至第一航廈（10＋5 分）',note:'由 OMO 步行至臨空城站，搭 JR 或南海電車至關西空港站約 10 分，再步行至第一航廈約 5 分；候車、站內移動與報到另預留時間。',segments:[
+      {from:'omo',to:'airportStation',mode:'rail',duration:'至關西空港站約 10 分'},
+      {from:'airportStation',to:'kix',mode:'walk',duration:'步行至第一航廈約 5 分（規劃估計）'}]}
   ]
 };
 window.TRIP_RETURN_NOTES = {
@@ -75,17 +76,17 @@ window.TRIP_RETURN_NOTES = {
 window.TRIP_DAY_GUIDES = {
   '3':'京都組先開車至伏見稻荷、北野天滿宮，再回一耕の宿附近停車；清水寺與八坂神社以步行遊覽。',
   '4':'本日以自駕串接貴船、鞍馬、鴨川及大阪十三，再回京都住宿；各處停車與山區路況請先確認。',
-  '5':'京都住宿 09:20 步行出發，10:00 到勝林寺；參觀後走回取車，開往梅田。商場之間步行，接著前往臨空城；先還車再逛 Outlet，最後步行回 OMO。'
+  '5':'京都住宿 09:20 步行出發，10:00 起參觀勝林寺；參觀後走回取車，再前往梅田和臨空城。各站 3 小時的推算會跨日，還車及回程均須重排。'
 };
 // 規劃時用於計算最早可銜接的時間；與上方各路段的 Google 地圖快照相同。
 const tripLegMinutes = {
   '1':[48,25,14,6,2,13,21,11],
-  '2':[44,110,23,4,40,7,1,134],
+  '2':[44,110,29,10,40,7,1,134],
   '3':[22,34,27,19,16,24],
   '3-jiawei':[25,34,12,7,24,34,21],
   '4':[46,8,25,72,61],
   '5':[24,25,60,4,2,4,51,18,11],
-  '6':[10]
+  '6':[15]
 };
 for (const [key, minutes] of Object.entries(tripLegMinutes)) {
   window.TRIP_LEGS[key].forEach((leg, index) => { leg.minutes = minutes[index]; });

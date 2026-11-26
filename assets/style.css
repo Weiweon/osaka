@@ -85,4 +85,5 @@
 .ticket-example{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;background:#fff;border:1px dashed #ce9b73;border-left:5px solid #cd8056;padding:13px;margin-top:13px;border-radius:7px}
 .ticket-example small,.ticket-example strong{display:block}.ticket-example small{font-size:.7rem;color:#936e56}.ticket-example strong{font-size:.95rem;margin-top:4px}.ticket-example>div+div{display:flex;align-items:baseline;gap:7px}.ticket-example span{font-size:.72rem;color:#8a7565}.ticket-example b{font-size:1rem;color:#a45737}
 .race-links{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.race-links a{font-size:.76rem}
+.stop-time{font-size:.95rem}.stop-meta{line-height:1.55}
 @media(max-width:600px){.race-guide{position:relative;width:calc(100% + 52px);margin-left:-52px;padding:13px}.race-facts,.race-options,.race-steps{grid-template-columns:1fr}.race-morning li{grid-template-columns:1fr;gap:0}.race-table{min-width:0;table-layout:fixed}.race-table th:first-child{width:3.1rem}.race-table th:nth-child(2){width:4rem}.race-table th,.race-table td{padding:7px 5px}}
