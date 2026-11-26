@@ -27,14 +27,14 @@ test('每一站從前一站離開時間與交通時間銜接', () => {
   }
 });
 
-test('一般景點一小時，三座指定寺社兩小時，12/8 景點三小時', () => {
+test('一般景點一小時，指定寺社兩小時，展場與 12/8 多數景點三小時', () => {
   for (const d of days) {
     for (const group of d.index === 3 ? ['friends', 'jiawei'] : ['friends']) {
       const route = group === 'jiawei' ? d.alternate : d;
       const times = schedule.calculate(d, group);
       route.stops.forEach((stop, i) => {
         if (times[i].role !== 'visit') return;
-        const expected = d.index === 5 ? 180 : ['inari', 'kiyomizu', 'kifune'].includes(stop.place) ? 120 : 60;
+        const expected = d.index === 5 && i === 7 ? 30 : d.index === 5 || (group === 'jiawei' && stop.place === 'hall') ? 180 : ['inari', 'kiyomizu', 'kifune'].includes(stop.place) ? 120 : 60;
         assert.equal(times[i].stay, expected, `${d.date} ${stop.place}`);
       });
     }
@@ -61,14 +61,17 @@ test('12/8 三小時方案會標明跨日，不能與隔日機場出發時間混
   assert.equal(schedule.format(day(5), t[1].begin), '10:00');
   assert.equal(schedule.format(day(5), t[1].departure), '13:00');
   assert.equal(schedule.format(day(5), t[7].arrival), '12/09 03:36');
-  assert.equal(schedule.format(day(5), t[9].arrival), '12/09 10:05');
+  assert.equal(schedule.format(day(5), t[7].departure), '12/09 04:06');
+  assert.equal(schedule.format(day(5), t[8].arrival), '12/09 04:24');
+  assert.equal(schedule.format(day(5), t[9].arrival), '12/09 07:35');
   assert.equal(schedule.format(day(6), schedule.calculate(day(6))[1].arrival), '08:00');
 });
 
-test('名古屋轉乘計入緩衝，開展後參觀一小時', () => {
+test('名古屋轉乘計入緩衝，開展後參觀三小時', () => {
   const t = schedule.calculate(day(3), 'jiawei');
   assert.equal(schedule.format(day(3), t[4].arrival), '09:48');
   assert.equal(schedule.format(day(3), t[4].begin), '11:00');
-  assert.equal(schedule.format(day(3), t[4].departure), '12:00');
-  assert.equal(schedule.format(day(3), t[7].arrival), '13:49');
+  assert.equal(t[4].stay, 180);
+  assert.equal(schedule.format(day(3), t[4].departure), '14:00');
+  assert.equal(schedule.format(day(3), t[7].arrival), '15:49');
 });

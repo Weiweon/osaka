@@ -10,12 +10,12 @@
       {role:'start'},{stay:120,notBefore:'08:00'},{stay:60},{stay:60},{stay:120},{stay:60},{role:'end'}]},
     '3-jiawei': {start:'08:00', first:'departure', stops:[
       {role:'start'},{stay:15,role:'transfer'},{stay:15,role:'transfer'},{role:'transfer'},
-      {stay:60,notBefore:'11:00'},{stay:15,role:'transfer'},{stay:15,role:'transfer'},{role:'end'}]},
+      {stay:180,notBefore:'11:00'},{stay:15,role:'transfer'},{stay:15,role:'transfer'},{role:'end'}]},
     '4': {start:'07:00', first:'departure', stops:[
       {role:'start'},{stay:120},{stay:60},{stay:60},{stay:60,notBefore:'14:00'},{role:'end'}]},
     '5': {start:'09:20', first:'departure', stops:[
       {role:'start'},{stay:180,notBefore:'10:00'},{stay:10,role:'pickup'},{stay:180},{stay:180},
-      {stay:180},{stay:180},{stay:180},{stay:180},{role:'end'}]},
+      {stay:180},{stay:180},{stay:30},{stay:180},{role:'end'}]},
     '6': {start:'07:45', first:'departure', stops:[{role:'start'},{role:'end'}]}
   };
   const parse = value => {
