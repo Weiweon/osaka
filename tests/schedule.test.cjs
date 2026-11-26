@@ -27,14 +27,15 @@ test('每一站從前一站離開時間與交通時間銜接', () => {
   }
 });
 
-test('一般景點一小時，指定寺社兩小時，展場與 12/8 多數景點三小時', () => {
+test('依指定景點及日期套用停留時間', () => {
   for (const d of days) {
     for (const group of d.index === 3 ? ['friends', 'jiawei'] : ['friends']) {
       const route = group === 'jiawei' ? d.alternate : d;
       const times = schedule.calculate(d, group);
       route.stops.forEach((stop, i) => {
         if (times[i].role !== 'visit') return;
-        const expected = d.index === 5 && i === 7 ? 30 : d.index === 5 || (group === 'jiawei' && stop.place === 'hall') ? 180 : ['inari', 'kiyomizu', 'kifune'].includes(stop.place) ? 120 : 60;
+        const dayFive = {shorinji:30, umeda:5, links:60, yodobashi:60, lucua:60, omo:30, outlet:180};
+        const expected = d.index === 5 ? dayFive[stop.place] : group === 'jiawei' && stop.place === 'hall' ? 180 : ['inari', 'kiyomizu', 'kifune'].includes(stop.place) ? 120 : 60;
         assert.equal(times[i].stay, expected, `${d.date} ${stop.place}`);
       });
     }
@@ -56,22 +57,37 @@ test('賽馬看到第 3 場後離場，後段依一小時停留計算', () => {
   assert.equal(schedule.format(day(2), t[7].arrival), '19:27');
 });
 
-test('12/8 三小時方案會標明跨日，不能與隔日機場出發時間混淆', () => {
+test('12/8 勝林寺直達梅田，含回京都取車及後續行程', () => {
   const t = schedule.calculate(day(5));
+  const places = day(5).stops.map(s => s.place);
+  assert.deepEqual(Array.from(places), ['ikko','shorinji','umeda','links','yodobashi','lucua','omo','outlet','omo']);
   assert.equal(schedule.format(day(5), t[1].begin), '10:00');
-  assert.equal(schedule.format(day(5), t[1].departure), '13:00');
-  assert.equal(schedule.format(day(5), t[7].arrival), '12/09 03:36');
-  assert.equal(schedule.format(day(5), t[7].departure), '12/09 04:06');
-  assert.equal(schedule.format(day(5), t[8].arrival), '12/09 04:24');
-  assert.equal(schedule.format(day(5), t[9].arrival), '12/09 07:35');
+  assert.equal(schedule.format(day(5), t[1].departure), '10:30');
+  assert.equal(schedule.format(day(5), t[2].arrival), '11:39');
+  assert.equal(schedule.format(day(5), t[5].departure), '14:54');
+  assert.equal(legs['5'][5].minutes, 63 + 10 + 86);
+  assert.deepEqual(Array.from(legs['5'][5].segments, s => [s.from,s.to,s.mode]), [['lucua','ikko','rail'],['ikko','omo','car']]);
+  assert.equal(schedule.format(day(5), t[6].arrival), '17:33');
+  assert.equal(schedule.format(day(5), t[6].departure), '18:03');
+  assert.equal(schedule.format(day(5), t[7].arrival), '18:21');
+  assert.equal(schedule.format(day(5), t[7].departure), '21:21');
+  assert.equal(schedule.format(day(5), t[8].arrival), '21:32');
   assert.equal(schedule.format(day(6), schedule.calculate(day(6))[1].arrival), '08:00');
 });
 
-test('名古屋轉乘計入緩衝，開展後參觀三小時', () => {
+test('名古屋展覽三小時後，兩組清水寺會合並一起返回', () => {
   const t = schedule.calculate(day(3), 'jiawei');
+  const friends = schedule.calculate(day(3));
   assert.equal(schedule.format(day(3), t[4].arrival), '09:48');
   assert.equal(schedule.format(day(3), t[4].begin), '11:00');
   assert.equal(t[4].stay, 180);
   assert.equal(schedule.format(day(3), t[4].departure), '14:00');
-  assert.equal(schedule.format(day(3), t[7].arrival), '15:49');
+  assert.equal(schedule.format(day(3), t[7].arrival), '15:56');
+  assert.equal(schedule.format(day(3), friends[4].plannedEnd), '15:20');
+  assert.equal(friends[4].departure, t[7].departure);
+  assert.ok(t[7].arrival <= friends[4].departure);
+  assert.equal(schedule.format(day(3), t[7].departure), '16:20');
+  assert.equal(friends[5].arrival, t[8].arrival);
+  assert.equal(friends[6].arrival, t[9].arrival);
+  assert.equal(schedule.format(day(3), t[9].arrival), '18:00');
 });

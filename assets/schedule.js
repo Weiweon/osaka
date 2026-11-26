@@ -7,15 +7,16 @@
     '2': {start:'07:55', first:'departure', stops:[
       {role:'start'},{role:'race',departAt:'11:10'},{stay:60},{stay:60},{stay:60},{stay:60},{stay:60},{stay:60},{role:'end'}]},
     '3': {start:'07:30', first:'departure', stops:[
-      {role:'start'},{stay:120,notBefore:'08:00'},{stay:60},{stay:60},{stay:120},{stay:60},{role:'end'}]},
+      {role:'start'},{stay:120,notBefore:'08:00'},{stay:60},{stay:60},{stay:120,departAt:'16:20'},{stay:60},{role:'end'}]},
     '3-jiawei': {start:'08:00', first:'departure', stops:[
       {role:'start'},{stay:15,role:'transfer'},{stay:15,role:'transfer'},{role:'transfer'},
-      {stay:180,notBefore:'11:00'},{stay:15,role:'transfer'},{stay:15,role:'transfer'},{role:'end'}]},
+      {stay:180,notBefore:'11:00'},{stay:15,role:'transfer'},{stay:15,role:'transfer'},
+      {role:'meeting',departAt:'16:20'},{stay:60},{role:'end'}]},
     '4': {start:'07:00', first:'departure', stops:[
       {role:'start'},{stay:120},{stay:60},{stay:60},{stay:60,notBefore:'14:00'},{role:'end'}]},
     '5': {start:'09:20', first:'departure', stops:[
-      {role:'start'},{stay:180,notBefore:'10:00'},{stay:10,role:'pickup'},{stay:180},{stay:180},
-      {stay:180},{stay:180},{stay:30},{stay:180},{role:'end'}]},
+      {role:'start'},{stay:30,notBefore:'10:00'},{stay:5},{stay:60},{stay:60},
+      {stay:60},{stay:30},{stay:180},{role:'end'}]},
     '6': {start:'07:45', first:'departure', stops:[{role:'start'},{role:'end'}]}
   };
   const parse = value => {
@@ -35,8 +36,9 @@
       const earliest=parse(rule.notBefore);
       const begin=earliest===null?arrival:Math.max(arrival,earliest);
       const fixedDeparture=parse(rule.departAt);
-      const departure=fixedDeparture===null?begin+(rule.stay || 0):Math.max(begin,fixedDeparture);
-      const result={arrival,begin,departure,stay:rule.stay || 0,role:rule.role || 'visit',wait:begin-arrival,
+      const plannedEnd=begin+(rule.stay || 0);
+      const departure=fixedDeparture===null?plannedEnd:Math.max(plannedEnd,fixedDeparture);
+      const result={arrival,begin,plannedEnd,departure,stay:rule.stay || 0,role:rule.role || 'visit',wait:begin-arrival,
         first: index===0 ? plan.first : null};
       if(index<legs.length) {
         if(!Number.isFinite(legs[index].minutes)) throw new Error(`交通時間不完整：${key} 第 ${index+1} 段`);

@@ -1,5 +1,5 @@
-/* Google 地圖路線結果快照：2026-11-25 查詢時的時間，非 12 月出發當日預測。 */
-window.TRIP_TRANSPORT_CHECKED = '2026/11/25';
+/* Google 地圖路線結果快照：2026-11-25–26 查詢時的時間，非 12 月出發當日預測。 */
+window.TRIP_TRANSPORT_CHECKED = '2026/11/25–26';
 window.TRIP_LEGS = {
   '1': [
     {mode:'rail-car',label:'電車＋步行取車＋開車',duration:'約 48 分（6＋12＋30 分）',note:'以原手冊示範的 Toyota 臨空城站前店為例；實際門市以租車訂單為準。另預留候車、取車、領 SIM 與入境時間。',segments:[
@@ -41,7 +41,9 @@ window.TRIP_LEGS = {
     {mode:'walk',label:'步行',duration:'約 7 分'},
     {mode:'metro',label:'步行＋地下鐵',duration:'約 24 分',note:'步行回吹上站，搭櫻通線至名古屋站；候車時間依班次變動。'},
     {mode:'shinkansen',label:'新幹線',duration:'約 34 分',note:'另預留進站及候車時間。'},
-    {mode:'transit',label:'公車＋步行',duration:'約 21 分',note:'京都站前搭公車至住宿附近，再步行返回；班次依當日查詢。'}
+    {mode:'transit',label:'公車＋步行至清水寺',duration:'約 28 分',note:'京都站前可搭 206 或 106 市巴士後步行；11/26 Google 地圖快照，候車及塞車依當日狀況。'},
+    {mode:'walk',label:'與京都組步行',duration:'約 16 分',note:'在清水寺仁王門附近會合後，一起前往八坂神社。'},
+    {mode:'walk',label:'一起步行回住宿',duration:'約 24 分'}
   ],
   '4': [
     {mode:'car',label:'開車',duration:'約 46 分',note:'貴船神社周邊車位有限，冬季請查路況並另計停車時間。'},
@@ -52,12 +54,13 @@ window.TRIP_LEGS = {
   ],
   '5': [
     {mode:'walk',label:'步行前往勝林寺',duration:'約 24 分',note:'約 1.7 公里；寺方沒有汽車停車場，車輛先留在住宿附近。'},
-    {mode:'walk',label:'步行回住宿附近取車',duration:'約 25 分',note:'參觀後走回住宿附近停車處；確切車位與取車時間請另計。'},
-    {mode:'car',label:'取車後開車前往梅田',duration:'約 1 小時',note:'前站已預留 10 分鐘取車；路況、停車與步行另計。'},
-    {mode:'walk',label:'步行',duration:'約 4 分',note:'建議先將車停在梅田，再步行逛周邊商場。'},
+    {mode:'rail',label:'步行＋京阪電車＋阪急電車',duration:'約 1 小時 9 分',note:'勝林寺後直接走至東福寺站，搭京阪本線至祇園四條、步行轉阪急京都河原町，再搭阪急京都線至大阪梅田；11/26 Google 地圖查詢範例，實際轉乘及班次以當日為準。'},
+    {mode:'walk',label:'步行',duration:'約 4 分',note:'梅田周邊各站以步行移動。'},
     {mode:'walk',label:'步行',duration:'約 2 分'},
     {mode:'walk',label:'步行',duration:'約 4 分'},
-    {mode:'car',label:'取車後開車',duration:'約 51 分',note:'先回梅田停車場取車，再開往臨空城；此時間由 LUCUA 計起，實際起點請改成停車場。'},
+    {mode:'rail-car',label:'電車及公車回京都取車＋開車',duration:'約 2 小時 39 分（63＋10＋86 分）',note:'車輛留在京都，不能直接從梅田開走：由 LUCUA 搭 JR 與公車回一耕の宿附近約 63 分，預留取車及領行李 10 分，再開車往 OMO 約 86 分；為 11/26 Google 地圖快照及規劃緩衝，依車位、行李與路況另加時間。',segments:[
+      {from:'lucua',to:'ikko',mode:'rail',duration:'電車及公車回京都約 63 分'},
+      {from:'ikko',to:'omo',mode:'car',duration:'京都取車後開車往 OMO 約 86 分'}]},
     {mode:'car-walk',label:'開車還車＋步行至 Outlet',duration:'移動約 18 分（1＋17 分）',note:'僅以 Toyota 臨空城站前店示範，不代表已確認訂單；實際還車時間與門市以租車訂單為準。加油、驗車、停車與等候時間未計入。',segments:[
       {from:'omo',to:'rentalExample',mode:'car',duration:'開車至示範門市約 1 分'},
       {from:'rentalExample',to:'outlet',mode:'walk',duration:'還車後步行至 Outlet 約 17 分'}]},
@@ -74,18 +77,18 @@ window.TRIP_RETURN_NOTES = {
   '4':'十三行程結束後自駕返回 Ikkō 一耕の宿 8；用餐與路況可能影響抵達時間。'
 };
 window.TRIP_DAY_GUIDES = {
-  '3':'京都組先開車至伏見稻荷、北野天滿宮，再回一耕の宿附近停車；清水寺與八坂神社以步行遊覽。',
+  '3':'京都組先開車至伏見稻荷、北野天滿宮，再回住宿附近停車；清水寺安排 2 小時並等家偉會合，之後一起步行經八坂神社返回住宿。',
   '4':'本日以自駕串接貴船、鞍馬、鴨川及大阪十三，再回京都住宿；各處停車與山區路況請先確認。',
-  '5':'京都住宿 09:20 步行出發，10:00 起參觀勝林寺；參觀後走回取車，再前往梅田和臨空城。多數景點停留 3 小時，中途 OMO 停留 30 分鐘；推算仍會跨日，還車及回程均須重排。'
+  '5':'09:20 退房出發，勝林寺停留 30 分鐘後直接搭電車前往梅田（需轉乘）。逛完梅田須回京都取車及行李，再開往臨空城；還車及 Outlet 營業時間有衝突，請先協調。'
 };
-// 規劃時用於計算最早可銜接的時間；與上方各路段的 Google 地圖快照相同。
+// 規劃時用於計算最早可銜接的時間；取車等額外緩衝有明確標示。
 const tripLegMinutes = {
   '1':[48,25,14,6,2,13,21,11],
   '2':[44,110,29,10,40,7,1,134],
   '3':[22,34,27,19,16,24],
-  '3-jiawei':[25,34,12,7,24,34,21],
+  '3-jiawei':[25,34,12,7,24,34,28,16,24],
   '4':[46,8,25,72,61],
-  '5':[24,25,60,4,2,4,51,18,11],
+  '5':[24,69,4,2,4,159,18,11],
   '6':[15]
 };
 for (const [key, minutes] of Object.entries(tripLegMinutes)) {

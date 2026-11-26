@@ -70,7 +70,7 @@
         return `<article class="overview-route" style="--route-color:${routeStyle(day,group).color}"><header class="overview-route-header"><div><span class="overview-route-date">DAY ${day.index} · ${day.date} 週${day.weekday}</span><h3>${escape(heading)}</h3><p>${escape(route.summary)}</p></div><button class="overview-open-day" data-open-day="${day.index}" data-open-group="${group}" type="button">查看單日</button></header>${renderNotes(route.notes)}${guide}<ol class="timeline">${renderStops(route,isAlternate)}</ol>${event}</article>`;
       });
     }).join('');
-    itinerary.innerHTML = `<div class="day-banner"><div><div class="kicker">SIX DAYS TO REMEMBER</div><h2>六天行程總覽</h2><p>所有景點、住宿與每段交通都在下方；編號如 1-1 代表第 1 天的第 1 站。</p></div><span class="date-pill">6 DAYS</span></div><div class="note info">12/6 的 <strong>3京</strong> 是西瓜・柏祥，<strong>3名</strong> 是家偉。各站以新推算的抵達時間與停留時間顯示。</div><section class="overview-index" aria-label="全部行程停靠點"><h3>每天的所有停靠點</h3><p>點編號可直接跳到該站細節；不需切換日期也能往下看完整行程。</p>${index}</section><p class="timeline-mode-note overview-timing-note">一般行程點停留 1 小時；伏見稻荷、清水寺及貴船神社各 2 小時，名古屋展場及 12/8 多數行程點各 3 小時，12/8 中途 OMO 停留 30 分鐘，賽馬安排看到第 3 場。住宿出發／終點、轉乘及取車銜接依各站標示，不另視為遊玩停留。交通依 ${escape(window.TRIP_TRANSPORT_CHECKED || '2026/11/25')} 的 Google 地圖快照及標示的吊椅時間估算，非即時或當日預測；除已標示的緩衝外，停車、候車、排隊和休息另計。</p><div class="overview-list overview-full">${cards}</div>`;
+    itinerary.innerHTML = `<div class="day-banner"><div><div class="kicker">SIX DAYS TO REMEMBER</div><h2>六天行程總覽</h2><p>所有景點、住宿與每段交通都在下方；編號如 1-1 代表第 1 天的第 1 站。</p></div><span class="date-pill">6 DAYS</span></div><div class="note info">12/6 的 <strong>3京</strong> 是西瓜・柏祥，<strong>3名</strong> 是家偉。各站以新推算的抵達時間與停留時間顯示。</div><section class="overview-index" aria-label="全部行程停靠點"><h3>每天的所有停靠點</h3><p>點編號可直接跳到該站細節；不需切換日期也能往下看完整行程。</p>${index}</section><p class="timeline-mode-note overview-timing-note">一般行程點停留 1 小時；伏見稻荷、京都組清水寺及貴船神社各 2 小時，名古屋展場與原定 Outlet 各 3 小時。12/8 勝林寺及中途 OMO 各 30 分鐘、梅田車站 5 分鐘；賽馬看到第 3 場。各站另列會合、轉乘與取車時間。交通依 ${escape(window.TRIP_TRANSPORT_CHECKED || '2026/11/25')} 的 Google 地圖快照及標示的吊椅時間估算，非即時或當日預測；除已標示的緩衝外，停車、候車、排隊和休息另計。</p><div class="overview-list overview-full">${cards}</div>`;
   }
   function renderNotes(notes) {
     return notes.map(n => `<div class="note ${escape(n.type)}">${escape(n.text)}</div>`).join('');
@@ -148,9 +148,11 @@
     if(item.role==='race') return `觀賞至第 3 場 · 預計 ${time(item.departure)} 取車出發`;
     if(item.role==='transfer') return item.stay ? `預留轉乘 ${item.stay} 分鐘；實際候車依班次` : '轉乘銜接；實際候車依班次';
     if(item.role==='pickup') return `回住宿附近取車 · 預留 ${item.stay} 分鐘`;
+    if(item.role==='meeting') return `與京都組會合 · 預計 ${time(item.departure)} 一起離開`;
     const duration=item.stay%60===0?`${item.stay/60} 小時`:`${item.stay} 分鐘`;
     const waiting=item.wait?` · 抵達後等候至 ${time(item.begin)}`:'';
-    return `停留 ${duration} · ${time(item.begin)}–${time(item.departure)}${waiting}`;
+    const meeting=item.departure>item.plannedEnd?` · 為會合預留至 ${time(item.departure)}`:'';
+    return `停留 ${duration} · ${time(item.begin)}–${time(item.plannedEnd)}${waiting}${meeting}`;
   }
   const googleMode = mode => mode==='walk'?'walking':mode==='car'?'driving':'transit';
   function renderStops(day, isAlternate) {
@@ -212,7 +214,7 @@
     itinerary.style.setProperty('--route-color',routeStyle(day,state.group).color);
     const guide=!isAlternate && dayGuides[String(day.index)]?`<div class="note info">${escape(dayGuides[String(day.index)])}</div>`:'';
     const after=!isAlternate && returnNotes[String(day.index)]?`<p class="return-note"><strong>回程與取車</strong><br>${escape(returnNotes[String(day.index)])}</p>`:'';
-    itinerary.innerHTML = `<div class="day-banner"><div><div class="kicker">DAY ${day.index} · ${escape(current.area.toUpperCase())}</div><h2>${escape(current.title)}</h2><p>${escape(current.summary)}</p></div><span class="date-pill">${day.date} 週${day.weekday}</span></div>${renderNotes(current.notes)}${guide}<section class="timeline-card" aria-labelledby="timeline-title"><div class="timeline-card-head"><h3 id="timeline-title">${isAlternate ? '建議交通與時間' : '今日行程'}</h3><span>預計抵達及停留</span></div><p class="timeline-mode-note">依每站停留時間及下一段交通逐站推算；一般 1 小時、指定寺社 2 小時、名古屋展場及 12/8 多數行程點 3 小時、12/8 中途 OMO 30 分鐘，賽馬看到第 3 場。住宿出發／終點、轉乘與取車銜接依各站標示。交通為 ${escape(window.TRIP_TRANSPORT_CHECKED || '2026/11/25')} 查詢快照及標示的吊椅時間，非即時預測；另計停車、候車及排隊。</p><ol class="timeline">${renderStops(current,isAlternate)}</ol>${after}</section>${isAlternate ? renderEvent() : ''}`;
+    itinerary.innerHTML = `<div class="day-banner"><div><div class="kicker">DAY ${day.index} · ${escape(current.area.toUpperCase())}</div><h2>${escape(current.title)}</h2><p>${escape(current.summary)}</p></div><span class="date-pill">${day.date} 週${day.weekday}</span></div>${renderNotes(current.notes)}${guide}<section class="timeline-card" aria-labelledby="timeline-title"><div class="timeline-card-head"><h3 id="timeline-title">${isAlternate ? '建議交通與時間' : '今日行程'}</h3><span>預計抵達及停留</span></div><p class="timeline-mode-note">依各站停留及交通逐站推算；一般 1 小時、指定寺社 2 小時、名古屋展場及原定 Outlet 3 小時。12/8 勝林寺及中途 OMO 各 30 分鐘、梅田車站 5 分鐘；賽馬看到第 3 場。會合、住宿與轉乘依各站標示。交通為 ${escape(window.TRIP_TRANSPORT_CHECKED || '2026/11/25')} 查詢快照及標示的吊椅時間，非即時預測；另計停車、候車及排隊。</p><ol class="timeline">${renderStops(current,isAlternate)}</ol>${after}</section>${isAlternate ? renderEvent() : ''}`;
   }
   function initMap() {
     if (!window.L) { document.querySelector('#map-fallback').hidden=false; return; }
