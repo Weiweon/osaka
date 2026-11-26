@@ -34,8 +34,8 @@ test('依指定景點及日期套用停留時間', () => {
       const times = schedule.calculate(d, group);
       route.stops.forEach((stop, i) => {
         if (times[i].role !== 'visit') return;
-        const dayFive = {shorinji:30, umeda:5, links:60, yodobashi:60, lucua:60, omo:30, outlet:180};
-        const expected = d.index === 5 ? dayFive[stop.place] : group === 'jiawei' && stop.place === 'hall' ? 180 : ['inari', 'kiyomizu', 'kifune'].includes(stop.place) ? 120 : 60;
+        const dayFive = {shorinji:30, umeda:5, links:60, pokemonOsaka:30, yodobashi:60, lucua:60, omo:30, outlet:180};
+        const expected = d.index === 5 ? dayFive[stop.place] : group === 'jiawei' && stop.place === 'hall' ? 180 : ['inari', 'kiyomizu', 'nishiki', 'kifune'].includes(stop.place) ? 120 : 60;
         assert.equal(times[i].stay, expected, `${d.date} ${stop.place}`);
       });
     }
@@ -57,21 +57,35 @@ test('賽馬看到第 3 場後離場，後段依一小時停留計算', () => {
   assert.equal(schedule.format(day(2), t[7].arrival), '19:27');
 });
 
-test('12/8 勝林寺直達梅田，含回京都取車及後續行程', () => {
+test('12/7 早上從住宿前往錦市場，並預留停車與取車時間', () => {
+  const t = schedule.calculate(day(4));
+  assert.deepEqual(Array.from(day(4).stops, s => s.place), ['ikko','nishiki','kifune','kurama','delta','juso','ikko']);
+  assert.equal(schedule.format(day(4), t[0].departure), '09:35');
+  assert.equal(schedule.format(day(4), t[1].arrival), '09:59');
+  assert.equal(schedule.format(day(4), t[1].begin), '10:00');
+  assert.equal(schedule.format(day(4), t[1].departure), '12:00');
+  assert.equal(schedule.format(day(4), t[2].arrival), '12:46');
+  assert.equal(schedule.format(day(4), t[3].arrival), '14:54');
+  assert.equal(schedule.format(day(4), t[6].arrival), '20:32');
+});
+
+test('12/8 梅田加入寶可夢中心並重算取車及後續行程', () => {
   const t = schedule.calculate(day(5));
   const places = day(5).stops.map(s => s.place);
-  assert.deepEqual(Array.from(places), ['ikko','shorinji','umeda','links','yodobashi','lucua','omo','outlet','omo']);
+  assert.deepEqual(Array.from(places), ['ikko','shorinji','umeda','links','pokemonOsaka','yodobashi','lucua','omo','outlet','omo']);
   assert.equal(schedule.format(day(5), t[1].begin), '10:00');
   assert.equal(schedule.format(day(5), t[1].departure), '10:30');
   assert.equal(schedule.format(day(5), t[2].arrival), '11:39');
-  assert.equal(schedule.format(day(5), t[5].departure), '14:54');
-  assert.equal(legs['5'][5].minutes, 63 + 10 + 86);
-  assert.deepEqual(Array.from(legs['5'][5].segments, s => [s.from,s.to,s.mode]), [['lucua','ikko','rail'],['ikko','omo','car']]);
-  assert.equal(schedule.format(day(5), t[6].arrival), '17:33');
-  assert.equal(schedule.format(day(5), t[6].departure), '18:03');
-  assert.equal(schedule.format(day(5), t[7].arrival), '18:21');
-  assert.equal(schedule.format(day(5), t[7].departure), '21:21');
-  assert.equal(schedule.format(day(5), t[8].arrival), '21:32');
+  assert.equal(schedule.format(day(5), t[4].arrival), '12:59');
+  assert.equal(schedule.format(day(5), t[4].departure), '13:29');
+  assert.equal(schedule.format(day(5), t[6].departure), '15:41');
+  assert.equal(legs['5'][6].minutes, 63 + 10 + 86);
+  assert.deepEqual(Array.from(legs['5'][6].segments, s => [s.from,s.to,s.mode]), [['lucua','ikko','rail'],['ikko','omo','car']]);
+  assert.equal(schedule.format(day(5), t[7].arrival), '18:20');
+  assert.equal(schedule.format(day(5), t[7].departure), '18:50');
+  assert.equal(schedule.format(day(5), t[8].arrival), '19:08');
+  assert.equal(schedule.format(day(5), t[8].departure), '22:08');
+  assert.equal(schedule.format(day(5), t[9].arrival), '22:19');
   assert.equal(schedule.format(day(6), schedule.calculate(day(6))[1].arrival), '08:00');
 });
 

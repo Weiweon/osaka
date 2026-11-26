@@ -1,5 +1,21 @@
 /* 實景照片、來源及授權；訂房圖片僅裁切顯示本機截圖中的住宿照片。 */
 window.TRIP_PHOTOS = {
+  "nishiki": {
+    "src": "assets/places/nishiki.jpg",
+    "caption": "錦市場（2026 年資料照）",
+    "alt": "京都錦市場的商店街與彩色天棚",
+    "author": "Anagoria",
+    "license": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:20260428_Nishiki_Markt_13_Kyoto,_Japan_anagoria.jpg",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/"
+  },
+  "pokemonOsaka": {
+    "src": "assets/places/pokemon-osaka.webp",
+    "caption": "寶可夢中心大阪店",
+    "alt": "寶可夢中心大阪店官方照片，入口有噴火龍展示",
+    "author": "寶可夢中心官方網站",
+    "source": "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-osaka/"
+  },
   "kix": {
     "src": "assets/places/kix.jpg",
     "caption": "關西機場第一航廈",

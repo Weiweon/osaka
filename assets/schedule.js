@@ -12,10 +12,10 @@
       {role:'start'},{stay:15,role:'transfer'},{stay:15,role:'transfer'},{role:'transfer'},
       {stay:180,notBefore:'11:00'},{stay:15,role:'transfer'},{stay:15,role:'transfer'},
       {role:'meeting',departAt:'16:20'},{stay:60},{role:'end'}]},
-    '4': {start:'07:00', first:'departure', stops:[
-      {role:'start'},{stay:120},{stay:60},{stay:60},{stay:60,notBefore:'14:00'},{role:'end'}]},
+    '4': {start:'09:35', first:'departure', stops:[
+      {role:'start'},{stay:120,notBefore:'10:00'},{stay:120},{stay:60},{stay:60},{stay:60,notBefore:'14:00'},{role:'end'}]},
     '5': {start:'09:20', first:'departure', stops:[
-      {role:'start'},{stay:30,notBefore:'10:00'},{stay:5},{stay:60},{stay:60},
+      {role:'start'},{stay:30,notBefore:'10:00'},{stay:5},{stay:60},{stay:30},{stay:60},
       {stay:60},{stay:30},{stay:180},{role:'end'}]},
     '6': {start:'07:45', first:'departure', stops:[{role:'start'},{role:'end'}]}
   };

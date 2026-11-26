@@ -87,3 +87,10 @@
 .race-links{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.race-links a{font-size:.76rem}
 .stop-time{font-size:.95rem}.stop-meta{line-height:1.55}
 @media(max-width:600px){.race-guide{position:relative;width:calc(100% + 52px);margin-left:-52px;padding:13px}.race-facts,.race-options,.race-steps{grid-template-columns:1fr}.race-morning li{grid-template-columns:1fr;gap:0}.race-table{min-width:0;table-layout:fixed}.race-table th:first-child{width:3.1rem}.race-table th:nth-child(2){width:4rem}.race-table th,.race-table td{padding:7px 5px}}
+
+/* 未排入日期的彈性景點 */
+.optional-places{padding:50px 0 0}.optional-places h2{font-size:1.45rem;margin:0 0 16px}
+.optional-place-card{display:flex;align-items:center;gap:20px;max-width:580px;padding:14px;border:1px solid #e2ebe4;border-radius:15px;background:#fff;box-shadow:var(--shadow)}
+.optional-place-card>a{display:block;width:180px;flex:none}.optional-place-card img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:9px}
+.optional-place-card h3{font-size:1rem;line-height:1.5;margin:0 0 10px}
+@media(max-width:480px){.optional-place-card{gap:14px}.optional-place-card>a{width:120px}.optional-places{padding-top:36px}}
